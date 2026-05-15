@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#FAF6EF">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Studio">
+  <title>Studio · IP Lab · Claire 玉婷 × 铜板儿</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2228%22 fill=%22%23E8A642%22/><circle cx=%2235%22 cy=%2245%22 r=%2210%22 fill=%22%23FFD566%22/><circle cx=%2265%22 cy=%2245%22 r=%2210%22 fill=%22%23FFD566%22/><ellipse cx=%2235%22 cy=%2245%22 rx=%223%22 ry=%228%22 fill=%22%23000%22/><ellipse cx=%2265%22 cy=%2245%22 rx=%223%22 ry=%228%22 fill=%22%23000%22/></svg>">
+
+  <style>
+    :root {
+      --paper: #FAF6EF;
+      --paper-2: #FFFFFF;
+      --paper-3: #F0EAE0;
+      --ink: #1A1A1A;
+      --ink-2: #585858;
+      --ink-3: #9A9A9A;
+
+      /* Claire palette */
+      --claire-hair: #3A2A20;
+      --claire-skin: #F5DBC3;
+      --claire-cheek: #FFB4B4;
+      --claire-black: #1A1A1A;
+      --claire-mic: #555;
+
+      /* 铜板儿 palette */
+      --tong-cream: #F5E5C8;
+      --tong-cream-light: #F8E8D0;
+      --tong-cream-deep: #E8D5A8;
+      --tong-eye-outer: #E8A642;
+      --tong-eye-inner: #FFD566;
+      --tong-pink: #FFB4A8;
+      --tong-nose: #FFA0A0;
+
+      /* Friends brand */
+      --cp-yellow: #FFC72C;
+      --cp-orange: #E5762A;
+      --cp-purple: #7B4B94;
+      --cp-teal: #4A90B8;
+      --cp-olive: #7CA982;
+
+      --shadow-xs: 0 1px 3px rgba(0,0,0,0.05);
+      --shadow-sm: 0 3px 8px rgba(0,0,0,0.05), inset 0 -2px 0 rgba(0,0,0,0.03);
+      --shadow-md: 0 8px 20px rgba(0,0,0,0.07), 0 2px 4px rgba(0,0,0,0.04), inset 0 -3px 0 rgba(0,0,0,0.04);
+      --shadow-lg: 0 16px 36px rgba(0,0,0,0.09), 0 4px 10px rgba(0,0,0,0.05), inset 0 -5px 0 rgba(0,0,0,0.05);
+
+      --sans: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Helvetica Neue", "Microsoft YaHei", system-ui, sans-serif;
+      --mono: ui-monospace, "SF Mono", "Menlo", "Consolas", monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.72;
+      -webkit-font-smoothing: antialiased;
+      padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+    }
+
+    /* Nav */
+    .topnav {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(250,246,239,0.85);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+    .topnav-inner {
+      max-width: 1120px; margin: 0 auto;
+      padding: 14px 24px;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    }
+    .nav-brand {
+      font-family: var(--sans); font-size: 16px; color: var(--ink);
+      text-decoration: none; font-weight: 900; white-space: nowrap;
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+    .nav-brand .planet { font-size: 18px; line-height: 1; filter: drop-shadow(0 2px 3px rgba(0,0,0,0.12)); margin-right: 4px; }
+    .nav-brand .cdot { font-weight: 900; font-size: 14px; margin: 0 1px; position: relative; top: -1px; }
+    .nav-brand .cdot.c1 { color: var(--cp-orange); }
+    .nav-brand .cdot.c2 { color: var(--cp-yellow); }
+    .nav-brand .cdot.c3 { color: var(--cp-teal); }
+    .nav-brand .cdot.c4 { color: var(--cp-olive); }
+    .nav-brand .cdot.c5 { color: var(--cp-purple); }
+    .nav-brand .muted {
+      color: var(--ink-3); font-weight: 700; font-size: 11px;
+      font-family: var(--mono); letter-spacing: 0.16em;
+      margin-left: 8px; padding-left: 8px; border-left: 1px solid var(--ink-3);
+    }
+    .nav-links {
+      display: flex; gap: 22px;
+      font-family: var(--mono); font-size: 11px;
+      letter-spacing: 0.18em; text-transform: uppercase; font-weight: 800;
+    }
+    .nav-links a {
+      color: var(--ink-2); text-decoration: none;
+      transition: color 0.15s ease;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--cp-orange); }
+
+    .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+    .wrap-narrow { max-width: 880px; margin: 0 auto; padding: 0 24px; }
+
+    /* Hero */
+    .hero { padding: 72px 0 56px; }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 6px 14px; background: var(--paper-2); border-radius: 999px;
+      box-shadow: var(--shadow-sm);
+      font-family: var(--mono); font-size: 11px;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      font-weight: 900; color: var(--cp-orange);
+      margin-bottom: 28px;
+    }
+    .hero-title {
+      font-family: var(--sans); font-size: 96px; font-weight: 900;
+      line-height: 0.98; letter-spacing: -0.045em; margin-bottom: 24px;
+    }
+    .hero-title em {
+      font-style: normal; color: var(--paper-2);
+      background: var(--tong-eye-outer); padding: 0.04em 0.18em 0.08em;
+      border-radius: 22px; display: inline-block;
+      transform: rotate(-1.2deg);
+      box-shadow: 0 12px 28px rgba(232,166,66,0.32);
+    }
+    .hero-lede {
+      font-family: var(--sans); font-size: 20px; line-height: 1.6;
+      color: var(--ink); max-width: 720px; margin-bottom: 16px; font-weight: 500;
+    }
+    .hero-lede mark {
+      background: var(--cp-yellow); padding: 0 6px; border-radius: 6px; font-weight: 800;
+    }
+
+    /* Section mark */
+    .section-mark {
+      font-family: var(--mono); font-size: 11.5px;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--cp-orange); margin-bottom: 16px;
+      font-weight: 900;
+      display: inline-flex; align-items: center; gap: 12px;
+      padding: 6px 14px; background: var(--paper-2);
+      border-radius: 999px; box-shadow: var(--shadow-xs);
+    }
+    .section-mark .emo { font-size: 16px; filter: drop-shadow(0 2px 3px rgba(0,0,0,0.12)); }
+
+    /* —— Meet the Hosts —— */
+    .hosts {
+      padding: 56px 0;
+    }
+    .hosts-title {
+      font-family: var(--sans); font-size: 56px; font-weight: 900;
+      line-height: 1.02; letter-spacing: -0.04em; margin-bottom: 8px;
+    }
+    .hosts-sub {
+      font-family: var(--mono); font-size: 12px;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--ink-3); font-weight: 800; margin-bottom: 36px;
+    }
+    .hosts-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+    }
+    .host-card {
+      background: var(--paper-2); border-radius: 28px;
+      padding: 36px 32px 32px;
+      box-shadow: var(--shadow-md);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative; overflow: hidden;
+    }
+    .host-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+    .host-card.claire { background: linear-gradient(180deg, #FFF8F0 0%, #FFFFFF 100%); }
+    .host-card.tong { background: linear-gradient(180deg, #FFF8E8 0%, #FFFFFF 100%); }
+
+    .host-portrait {
+      display: block; margin: 0 auto 20px;
+      width: 200px; height: 240px;
+      filter: drop-shadow(0 12px 16px rgba(0,0,0,0.12));
+    }
+
+    .host-role {
+      font-family: var(--mono); font-size: 10.5px;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      font-weight: 900; margin-bottom: 6px;
+      text-align: center;
+    }
+    .host-card.claire .host-role { color: var(--cp-purple); }
+    .host-card.tong .host-role { color: var(--tong-eye-outer); }
+    .host-name {
+      font-family: var(--sans); font-size: 38px; font-weight: 900;
+      letter-spacing: -0.025em; line-height: 1.05;
+      text-align: center; margin-bottom: 12px;
+    }
+    .host-quote {
+      font-family: var(--sans); font-size: 15px;
+      line-height: 1.55; color: var(--ink-2); font-style: italic;
+      text-align: center; margin-bottom: 22px; font-weight: 500;
+      padding: 0 8px;
+    }
+    .host-card.claire .host-quote { color: var(--ink-2); }
+    .host-traits {
+      display: flex; flex-wrap: wrap; gap: 6px; justify-content: center;
+      margin-bottom: 22px;
+    }
+    .host-trait {
+      font-family: var(--mono); font-size: 10.5px;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      font-weight: 800; padding: 5px 11px;
+      background: var(--paper-3); border-radius: 999px; color: var(--ink);
+    }
+    .host-trait.tom { background: #FCE4DE; color: #B62E3A; }
+    .host-trait.yel { background: #FFF1C2; color: #8B6E00; }
+    .host-trait.pur { background: #ECDFFF; color: #6B3DB0; }
+    .host-trait.gre { background: #D6F5EA; color: #04A37A; }
+    .host-trait.sky { background: #DCE3FF; color: #2840C0; }
+
+    .host-palette {
+      display: flex; gap: 6px; justify-content: center;
+      padding-top: 18px; border-top: 1px solid var(--paper-3);
+    }
+    .swatch {
+      width: 24px; height: 24px; border-radius: 8px;
+      box-shadow: inset 0 -2px 0 rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06);
+    }
+
+    /* —— Duo scene —— */
+    .duo {
+      padding: 56px 0;
+    }
+    .duo-card {
+      background: linear-gradient(135deg, #FFF8E8 0%, #FCE4DE 100%);
+      border-radius: 32px; padding: 40px 32px;
+      box-shadow: var(--shadow-md);
+      text-align: center;
+    }
+    .duo-title {
+      font-family: var(--sans); font-size: 44px; font-weight: 900;
+      letter-spacing: -0.035em; line-height: 1.05; margin-bottom: 8px;
+    }
+    .duo-title em {
+      font-style: normal; background: var(--ink); color: var(--cp-yellow);
+      padding: 0 10px; border-radius: 10px; display: inline-block;
+    }
+    .duo-sub {
+      font-family: var(--mono); font-size: 12px;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--ink-2); font-weight: 800; margin-bottom: 28px;
+    }
+    .duo-scene {
+      display: block; margin: 0 auto;
+      max-width: 100%; width: 640px; height: auto;
+      filter: drop-shadow(0 16px 28px rgba(0,0,0,0.12));
+    }
+    .duo-tag {
+      font-family: var(--sans); font-size: 15.5px;
+      color: var(--ink); font-weight: 600; line-height: 1.55;
+      max-width: 540px; margin: 24px auto 0;
+    }
+    .duo-tag strong { background: var(--paper-2); padding: 1px 8px; border-radius: 6px; font-weight: 800; }
+
+    /* —— Personality —— */
+    .personality {
+      padding: 56px 0;
+    }
+    .personality-title {
+      font-family: var(--sans); font-size: 48px; font-weight: 900;
+      letter-spacing: -0.035em; line-height: 1.06; margin-bottom: 8px;
+    }
+    .personality-sub {
+      font-family: var(--mono); font-size: 12px;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--ink-3); font-weight: 800; margin-bottom: 32px;
+    }
+    .personality-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 32px;
+    }
+    .pers-col {
+      background: var(--paper-2); border-radius: 24px;
+      padding: 28px 26px; box-shadow: var(--shadow-sm);
+    }
+    .pers-name {
+      font-family: var(--sans); font-size: 22px; font-weight: 900;
+      letter-spacing: -0.02em; margin-bottom: 6px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .pers-dot {
+      display: inline-block; width: 12px; height: 12px; border-radius: 50%;
+    }
+    .pers-dot.claire { background: var(--cp-purple); }
+    .pers-dot.tong { background: var(--tong-eye-outer); }
+    .pers-tag {
+      font-family: var(--mono); font-size: 10.5px;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--ink-3); font-weight: 800; margin-bottom: 20px;
+    }
+    .pers-list { list-style: none; }
+    .pers-list li {
+      padding: 10px 0; font-size: 15px; line-height: 1.5;
+      color: var(--ink); font-weight: 500;
+      border-bottom: 1px dashed rgba(0,0,0,0.08);
+      display: grid; grid-template-columns: 24px 1fr; gap: 10px; align-items: baseline;
+    }
+    .pers-list li:last-child { border-bottom: none; }
+    .pers-list .e { font-size: 18px; line-height: 1; }
+    .pers-list strong { font-weight: 800; color: var(--ink); }
+
+    /* —— Merch —— */
+    .merch {
+      padding: 56px 0;
+    }
+    .merch-title {
+      font-family: var(--sans); font-size: 56px; font-weight: 900;
+      letter-spacing: -0.04em; line-height: 1.02; margin-bottom: 8px;
+    }
+    .merch-sub {
+      font-family: var(--mono); font-size: 12px;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--ink-3); font-weight: 800; margin-bottom: 32px;
+    }
+    .merch-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+    }
+    .merch-card {
+      background: var(--paper-2); border-radius: 24px;
+      padding: 28px 24px;
+      box-shadow: var(--shadow-md);
+      transition: transform 0.3s ease;
+      position: relative; overflow: hidden;
+    }
+    .merch-card:hover { transform: translateY(-4px); }
+    .merch-card .stage {
+      aspect-ratio: 4/3;
+      background: var(--paper);
+      border-radius: 16px;
+      display: grid; place-items: center;
+      margin-bottom: 18px; overflow: hidden;
+      position: relative;
+    }
+    .merch-card.sticker .stage { background: linear-gradient(135deg, #FFF8E8, #F0EAE0); }
+    .merch-card.mug .stage { background: linear-gradient(135deg, #FFE4E0, #FAF6EF); }
+    .merch-card.tote .stage { background: linear-gradient(135deg, #DCE3FF, #FFFFFF); }
+    .merch-card.magnet .stage { background: linear-gradient(135deg, #FFF1C2, #FFFFFF); }
+    .merch-card.plush .stage { background: linear-gradient(135deg, #ECDFFF, #FFFFFF); }
+    .merch-card.tshirt .stage { background: linear-gradient(135deg, #D6F5EA, #FFFFFF); }
+
+    .merch-name {
+      font-family: var(--sans); font-size: 20px; font-weight: 900;
+      letter-spacing: -0.015em; margin-bottom: 6px;
+    }
+    .merch-tag {
+      font-family: var(--mono); font-size: 10.5px;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      font-weight: 800; color: var(--ink-3);
+      margin-bottom: 10px;
+    }
+    .merch-desc {
+      font-family: var(--sans); font-size: 14px;
+      color: var(--ink-2); line-height: 1.55; font-weight: 500;
+    }
+    .merch-desc strong { color: var(--ink); font-weight: 800; }
+
+    /* Mug shape (CSS-drawn) */
+    .mug-shape {
+      width: 130px; height: 140px; position: relative;
+      background: var(--paper-2);
+      border-radius: 8px 8px 16px 16px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.14), inset -8px -4px 0 rgba(0,0,0,0.06);
+      display: grid; place-items: center;
+    }
+    .mug-shape::before {
+      content: '';
+      position: absolute; right: -22px; top: 35px;
+      width: 30px; height: 50px;
+      border: 8px solid var(--paper-2);
+      border-radius: 50%; border-left: none;
+      box-shadow: 3px 0 6px rgba(0,0,0,0.08);
+    }
+    .mug-print {
+      width: 80px; height: 80px;
+    }
+
+    /* Tote bag shape */
+    .tote-shape {
+      width: 140px; height: 150px;
+      background: #F5EFE5;
+      border-radius: 4px 4px 12px 12px;
+      position: relative;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.10), inset -6px -4px 0 rgba(0,0,0,0.04);
+      display: grid; place-items: center;
+    }
+    .tote-shape::before {
+      content: ''; position: absolute;
+      top: -32px; left: 22px; width: 26px; height: 40px;
+      border: 4px solid #5A4A3A; border-radius: 50% 50% 0 0;
+      border-bottom: none; background: transparent;
+    }
+    .tote-shape::after {
+      content: ''; position: absolute;
+      top: -32px; right: 22px; width: 26px; height: 40px;
+      border: 4px solid #5A4A3A; border-radius: 50% 50% 0 0;
+      border-bottom: none; background: transparent;
+    }
+    .tote-print { width: 90px; height: 90px; }
+
+    /* Sticker shape (rounded square, tilted) */
+    .sticker-shape {
+      width: 160px; height: 160px;
+      background: var(--paper-2);
+      border-radius: 20px;
+      transform: rotate(-6deg);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.10), 0 2px 4px rgba(0,0,0,0.06);
+      padding: 12px;
+      display: grid; place-items: center;
+      border: 2px dashed rgba(0,0,0,0.1);
+    }
+    .sticker-print { width: 110px; height: 110px; }
+
+    /* Magnet shape (round) */
+    .magnet-shape {
+      width: 140px; height: 140px; border-radius: 50%;
+      background: var(--paper-2);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.12), inset 0 -4px 0 rgba(0,0,0,0.06), inset 0 2px 0 rgba(255,255,255,0.6);
+      display: grid; place-items: center;
+      position: relative;
+    }
+    .magnet-shape::before {
+      content: ''; position: absolute;
+      width: 30px; height: 30px;
+      bottom: -8px; left: 50%; transform: translateX(-50%);
+      background: var(--ink); border-radius: 50% 50% 8px 8px;
+      opacity: 0.5;
+    }
+    .magnet-print { width: 90px; height: 90px; }
+
+    /* Plush mockup (jellycat style) */
+    .plush-shape {
+      width: 140px; height: 160px;
+      background: linear-gradient(180deg, var(--tong-cream-light) 0%, var(--tong-cream) 100%);
+      border-radius: 50% 50% 40% 40% / 60% 60% 40% 40%;
+      box-shadow: 0 12px 24px rgba(0,0,0,0.15), inset 0 -8px 12px rgba(0,0,0,0.08), inset 0 6px 12px rgba(255,255,255,0.5);
+      display: grid; place-items: center;
+      position: relative;
+    }
+    .plush-print { width: 100px; height: 100px; margin-top: 4px; }
+
+    /* T-shirt shape */
+    .tshirt-shape {
+      width: 160px; height: 140px;
+      background: var(--paper-2);
+      position: relative;
+      border-radius: 8px;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.10), inset -6px -3px 0 rgba(0,0,0,0.04);
+      display: grid; place-items: center;
+    }
+    .tshirt-shape::before, .tshirt-shape::after {
+      content: ''; position: absolute; top: -8px;
+      width: 40px; height: 30px; background: var(--paper-2);
+      border-radius: 8px 8px 0 0;
+    }
+    .tshirt-shape::before { left: -16px; transform: rotate(-25deg); transform-origin: bottom right; }
+    .tshirt-shape::after { right: -16px; transform: rotate(25deg); transform-origin: bottom left; }
+    .tshirt-print { width: 80px; height: 80px; position: relative; z-index: 2; }
+
+    /* —— AI Prompts —— */
+    .prompts {
+      padding: 56px 0 80px;
+    }
+    .prompts-title {
+      font-family: var(--sans); font-size: 48px; font-weight: 900;
+      letter-spacing: -0.035em; line-height: 1.06; margin-bottom: 8px;
+    }
+    .prompts-sub {
+      font-family: var(--mono); font-size: 12px;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--ink-3); font-weight: 800; margin-bottom: 16px;
+    }
+    .prompts-lede {
+      font-family: var(--sans); font-size: 16px; line-height: 1.65;
+      color: var(--ink-2); font-weight: 500;
+      max-width: 720px; margin-bottom: 32px;
+      padding: 18px 22px; background: var(--paper-2);
+      border-radius: 18px; box-shadow: var(--shadow-xs);
+    }
+    .prompts-lede strong { color: var(--ink); font-weight: 800; background: var(--cp-yellow); padding: 1px 6px; border-radius: 5px; }
+
+    .prompt-card {
+      background: var(--paper-2); border-radius: 20px;
+      padding: 22px 24px; margin-bottom: 14px;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.2s ease;
+    }
+    .prompt-card:hover { transform: translateX(4px); }
+    .prompt-tag {
+      font-family: var(--mono); font-size: 10.5px;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      font-weight: 900; color: var(--cp-orange);
+      margin-bottom: 8px;
+    }
+    .prompt-name {
+      font-family: var(--sans); font-size: 17px; font-weight: 800;
+      margin-bottom: 12px; color: var(--ink);
+    }
+    .prompt-body {
+      font-family: var(--mono); font-size: 13px;
+      background: var(--paper); border-radius: 12px;
+      padding: 14px 16px;
+      color: var(--ink-2); line-height: 1.6;
+      white-space: pre-wrap; word-break: break-word;
+      position: relative;
+    }
+    .prompt-copy {
+      position: absolute; top: 12px; right: 12px;
+      padding: 4px 10px;
+      background: var(--ink); color: var(--paper-2);
+      border: none; border-radius: 999px;
+      font-family: var(--mono); font-size: 10px; font-weight: 800;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      cursor: pointer; transition: background 0.18s;
+    }
+    .prompt-copy:hover { background: var(--cp-orange); }
+    .prompt-copy.copied { background: var(--cp-olive); }
+
+    /* —— Back —— */
+    .back-link {
+      display: inline-block; padding: 14px 24px;
+      background: var(--ink); color: var(--paper-2);
+      text-decoration: none; font-family: var(--sans);
+      font-weight: 900; font-size: 15px;
+      border-radius: 999px; box-shadow: var(--shadow-sm);
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+    .back-link:hover { transform: translateY(-2px); background: var(--cp-orange); }
+
+    /* —— Mobile —— */
+    @media (max-width: 760px) {
+      .topnav-inner { padding: 11px 16px; gap: 8px; }
+      .nav-brand { font-size: 10.5px; letter-spacing: 0.04em; }
+      .nav-brand .muted { display: none; }
+      .nav-links { gap: 12px; font-size: 10px; }
+      .wrap, .wrap-narrow { padding: 0 18px; }
+      .hero { padding: 48px 0 32px; }
+      .hero-title { font-size: 44px; }
+      .hero-title em { border-radius: 14px; }
+      .hero-lede { font-size: 16px; }
+      .hosts { padding: 32px 0; }
+      .hosts-title { font-size: 32px; }
+      .hosts-grid { grid-template-columns: 1fr; gap: 16px; }
+      .host-card { padding: 28px 22px; border-radius: 22px; }
+      .host-portrait { width: 160px; height: 192px; }
+      .host-name { font-size: 28px; }
+      .duo { padding: 32px 0; }
+      .duo-card { padding: 28px 20px; border-radius: 24px; }
+      .duo-title { font-size: 28px; }
+      .personality { padding: 32px 0; }
+      .personality-title { font-size: 30px; }
+      .personality-grid { grid-template-columns: 1fr; gap: 16px; }
+      .pers-col { padding: 22px 20px; border-radius: 20px; }
+      .merch { padding: 32px 0; }
+      .merch-title { font-size: 32px; }
+      .merch-grid { grid-template-columns: 1fr; gap: 14px; }
+      .merch-card { padding: 20px 16px; border-radius: 20px; }
+      .prompts { padding: 32px 0 56px; }
+      .prompts-title { font-size: 30px; }
+      .prompts-lede { font-size: 14px; padding: 14px 16px; }
+      .prompt-card { padding: 18px 20px; border-radius: 16px; }
+      .prompt-body { font-size: 12px; padding: 12px 14px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="topnav-inner">
+    <a class="nav-brand" href="/">
+      <span class="planet">🪐</span><span>C</span><span class="cdot c1">·</span><span>L</span><span class="cdot c2">·</span><span>A</span><span class="cdot c3">·</span><span>I</span><span class="cdot c4">·</span><span>R</span><span class="cdot c5">·</span><span>E</span><span class="muted">STUDIO</span>
+    </a>
+    <div class="nav-links">
+      <a href="/">主刊</a>
+      <a href="/looks">风格</a>
+      <a href="/studio" class="active">IP</a>
+      <a href="/#findme">找我</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="wrap-narrow hero">
+  <div class="hero-eyebrow">🎨 STUDIO · IP Lab</div>
+  <h1 class="hero-title">玉婷 ×<br><em>铜板儿</em><br>=  本期主理人</h1>
+  <p class="hero-lede">这一页是 STUDIO 的<mark>IP 化妆间</mark>——把你和铜板儿做成一对 mascot，配色、性格、招牌动作、周边样图 + AI 生成 prompt 都在这里。Phoebe 唱 Smelly Cat，你弹钢琴 + 铜板儿踩键。**就是这个画面。**</p>
+</header>
+
+<!-- MEET THE HOSTS -->
+<section class="wrap hosts">
+  <div class="section-mark"><span class="emo">👋</span> Meet the Hosts · 主理人 + 联合主理人</div>
+  <h2 class="hosts-title">两个角色 ·<br>一对搭子</h2>
+  <p class="hosts-sub">v0.1 · 你定稿后我再细化</p>
+
+  <div class="hosts-grid">
+
+    <!-- Claire -->
+    <article class="host-card claire">
+      <svg class="host-portrait" viewBox="0 0 240 280" xmlns="http://www.w3.org/2000/svg">
+        <!-- back hair -->
+        <path d="M 50 100 Q 40 200 60 270 L 180 270 Q 200 200 190 100 Q 175 50 120 45 Q 65 50 50 100 Z" fill="#3A2A20"/>
+        <!-- face -->
+        <ellipse cx="120" cy="135" rx="52" ry="60" fill="#F5DBC3"/>
+        <!-- bangs -->
+        <path d="M 68 100 Q 75 85 110 92 Q 120 70 130 92 Q 165 85 172 100 Q 168 115 140 113 Q 120 105 100 113 Q 72 115 68 100 Z" fill="#3A2A20"/>
+        <!-- eyebrows -->
+        <path d="M 92 122 Q 102 119 110 122" stroke="#2A1810" stroke-width="3" fill="none" stroke-linecap="round"/>
+        <path d="M 130 122 Q 138 119 148 122" stroke="#2A1810" stroke-width="3" fill="none" stroke-linecap="round"/>
+        <!-- glasses (signature ROUND) -->
+        <circle cx="101" cy="138" r="18" fill="#FFFFFF" fill-opacity="0.4" stroke="#1A1A1A" stroke-width="3"/>
+        <circle cx="139" cy="138" r="18" fill="#FFFFFF" fill-opacity="0.4" stroke="#1A1A1A" stroke-width="3"/>
+        <path d="M 119 138 L 121 138" stroke="#1A1A1A" stroke-width="3"/>
+        <!-- eyes (single eyelid Asian) -->
+        <ellipse cx="101" cy="139" rx="3.5" ry="2.5" fill="#1A1A1A"/>
+        <ellipse cx="139" cy="139" rx="3.5" ry="2.5" fill="#1A1A1A"/>
+        <!-- nose -->
+        <path d="M 120 152 Q 116 162 120 167" stroke="#C4977A" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <!-- smile -->
+        <path d="M 109 178 Q 120 184 131 178" stroke="#A65D44" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <!-- cheek -->
+        <ellipse cx="78" cy="165" rx="7" ry="5" fill="#FFB4B4" opacity="0.5"/>
+        <ellipse cx="162" cy="165" rx="7" ry="5" fill="#FFB4B4" opacity="0.5"/>
+        <!-- side hair flows -->
+        <path d="M 55 105 Q 45 200 70 275" stroke="#3A2A20" stroke-width="18" fill="none" stroke-linecap="round"/>
+        <path d="M 185 105 Q 195 200 170 275" stroke="#3A2A20" stroke-width="18" fill="none" stroke-linecap="round"/>
+        <!-- body (black) -->
+        <path d="M 60 240 Q 75 215 100 210 L 140 210 Q 165 215 180 240 L 195 280 L 45 280 Z" fill="#1A1A1A"/>
+        <!-- mic -->
+        <circle cx="195" cy="210" r="13" fill="#666" stroke="#1A1A1A" stroke-width="2"/>
+        <circle cx="195" cy="210" r="8" fill="#444"/>
+        <rect x="191" y="220" width="8" height="22" fill="#444" stroke="#1A1A1A" stroke-width="1.5"/>
+        <rect x="183" y="240" width="24" height="5" fill="#333" rx="2" stroke="#1A1A1A" stroke-width="1.5"/>
+        <!-- mic grille dots -->
+        <circle cx="192" cy="207" r="1" fill="#222"/>
+        <circle cx="198" cy="207" r="1" fill="#222"/>
+        <circle cx="195" cy="213" r="1" fill="#222"/>
+      </svg>
+      <div class="host-role">🎙️ Host · 主理人</div>
+      <h3 class="host-name">CLAIRE · 玉婷</h3>
+      <p class="host-quote">"想让大家都不害羞，由内而外地自信，一起往上长。"</p>
+      <div class="host-traits">
+        <span class="host-trait tom">ENTP</span>
+        <span class="host-trait pur">5 yr PM</span>
+        <span class="host-trait yel">播客主理人</span>
+        <span class="host-trait gre">向上长</span>
+        <span class="host-trait sky">圆框眼镜</span>
+      </div>
+      <div class="host-palette">
+        <span class="swatch" style="background:#3A2A20" title="发色"></span>
+        <span class="swatch" style="background:#F5DBC3" title="肤色"></span>
+        <span class="swatch" style="background:#1A1A1A" title="衣服"></span>
+        <span class="swatch" style="background:#FFB4B4" title="腮红"></span>
+        <span class="swatch" style="background:#7B4B94" title="紫调"></span>
+      </div>
+    </article>
+
+    <!-- 铜板儿 -->
+    <article class="host-card tong">
+      <svg class="host-portrait" viewBox="0 0 240 280" xmlns="http://www.w3.org/2000/svg">
+        <!-- fluffy tail behind -->
+        <path d="M 200 200 Q 235 150 215 100" stroke="#F5E5C8" stroke-width="28" fill="none" stroke-linecap="round"/>
+        <path d="M 200 200 Q 235 150 215 100" stroke="#E8D5A8" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.4"/>
+        <!-- body -->
+        <ellipse cx="120" cy="210" rx="78" ry="50" fill="#F5E5C8" stroke="#1A1A1A" stroke-width="2.5"/>
+        <!-- chest fluff -->
+        <ellipse cx="120" cy="180" rx="60" ry="30" fill="#F8E8D0"/>
+        <!-- mane around neck -->
+        <path d="M 65 175 Q 60 200 70 215 L 170 215 Q 180 200 175 175 Q 165 145 120 145 Q 75 145 65 175 Z" fill="#F5E5C8" stroke="#1A1A1A" stroke-width="2.5"/>
+        <!-- head -->
+        <circle cx="120" cy="115" r="58" fill="#F8E8D0" stroke="#1A1A1A" stroke-width="3"/>
+        <!-- top fluff -->
+        <path d="M 70 80 Q 90 60 105 70 Q 120 50 135 70 Q 150 60 170 80" stroke="#F8E8D0" stroke-width="14" fill="none" stroke-linecap="round"/>
+        <!-- ears -->
+        <path d="M 75 70 L 65 25 L 100 60 Z" fill="#F5E5C8" stroke="#1A1A1A" stroke-width="2.5" stroke-linejoin="round"/>
+        <path d="M 165 70 L 175 25 L 140 60 Z" fill="#F5E5C8" stroke="#1A1A1A" stroke-width="2.5" stroke-linejoin="round"/>
+        <!-- inner ears (pink) -->
+        <path d="M 80 62 L 75 38 L 95 58 Z" fill="#FFB4A8"/>
+        <path d="M 160 62 L 165 38 L 145 58 Z" fill="#FFB4A8"/>
+        <!-- face cream lighter -->
+        <ellipse cx="120" cy="130" rx="40" ry="32" fill="#FFFAEC"/>
+        <!-- BIG COPPER EYES (the star) -->
+        <circle cx="96" cy="115" r="17" fill="#E8A642" stroke="#1A1A1A" stroke-width="3"/>
+        <circle cx="144" cy="115" r="17" fill="#E8A642" stroke="#1A1A1A" stroke-width="3"/>
+        <!-- gold inner -->
+        <circle cx="96" cy="115" r="12" fill="#FFD566"/>
+        <circle cx="144" cy="115" r="12" fill="#FFD566"/>
+        <!-- pupils (vertical slit) -->
+        <ellipse cx="96" cy="115" rx="3.5" ry="13" fill="#1A1A1A"/>
+        <ellipse cx="144" cy="115" rx="3.5" ry="13" fill="#1A1A1A"/>
+        <!-- highlight -->
+        <circle cx="92" cy="110" r="3" fill="#FFF" opacity="0.95"/>
+        <circle cx="140" cy="110" r="3" fill="#FFF" opacity="0.95"/>
+        <!-- nose -->
+        <path d="M 111 144 L 120 152 L 129 144 Z" fill="#FFA0A0" stroke="#1A1A1A" stroke-width="2" stroke-linejoin="round"/>
+        <!-- mouth -->
+        <path d="M 120 152 Q 110 162 102 156" stroke="#1A1A1A" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <path d="M 120 152 Q 130 162 138 156" stroke="#1A1A1A" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <!-- whiskers -->
+        <line x1="55" y1="143" x2="85" y2="146" stroke="#1A1A1A" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="55" y1="155" x2="85" y2="153" stroke="#1A1A1A" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="185" y1="143" x2="155" y2="146" stroke="#1A1A1A" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="185" y1="155" x2="155" y2="153" stroke="#1A1A1A" stroke-width="1.5" stroke-linecap="round"/>
+        <!-- front paws -->
+        <ellipse cx="95" cy="252" rx="14" ry="10" fill="#F8E8D0" stroke="#1A1A1A" stroke-width="2.5"/>
+        <ellipse cx="145" cy="252" rx="14" ry="10" fill="#F8E8D0" stroke="#1A1A1A" stroke-width="2.5"/>
+        <!-- paw pads pink -->
+        <circle cx="92" cy="248" r="2" fill="#FFA0A0"/>
+        <circle cx="98" cy="248" r="2" fill="#FFA0A0"/>
+        <circle cx="142" cy="248" r="2" fill="#FFA0A0"/>
+        <circle cx="148" cy="248" r="2" fill="#FFA0A0"/>
+      </svg>
+      <div class="host-role">🎙️ Co-Host · 联合主理人</div>
+      <h3 class="host-name">铜板儿 · TONGBAR</h3>
+      <p class="host-quote">"永远困，永远饿，永远诚实。<br>主理人犯错我就翻白眼。"</p>
+      <div class="host-traits">
+        <span class="host-trait yel">英国长毛猫</span>
+        <span class="host-trait tom">乳白色</span>
+        <span class="host-trait yel">铜琥珀眼</span>
+        <span class="host-trait pur">射手座</span>
+        <span class="host-trait gre">钢琴踩键人</span>
+      </div>
+      <div class="host-palette">
+        <span class="swatch" style="background:#F5E5C8" title="奶咖底"></span>
+        <span class="swatch" style="background:#F8E8D0" title="脸白"></span>
+        <span class="swatch" style="background:#E8A642" title="铜眼外"></span>
+        <span class="swatch" style="background:#FFD566" title="眼中金"></span>
+        <span class="swatch" style="background:#FFB4A8" title="耳鼻粉"></span>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- DUO -->
+<section class="wrap duo">
+  <div class="section-mark"><span class="emo">🎹</span> The Iconic Duo · 招牌画面</div>
+  <div class="duo-card">
+    <h2 class="duo-title">玉婷弹琴 ·<br>铜板儿<em>踩键</em></h2>
+    <p class="duo-sub">The Signature Scene · 写好的剧本</p>
+
+    <svg class="duo-scene" viewBox="0 0 600 320" xmlns="http://www.w3.org/2000/svg">
+      <!-- piano body (back tall part) -->
+      <rect x="320" y="100" width="260" height="80" fill="#1A1A1A" stroke="#1A1A1A" stroke-width="2"/>
+      <text x="385" y="148" font-family="serif" font-size="18" fill="#E8A642" font-weight="700">YAMAHA</text>
+      <!-- piano keys lid -->
+      <rect x="305" y="180" width="280" height="20" fill="#0F0F0F"/>
+      <!-- keys -->
+      <rect x="320" y="200" width="260" height="40" fill="#FFFFFF" stroke="#1A1A1A" stroke-width="1.5"/>
+      <!-- white key lines -->
+      <line x1="340" y1="200" x2="340" y2="240" stroke="#CCC" stroke-width="1"/>
+      <line x1="360" y1="200" x2="360" y2="240" stroke="#CCC" stroke-width="1"/>
+      <line x1="380" y1="200" x2="380" y2="240" stroke="#CCC" stroke-width="1"/>
+      <line x1="400" y1="200" x2="400" y2="240" stroke="#CCC" stroke-width="1"/>
+      <line x1="420" y1="200" x2="420" y2="240" stroke="#CCC" stroke-width="1"/>
+      <line x1="440" y1="200" x2="440" y2="240" stroke="#CCC" stroke-width="1"/>
+      <line x1="460" y1="200" x2="460" y2="240" stroke="#CCC" stroke-width="1"/>
+      <line x1="480" y1="200" x2="480" y2="240" stroke="#CCC" stroke-width="1"/>
+      <line x1="500" y1="200" x2="500" y2="240" stroke="#CCC" stroke-width="1"/>
+      <line x1="520" y1="200" x2="520" y2="240" stroke="#CCC" stroke-width="1"/>
+      <line x1="540" y1="200" x2="540" y2="240" stroke="#CCC" stroke-width="1"/>
+      <line x1="560" y1="200" x2="560" y2="240" stroke="#CCC" stroke-width="1"/>
+      <!-- black keys -->
+      <rect x="333" y="200" width="12" height="22" fill="#1A1A1A"/>
+      <rect x="373" y="200" width="12" height="22" fill="#1A1A1A"/>
+      <rect x="413" y="200" width="12" height="22" fill="#1A1A1A"/>
+      <rect x="433" y="200" width="12" height="22" fill="#1A1A1A"/>
+      <rect x="473" y="200" width="12" height="22" fill="#1A1A1A"/>
+      <rect x="513" y="200" width="12" height="22" fill="#1A1A1A"/>
+      <rect x="533" y="200" width="12" height="22" fill="#1A1A1A"/>
+
+      <!-- Claire (left, simplified) -->
+      <g transform="translate(40, 60)">
+        <!-- back hair -->
+        <path d="M 50 50 Q 30 180 60 280 L 160 280 Q 190 180 170 50 Q 155 5 110 5 Q 65 5 50 50 Z" fill="#3A2A20"/>
+        <!-- face -->
+        <ellipse cx="110" cy="80" rx="42" ry="48" fill="#F5DBC3"/>
+        <!-- bangs -->
+        <path d="M 65 55 Q 80 38 110 48 Q 120 28 140 48 Q 155 38 158 60 Q 155 75 130 70 Q 110 60 90 70 Q 65 72 65 55 Z" fill="#3A2A20"/>
+        <!-- glasses -->
+        <circle cx="95" cy="82" r="14" fill="#FFFFFF" fill-opacity="0.4" stroke="#1A1A1A" stroke-width="2.5"/>
+        <circle cx="125" cy="82" r="14" fill="#FFFFFF" fill-opacity="0.4" stroke="#1A1A1A" stroke-width="2.5"/>
+        <path d="M 109 82 L 111 82" stroke="#1A1A1A" stroke-width="2.5"/>
+        <ellipse cx="95" cy="83" rx="3" ry="2" fill="#1A1A1A"/>
+        <ellipse cx="125" cy="83" rx="3" ry="2" fill="#1A1A1A"/>
+        <!-- smile -->
+        <path d="M 100 110 Q 110 115 120 110" stroke="#A65D44" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <ellipse cx="73" cy="98" rx="5" ry="4" fill="#FFB4B4" opacity="0.5"/>
+        <ellipse cx="147" cy="98" rx="5" ry="4" fill="#FFB4B4" opacity="0.5"/>
+        <!-- side hair flows -->
+        <path d="M 50 60 Q 40 160 60 240" stroke="#3A2A20" stroke-width="14" fill="none" stroke-linecap="round"/>
+        <path d="M 170 60 Q 180 160 160 240" stroke="#3A2A20" stroke-width="14" fill="none" stroke-linecap="round"/>
+        <!-- body (black) -->
+        <path d="M 55 165 Q 70 145 95 142 L 130 142 Q 155 145 170 165 L 180 230 L 45 230 Z" fill="#1A1A1A"/>
+        <!-- arms on keys -->
+        <path d="M 60 175 Q 50 195 60 210 Q 65 215 75 215" stroke="#F5DBC3" stroke-width="14" fill="none" stroke-linecap="round"/>
+        <path d="M 165 175 Q 175 195 165 210" stroke="#F5DBC3" stroke-width="14" fill="none" stroke-linecap="round"/>
+      </g>
+
+      <!-- 铜板儿 on piano (right side, smaller) -->
+      <g transform="translate(420, 80)">
+        <!-- tail -->
+        <path d="M 110 70 Q 145 35 130 5" stroke="#F5E5C8" stroke-width="18" fill="none" stroke-linecap="round"/>
+        <!-- body -->
+        <ellipse cx="80" cy="80" rx="55" ry="32" fill="#F5E5C8" stroke="#1A1A1A" stroke-width="2"/>
+        <!-- mane -->
+        <ellipse cx="65" cy="60" rx="45" ry="25" fill="#F5E5C8" stroke="#1A1A1A" stroke-width="2"/>
+        <!-- head -->
+        <circle cx="55" cy="45" r="32" fill="#F8E8D0" stroke="#1A1A1A" stroke-width="2"/>
+        <!-- ears -->
+        <path d="M 35 25 L 30 5 L 48 22 Z" fill="#F5E5C8" stroke="#1A1A1A" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M 75 25 L 80 5 L 62 22 Z" fill="#F5E5C8" stroke="#1A1A1A" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M 37 22 L 35 12 L 45 22 Z" fill="#FFB4A8"/>
+        <path d="M 73 22 L 75 12 L 65 22 Z" fill="#FFB4A8"/>
+        <!-- BIG eyes -->
+        <circle cx="42" cy="45" r="9" fill="#E8A642" stroke="#1A1A1A" stroke-width="2"/>
+        <circle cx="68" cy="45" r="9" fill="#E8A642" stroke="#1A1A1A" stroke-width="2"/>
+        <circle cx="42" cy="45" r="6" fill="#FFD566"/>
+        <circle cx="68" cy="45" r="6" fill="#FFD566"/>
+        <ellipse cx="42" cy="45" rx="2" ry="7" fill="#1A1A1A"/>
+        <ellipse cx="68" cy="45" rx="2" ry="7" fill="#1A1A1A"/>
+        <circle cx="40" cy="42" r="1.5" fill="#FFF"/>
+        <circle cx="66" cy="42" r="1.5" fill="#FFF"/>
+        <!-- nose -->
+        <path d="M 49 60 L 55 65 L 61 60 Z" fill="#FFA0A0" stroke="#1A1A1A" stroke-width="1.5" stroke-linejoin="round"/>
+        <!-- mouth -->
+        <path d="M 55 65 Q 49 71 44 67" stroke="#1A1A1A" stroke-width="1.5" fill="none"/>
+        <path d="M 55 65 Q 61 71 66 67" stroke="#1A1A1A" stroke-width="1.5" fill="none"/>
+        <!-- whiskers -->
+        <line x1="15" y1="62" x2="35" y2="64" stroke="#1A1A1A" stroke-width="1" stroke-linecap="round"/>
+        <line x1="75" y1="64" x2="95" y2="62" stroke="#1A1A1A" stroke-width="1" stroke-linecap="round"/>
+        <!-- paw stretching to keys -->
+        <ellipse cx="60" cy="125" rx="14" ry="10" fill="#F8E8D0" stroke="#1A1A1A" stroke-width="2"/>
+        <circle cx="56" cy="121" r="2" fill="#FFA0A0"/>
+        <circle cx="64" cy="121" r="2" fill="#FFA0A0"/>
+      </g>
+
+      <!-- Musical notes scattered -->
+      <text x="240" y="80" font-family="serif" font-size="32" fill="#1A1A1A">♪</text>
+      <text x="280" y="55" font-family="serif" font-size="26" fill="#1A1A1A">♫</text>
+      <text x="260" y="125" font-family="serif" font-size="24" fill="#E5762A">♩</text>
+      <text x="200" y="120" font-family="serif" font-size="22" fill="#1A1A1A">♪</text>
+      <text x="160" y="80" font-family="serif" font-size="20" fill="#7B4B94">♫</text>
+    </svg>
+
+    <p class="duo-tag"><strong>Phoebe 弹吉他唱 Smelly Cat</strong>，<strong>你弹钢琴 + 铜板儿踩键</strong>—— 这个画面会成为播客封面、贴纸、毛绒玩具姿势、社群头像的统一视觉锚点。</p>
+  </div>
+</section>
+
+<!-- PERSONALITY -->
+<section class="wrap-narrow personality">
+  <div class="section-mark"><span class="emo">🎭</span> Personality · 性格设定</div>
+  <h2 class="personality-title">两个人的<br>性格说明书</h2>
+  <p class="personality-sub">这是文案库 · 后续脚本 / 字幕 / 标语都从这调用</p>
+
+  <div class="personality-grid">
+    <div class="pers-col">
+      <h3 class="pers-name"><span class="pers-dot claire"></span>CLAIRE</h3>
+      <p class="pers-tag">主理人 · The Host</p>
+      <ul class="pers-list">
+        <li><span class="e">🧠</span><span>ENTP · <strong>点子机器</strong>，话题能从 AI 跳到八字再跳回来不掉链子</span></li>
+        <li><span class="e">👓</span><span>圆框眼镜不离脸 · <strong>书卷气 + 锋利</strong>的混合</span></li>
+        <li><span class="e">🌱</span><span>"向上长 · 无界长" · <strong>不甘心被职场磨平</strong>的人</span></li>
+        <li><span class="e">🎙️</span><span>采访人是真听 · <strong>不打断、不站台、不油</strong></span></li>
+        <li><span class="e">🤝</span><span>把别人推到台前 · <strong>主理人比嘉宾更隐身</strong></span></li>
+      </ul>
+    </div>
+    <div class="pers-col">
+      <h3 class="pers-name"><span class="pers-dot tong"></span>铜板儿 · TONGBAR</h3>
+      <p class="pers-tag">联合主理人 · The Co-Host</p>
+      <ul class="pers-list">
+        <li><span class="e">😴</span><span><strong>永远困</strong>，但你录播客她必到场</span></li>
+        <li><span class="e">👁️</span><span>铜眼睛会说话 · <strong>翻白眼比说话有力</strong></span></li>
+        <li><span class="e">🎹</span><span>钢琴自动跳上去 · <strong>真·co-host，会发声</strong></span></li>
+        <li><span class="e">🍗</span><span><strong>永远饿</strong>，对所有食物视频感兴趣</span></li>
+        <li><span class="e">👑</span><span>气场公主 · <strong>但姿态永远摊着</strong></span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- MERCH -->
+<section class="wrap merch">
+  <div class="section-mark"><span class="emo">🎁</span> Merch Mockups · 周边样图</div>
+  <h2 class="merch-title">周边长这样<br>（先看 6 个）</h2>
+  <p class="merch-sub">CSS 画的概念图 · 真实样品要去工厂打样</p>
+
+  <div class="merch-grid">
+
+    <!-- Sticker -->
+    <article class="merch-card sticker">
+      <div class="stage">
+        <div class="sticker-shape">
+          <svg class="sticker-print" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="48" fill="#FFD566" stroke="#1A1A1A" stroke-width="2.5"/>
+            <circle cx="35" cy="45" r="9" fill="#E8A642" stroke="#1A1A1A" stroke-width="2"/>
+            <circle cx="65" cy="45" r="9" fill="#E8A642" stroke="#1A1A1A" stroke-width="2"/>
+            <circle cx="35" cy="45" r="6" fill="#FFD566"/>
+            <circle cx="65" cy="45" r="6" fill="#FFD566"/>
+            <ellipse cx="35" cy="45" rx="2" ry="6" fill="#1A1A1A"/>
+            <ellipse cx="65" cy="45" rx="2" ry="6" fill="#1A1A1A"/>
+            <path d="M 44 62 L 50 68 L 56 62 Z" fill="#FFA0A0" stroke="#1A1A1A" stroke-width="1.5"/>
+            <path d="M 50 68 Q 45 74 41 70" stroke="#1A1A1A" stroke-width="1.5" fill="none"/>
+            <path d="M 50 68 Q 55 74 59 70" stroke="#1A1A1A" stroke-width="1.5" fill="none"/>
+            <text x="50" y="92" text-anchor="middle" font-family="sans-serif" font-size="9" font-weight="900" fill="#1A1A1A">铜板儿</text>
+          </svg>
+        </div>
+      </div>
+      <h3 class="merch-name">🏷️ 贴纸 · Sticker Pack</h3>
+      <p class="merch-tag">Print-on-Demand · 工厂打样首选</p>
+      <p class="merch-desc">铜眼+鼻三角的<strong>极简头像版</strong>。一套 6 张可做不同表情（瞪 / 闭眼 / 翻白眼 / 张嘴 / 困 / 假笑）。Cricut 切割机 + 防水贴纸纸自己也能打。</p>
+    </article>
+
+    <!-- Mug -->
+    <article class="merch-card mug">
+      <div class="stage">
+        <div class="mug-shape">
+          <svg class="mug-print" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <ellipse cx="50" cy="60" rx="32" ry="20" fill="#F5E5C8" stroke="#1A1A1A" stroke-width="2"/>
+            <circle cx="50" cy="40" r="22" fill="#F8E8D0" stroke="#1A1A1A" stroke-width="2"/>
+            <path d="M 35 25 L 30 8 L 45 22 Z" fill="#F5E5C8" stroke="#1A1A1A" stroke-width="1.5"/>
+            <path d="M 65 25 L 70 8 L 55 22 Z" fill="#F5E5C8" stroke="#1A1A1A" stroke-width="1.5"/>
+            <circle cx="42" cy="40" r="6" fill="#E8A642" stroke="#1A1A1A" stroke-width="1.5"/>
+            <circle cx="58" cy="40" r="6" fill="#E8A642" stroke="#1A1A1A" stroke-width="1.5"/>
+            <ellipse cx="42" cy="40" rx="1.5" ry="4" fill="#1A1A1A"/>
+            <ellipse cx="58" cy="40" rx="1.5" ry="4" fill="#1A1A1A"/>
+            <path d="M 46 50 L 50 54 L 54 50 Z" fill="#FFA0A0"/>
+            <text x="50" y="85" text-anchor="middle" font-family="sans-serif" font-size="8" font-weight="900" fill="#1A1A1A">CLAIRE · 玉婷</text>
+          </svg>
+        </div>
+      </div>
+      <h3 class="merch-name">☕ 马克杯 · Mug</h3>
+      <p class="merch-tag">Central Perk 致敬款</p>
+      <p class="merch-desc">两面印不同图：<strong>一面铜板儿大眼睛 + CLAIRE·玉婷</strong>，<strong>另一面 "I'll be there for you"</strong>。播客上新发周边时这是入门级单品。</p>
+    </article>
+
+    <!-- Tote -->
+    <article class="merch-card tote">
+      <div class="stage">
+        <div class="tote-shape">
+          <svg class="tote-print" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <text x="50" y="20" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="900" fill="#1A1A1A">CLAIRE·玉婷</text>
+            <line x1="20" y1="26" x2="80" y2="26" stroke="#E5762A" stroke-width="2"/>
+            <text x="50" y="42" text-anchor="middle" font-family="sans-serif" font-size="7" font-weight="700" fill="#7B4B94" font-style="italic">A Field Guide</text>
+            <circle cx="50" cy="62" r="18" fill="#F5E5C8" stroke="#1A1A1A" stroke-width="2"/>
+            <circle cx="42" cy="60" r="4" fill="#E8A642" stroke="#1A1A1A" stroke-width="1"/>
+            <circle cx="58" cy="60" r="4" fill="#E8A642" stroke="#1A1A1A" stroke-width="1"/>
+            <text x="50" y="92" text-anchor="middle" font-family="monospace" font-size="6" font-weight="800" fill="#1A1A1A">VOL · 01 → ∞</text>
+          </svg>
+        </div>
+      </div>
+      <h3 class="merch-name">👜 帆布袋 · Tote Bag</h3>
+      <p class="merch-tag">米色帆布 · 单面丝印</p>
+      <p class="merch-desc"><strong>"CLAIRE · 玉婷"</strong>大字 + 铜板儿头像 + <strong>"VOL · 01 → ∞"</strong> 编号。装播客录音设备出门，<strong>本身就是行走的播客海报</strong>。</p>
+    </article>
+
+    <!-- Magnet -->
+    <article class="merch-card magnet">
+      <div class="stage">
+        <div class="magnet-shape">
+          <svg class="magnet-print" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="40" r="22" fill="#F8E8D0" stroke="#1A1A1A" stroke-width="2"/>
+            <path d="M 32 22 L 28 5 L 43 20 Z" fill="#F5E5C8" stroke="#1A1A1A" stroke-width="1.5"/>
+            <path d="M 68 22 L 72 5 L 57 20 Z" fill="#F5E5C8" stroke="#1A1A1A" stroke-width="1.5"/>
+            <circle cx="40" cy="40" r="8" fill="#E8A642" stroke="#1A1A1A" stroke-width="1.5"/>
+            <circle cx="60" cy="40" r="8" fill="#E8A642" stroke="#1A1A1A" stroke-width="1.5"/>
+            <circle cx="40" cy="40" r="5" fill="#FFD566"/>
+            <circle cx="60" cy="40" r="5" fill="#FFD566"/>
+            <ellipse cx="40" cy="40" rx="1.8" ry="6" fill="#1A1A1A"/>
+            <ellipse cx="60" cy="40" rx="1.8" ry="6" fill="#1A1A1A"/>
+            <text x="50" y="78" text-anchor="middle" font-family="sans-serif" font-size="7" font-weight="900" fill="#1A1A1A">铜板儿 · 2026</text>
+            <text x="50" y="88" text-anchor="middle" font-family="monospace" font-size="6" font-weight="700" fill="#7B4B94">CO-HOST</text>
+          </svg>
+        </div>
+      </div>
+      <h3 class="merch-name">🧲 冰箱贴 · Fridge Magnet</h3>
+      <p class="merch-tag">圆形软磁 · 软陶 / 亚克力都行</p>
+      <p class="merch-desc">小、便宜、易出货。每期 Vol 出一款<strong>纪念冰箱贴</strong>（"Vol.01 纪念版"），用户集卡式收。</p>
+    </article>
+
+    <!-- Plush -->
+    <article class="merch-card plush">
+      <div class="stage">
+        <div class="plush-shape">
+          <svg class="plush-print" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <path d="M 35 18 L 28 5 L 45 18 Z" fill="#E8D5A8" stroke="#1A1A1A" stroke-width="1.5"/>
+            <path d="M 65 18 L 72 5 L 55 18 Z" fill="#E8D5A8" stroke="#1A1A1A" stroke-width="1.5"/>
+            <circle cx="42" cy="42" r="8" fill="#E8A642" stroke="#1A1A1A" stroke-width="1.5"/>
+            <circle cx="58" cy="42" r="8" fill="#E8A642" stroke="#1A1A1A" stroke-width="1.5"/>
+            <circle cx="42" cy="42" r="5" fill="#FFD566"/>
+            <circle cx="58" cy="42" r="5" fill="#FFD566"/>
+            <ellipse cx="42" cy="42" rx="2" ry="6" fill="#1A1A1A"/>
+            <ellipse cx="58" cy="42" rx="2" ry="6" fill="#1A1A1A"/>
+            <path d="M 46 56 L 50 60 L 54 56 Z" fill="#FFA0A0"/>
+            <path d="M 50 60 Q 45 65 42 62" stroke="#1A1A1A" stroke-width="1" fill="none"/>
+            <path d="M 50 60 Q 55 65 58 62" stroke="#1A1A1A" stroke-width="1" fill="none"/>
+          </svg>
+        </div>
+      </div>
+      <h3 class="merch-name">🧸 毛绒玩具 · Plush (Jellycat-style)</h3>
+      <p class="merch-tag">需要工厂打样 · 高客单价</p>
+      <p class="merch-desc"><strong>Jellycat 同款工艺</strong>：超柔短绒 + 内胆 PP 棉。第一版做<strong>坐姿小铜板儿</strong>（15-20cm 高），适合放在播客录音桌上当吉祥物。深圳 / 浙江工厂打样 ¥80-150 / 个。</p>
+    </article>
+
+    <!-- T-shirt -->
+    <article class="merch-card tshirt">
+      <div class="stage">
+        <div class="tshirt-shape">
+          <svg class="tshirt-print" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <text x="50" y="22" text-anchor="middle" font-family="sans-serif" font-size="9" font-weight="900" fill="#1A1A1A">向上长</text>
+            <text x="50" y="34" text-anchor="middle" font-family="sans-serif" font-size="9" font-weight="900" fill="#E5762A" font-style="italic">GROW UP</text>
+            <circle cx="50" cy="58" r="16" fill="#FFD566" stroke="#1A1A1A" stroke-width="2"/>
+            <circle cx="44" cy="56" r="4" fill="#1A1A1A"/>
+            <circle cx="56" cy="56" r="4" fill="#1A1A1A"/>
+            <path d="M 44 66 Q 50 70 56 66" stroke="#1A1A1A" stroke-width="1.5" fill="none"/>
+            <text x="50" y="88" text-anchor="middle" font-family="monospace" font-size="6" font-weight="700" fill="#7B4B94">CLAIRE · FIELD GUIDE</text>
+          </svg>
+        </div>
+      </div>
+      <h3 class="merch-name">👕 T-Shirt</h3>
+      <p class="merch-tag">"向上长" 口号款 · 直印</p>
+      <p class="merch-desc">前胸 "<strong>向上长 / GROW UP</strong>" 大字 + 太阳脸（"由内而外"的隐喻），背后小字 "CLAIRE · FIELD GUIDE"。简单、好印、社群辨识度强。</p>
+    </article>
+
+  </div>
+</section>
+
+<!-- AI PROMPTS -->
+<section class="wrap-narrow prompts">
+  <div class="section-mark"><span class="emo">🤖</span> AI Prompt Library · 真图生成器</div>
+  <h2 class="prompts-title">CSS 画到这里<br>真实图找 AI</h2>
+  <p class="prompts-sub">Midjourney · Sora · DALL-E · Recraft · Ideogram 通用</p>
+
+  <p class="prompts-lede">
+    上面的 CSS mockup 是<strong>概念稿</strong>——拿去找毛绒厂、贴纸厂打样还不够。<strong>这下面 6 段 prompt 你直接复制</strong>到 Midjourney / Sora 里，会生成高分辨率、可印刷、可打样的真实图。每段都为不同周边场景调优过。
+  </p>
+
+  <div class="prompt-card">
+    <div class="prompt-tag">PROMPT · 01</div>
+    <h3 class="prompt-name">🐈 铜板儿 主形象 (Jellycat 风毛绒)</h3>
+    <div class="prompt-body">A super cute plush toy of a cream-colored British Longhair cat sitting upright, fluffy mane around neck, big round copper-amber eyes with golden centers, pink triangular nose, pink inner ears, sitting pose, Jellycat plush style, soft pastel cream and beige tones, studio white background, product photography, soft natural lighting, 8K, hyperdetailed fur texture, 4:5 aspect ratio<button class="prompt-copy">复制</button></div>
+  </div>
+
+  <div class="prompt-card">
+    <div class="prompt-tag">PROMPT · 02</div>
+    <h3 class="prompt-name">🏷️ 铜板儿 贴纸 (die-cut sticker)</h3>
+    <div class="prompt-body">Die-cut vinyl sticker design of a chibi cream cat face, only the head, huge round copper eyes taking up most of the face, tiny pink nose, simple cute kawaii style, thick black outline, flat colors no shading, white background, ready for sticker printing, vector illustration style, kiss-cut sticker, 1:1<button class="prompt-copy">复制</button></div>
+  </div>
+
+  <div class="prompt-card">
+    <div class="prompt-tag">PROMPT · 03</div>
+    <h3 class="prompt-name">🎹 招牌画面 · 弹琴二人组</h3>
+    <div class="prompt-body">Editorial illustration: a young Asian woman with mid-length dark brown hair, wearing round black-framed glasses, gentle smile, playing a Yamaha upright piano, while her fluffy cream British Longhair cat with copper-amber eyes is stepping on the piano keys with one paw, warm afternoon light, cozy living room, "Friends" sitcom aesthetic, Phoebe Buffay vibe but modern, watercolor + soft vector hybrid, 16:9 aspect ratio<button class="prompt-copy">复制</button></div>
+  </div>
+
+  <div class="prompt-card">
+    <div class="prompt-tag">PROMPT · 04</div>
+    <h3 class="prompt-name">☕ Mug 印面 · "I'll be there for you"</h3>
+    <div class="prompt-body">Mug wrap design, cream British Longhair cat face on one side with huge copper eyes, "I'll be there for you" handwritten in marker style on the other side, color palette: cream beige + tomato red + Central Perk yellow, simple bold lines, white ceramic mug mockup, product render, 16:9<button class="prompt-copy">复制</button></div>
+  </div>
+
+  <div class="prompt-card">
+    <div class="prompt-tag">PROMPT · 05</div>
+    <h3 class="prompt-name">👤 玉婷头像 (插画风 IP)</h3>
+    <div class="prompt-body">Stylized portrait illustration of a young Asian woman, mid-length dark brown straight hair with bangs, big round black-framed glasses, gentle subtle smile, single-eyelid eyes, fair skin, wearing all black, holding a podcast microphone, friendly approachable vibe, scholarly podcaster aesthetic, flat vector illustration with subtle gradients, cream background, minimal style, 4:5<button class="prompt-copy">复制</button></div>
+  </div>
+
+  <div class="prompt-card">
+    <div class="prompt-tag">PROMPT · 06</div>
+    <h3 class="prompt-name">📕 封面海报 · Vol.01</h3>
+    <div class="prompt-body">Magazine cover poster for "Claire's Field Guide Vol.01", title "AI 全景框架" in large bold sans-serif, sub-header "S01·E01 · The One About AI", featuring the woman + cat duo (described in prompt 05 + 01), Phoebe-Friends-meets-Thiings aesthetic, Friends color palette (Central Perk orange, mustard yellow, Monica purple), large playful typography, indie zine style, 2:3 aspect ratio, ready for print<button class="prompt-copy">复制</button></div>
+  </div>
+
+  <div style="margin-top: 36px; text-align: center;">
+    <a href="/" class="back-link">← 回主刊</a>
+  </div>
+</section>
+
+<script>
+  // Copy button
+  document.querySelectorAll('.prompt-copy').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const body = btn.parentElement;
+      const text = body.textContent.replace(/复制$/, '').trim();
+      navigator.clipboard.writeText(text).then(() => {
+        btn.textContent = '已复制 ✓';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.textContent = '复制';
+          btn.classList.remove('copied');
+        }, 1500);
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
