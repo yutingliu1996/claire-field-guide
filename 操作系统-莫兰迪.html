@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>我的人生操作系统 · 莫兰迪</title>
+<style>
+  @page { size: A4; margin: 12mm; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #f4f1ec;
+    --bg-section: #ebe7df;
+    --bg-card: #ffffff;
+    --text: #3d3a36;
+    --text-secondary: #6e6960;
+    --text-tertiary: #968f83;
+    --accent-blue: #8da4b3;
+    --accent-sage: #a8b5a3;
+    --accent-rose: #c9a8a3;
+    --accent-warm: #b09480;
+    --border: #d8d2c7;
+    --border-soft: #e3ddd1;
+  }
+
+  html, body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "PingFang SC", "Hiragino Sans GB", sans-serif;
+    color: var(--text);
+    background: #d8d2c7;
+    line-height: 1.55;
+    font-size: 10pt;
+    -webkit-font-smoothing: antialiased;
+    font-weight: 400;
+  }
+
+  body { padding: 24px; }
+
+  .page {
+    background: var(--bg);
+    width: 210mm;
+    min-height: 297mm;
+    margin: 0 auto;
+    padding: 18mm 16mm;
+    box-shadow: 0 2px 40px rgba(61, 58, 54, 0.12);
+  }
+
+  .header {
+    text-align: center;
+    padding-bottom: 18px;
+    margin-bottom: 22px;
+    border-bottom: 0.5px solid var(--border);
+  }
+
+  .title {
+    font-size: 26pt;
+    font-weight: 200;
+    letter-spacing: 0.35em;
+    margin-bottom: 8px;
+    color: var(--text);
+  }
+
+  .subtitle {
+    font-size: 8pt;
+    color: var(--text-tertiary);
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .bazi {
+    font-family: "STSong", "Songti SC", "SimSun", serif;
+    font-size: 11pt;
+    color: var(--text-secondary);
+    letter-spacing: 0.6em;
+    padding-left: 0.6em;
+    font-weight: 300;
+  }
+
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 14px;
+  }
+
+  .section {
+    background: var(--bg-card);
+    padding: 14px 18px;
+    border-radius: 10px;
+  }
+
+  .section-blue { border-top: 2px solid var(--accent-blue); }
+  .section-sage { border-top: 2px solid var(--accent-sage); }
+  .section-rose { border-top: 2px solid var(--accent-rose); }
+  .section-warm { border-top: 2px solid var(--accent-warm); }
+
+  .section-title {
+    font-size: 7.5pt;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: var(--text-tertiary);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+  }
+
+  .check-list {
+    list-style: none;
+    font-size: 9.5pt;
+  }
+
+  .check-list li {
+    padding: 3px 0 3px 16px;
+    position: relative;
+    color: var(--text);
+  }
+
+  .check-list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 9px;
+    width: 8px;
+    height: 8px;
+    border: 0.8px solid var(--accent-blue);
+    border-radius: 50%;
+  }
+
+  .check-list li strong {
+    font-weight: 500;
+  }
+
+  .full-section {
+    background: var(--bg-card);
+    padding: 14px 18px;
+    border-radius: 10px;
+    margin-bottom: 14px;
+    border-top: 2px solid var(--accent-warm);
+  }
+
+  .timeline-row {
+    display: grid;
+    grid-template-columns: 100px 1fr 130px;
+    padding: 5px 0;
+    border-bottom: 0.5px solid var(--border-soft);
+    font-size: 9.5pt;
+    align-items: center;
+  }
+
+  .timeline-row:last-child { border-bottom: none; }
+
+  .timeline-year {
+    font-weight: 500;
+    color: var(--text);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .timeline-theme { color: var(--text); }
+
+  .timeline-note {
+    color: var(--text-tertiary);
+    font-size: 9pt;
+    text-align: right;
+  }
+
+  .timeline-marker {
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+
+  .marker-warning { background: var(--accent-rose); }
+  .marker-star { background: var(--accent-sage); }
+  .marker-key { background: var(--accent-warm); width: 7px; height: 7px; }
+
+  .compass {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+
+  .compass-item {
+    padding: 10px 12px;
+    border-radius: 6px;
+    font-size: 9pt;
+    line-height: 1.8;
+  }
+
+  .green-side {
+    background: rgba(168, 181, 163, 0.25);
+    color: #4a5546;
+  }
+
+  .red-side {
+    background: rgba(201, 168, 163, 0.3);
+    color: #5e3f3c;
+  }
+
+  .compass-label {
+    font-size: 7pt;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+    opacity: 0.7;
+    font-weight: 500;
+  }
+
+  .compass-question {
+    text-align: center;
+    font-size: 10pt;
+    color: var(--text);
+    padding: 8px;
+    font-weight: 400;
+  }
+
+  .compass-question em {
+    font-style: normal;
+    font-weight: 500;
+    color: var(--accent-warm);
+  }
+
+  .health-priority {
+    font-size: 11pt;
+    font-weight: 300;
+    color: var(--accent-blue);
+    margin-bottom: 6px;
+    text-align: center;
+    padding: 8px;
+    letter-spacing: 0.5em;
+    border-top: 0.5px solid var(--border);
+    border-bottom: 0.5px solid var(--border);
+  }
+
+  .rules-list {
+    counter-reset: rule;
+    list-style: none;
+    font-size: 9.5pt;
+  }
+
+  .rules-list li {
+    padding: 5px 0 5px 28px;
+    position: relative;
+    counter-increment: rule;
+  }
+
+  .rules-list li::before {
+    content: counter(rule, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: 5px;
+    color: var(--accent-warm);
+    font-size: 8pt;
+    font-weight: 600;
+  }
+
+  .rules-list li strong { font-weight: 500; }
+
+  .closing {
+    text-align: center;
+    padding: 24px 8px 16px;
+    margin-top: 16px;
+    border-top: 0.5px solid var(--border);
+  }
+
+  .closing-headline {
+    font-weight: 300;
+    font-size: 16pt;
+    margin-bottom: 8px;
+    color: var(--text);
+    letter-spacing: 0.1em;
+  }
+
+  .closing-sub {
+    font-size: 9.5pt;
+    color: var(--text-tertiary);
+    letter-spacing: 0.05em;
+  }
+
+  .footer {
+    text-align: center;
+    color: var(--text-tertiary);
+    font-size: 7.5pt;
+    margin-top: 12px;
+    letter-spacing: 0.5em;
+    font-family: "STSong", "Songti SC", serif;
+  }
+
+  @media print {
+    body { background: white; padding: 0; }
+    .page { box-shadow: none; margin: 0; padding: 12mm; width: 100%; min-height: auto; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <div class="header">
+    <div class="subtitle">L i f e &nbsp;&nbsp; O S</div>
+    <div class="title">人生操作系统</div>
+    <div class="bazi">丙子 · 戊戌 · 癸巳 · 壬戌</div>
+  </div>
+
+  <div class="grid-2">
+    <div class="section section-blue">
+      <div class="section-title">DAILY · 每日</div>
+      <ul class="check-list">
+        <li><strong>11 点前睡</strong> · 喝够水 · 床头朝西</li>
+        <li>戴银饰 · 穿白黑色</li>
+        <li>读 30 页书 · 写 500 字</li>
+        <li>8-11 点深度工作</li>
+        <li>联系一个让你变好的人</li>
+      </ul>
+    </div>
+    <div class="section section-sage">
+      <div class="section-title">WEEKLY · 每周</div>
+      <ul class="check-list">
+        <li>游泳 / 瑜伽 ≥ 3 次</li>
+        <li>读 1/4 本书</li>
+        <li>见 1 位&ldquo;比你强的人&rdquo;</li>
+        <li>写 1 篇文章 / 录 1 期</li>
+        <li>拒绝 1 次消耗你的应酬</li>
+        <li>周日复盘</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="section section-rose">
+      <div class="section-title">MONTHLY · 每月</div>
+      <ul class="check-list">
+        <li>读完 1 本书</li>
+        <li>见 1 位新朋友 / 前辈</li>
+        <li>整理卧室（西边干净）</li>
+        <li>财务复盘</li>
+        <li>北方 / 沿海短途游</li>
+        <li>给 1 位贵人写感谢</li>
+      </ul>
+    </div>
+    <div class="section section-warm">
+      <div class="section-title">QUARTERLY · 每季</div>
+      <ul class="check-list">
+        <li>与导师一对一深聊</li>
+        <li>学一项硬技能</li>
+        <li>大健康检查</li>
+        <li>5-7 天深度旅行</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="full-section">
+    <div class="section-title">2026 — 2031 · 五年路线</div>
+    <div class="timeline-row">
+      <div class="timeline-year"><span class="timeline-marker marker-warning"></span>2026</div>
+      <div class="timeline-theme">稳住 + 内容启动</div>
+      <div class="timeline-note">别做长期承诺</div>
+    </div>
+    <div class="timeline-row">
+      <div class="timeline-year"><span class="timeline-marker marker-warning"></span>2027</div>
+      <div class="timeline-theme">蓄力 + 学习</div>
+      <div class="timeline-note">别冲动</div>
+    </div>
+    <div class="timeline-row">
+      <div class="timeline-year"><span class="timeline-marker marker-star"></span>2028</div>
+      <div class="timeline-theme">正缘窗口开启</div>
+      <div class="timeline-note">主动拜师</div>
+    </div>
+    <div class="timeline-row">
+      <div class="timeline-year"><span class="timeline-marker marker-star"></span>2029</div>
+      <div class="timeline-theme">深耕 + 玄学缘</div>
+      <div class="timeline-note">深度学习</div>
+    </div>
+    <div class="timeline-row">
+      <div class="timeline-year"><span class="timeline-marker marker-key"></span>2030</div>
+      <div class="timeline-theme">庚正印透干</div>
+      <div class="timeline-note">可结婚 / 进体制</div>
+    </div>
+    <div class="timeline-row">
+      <div class="timeline-year">2031</div>
+      <div class="timeline-theme">甲午运启动</div>
+      <div class="timeline-note">婚姻宫触动</div>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="section section-rose">
+      <div class="section-title">COMPASS · 感情指南</div>
+      <div class="compass">
+        <div class="compass-item green-side">
+          <div class="compass-label">YES</div>
+          庚金 · 辛金<br/>壬水 · 癸水
+        </div>
+        <div class="compass-item red-side">
+          <div class="compass-label">NO</div>
+          丁火 · 己土<br/>戊土过重
+        </div>
+      </div>
+      <div class="compass-question">
+        和他在一起，<em>我可以脆弱吗？</em>
+      </div>
+    </div>
+    <div class="section section-blue">
+      <div class="section-title">HEALTH · 健康守则</div>
+      <div class="health-priority">肾 &nbsp;&middot;&nbsp; 肺 &nbsp;&middot;&nbsp; 心</div>
+      <ul class="check-list">
+        <li>早睡 · 喝水 · 游泳</li>
+        <li>不熬夜 · 不久坐</li>
+        <li>白色 + 黑色食物</li>
+        <li>避免咸食过量</li>
+        <li><strong>11 点前必须上床</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="full-section">
+    <div class="section-title">PRINCIPLES · 六大永恒法则</div>
+    <ol class="rules-list">
+      <li><strong>找老师 / 找队友</strong>——别一个人扛</li>
+      <li><strong>穿白戴银朝西睡</strong></li>
+      <li><strong>2026-2027 不做重大决定</strong></li>
+      <li><strong>35 岁是分水岭</strong></li>
+      <li><strong>金水绿灯 · 火土红灯</strong></li>
+      <li><strong>早睡 + 喝水 + 游泳</strong></li>
+    </ol>
+  </div>
+
+  <div class="closing">
+    <div class="closing-headline">最好的部分还在 35 岁之后</div>
+    <div class="closing-sub">现在不是&ldquo;晚了&rdquo;，是&ldquo;刚刚开始&rdquo;</div>
+  </div>
+
+  <div class="footer">丙 子 · 戊 戌 · 癸 巳 · 壬 戌</div>
+
+</div>
+
+</body>
+</html>

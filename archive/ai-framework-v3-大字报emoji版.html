@@ -1,0 +1,1522 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#F8F5F0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Vol.01">
+  <title>Vol.01 · 给内容创作者的 AI 全景框架</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2280%22>📡</text></svg>">
+
+  <style>
+    :root {
+      --paper: #F8F5F0;
+      --paper-2: #FFFFFF;
+      --paper-deep: #EFE9DF;
+
+      --ink: #1A1612;
+      --ink-2: #5A4F45;
+      --ink-3: #968B7E;
+
+      --rule: #D8CCB7;
+      --rule-soft: #E8DFCE;
+
+      --brick: #B5573D;
+      --brick-deep: #8C3F2A;
+      --brick-soft: #F4E4DE;
+
+      --sans: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Helvetica Neue", "Microsoft YaHei", system-ui, sans-serif;
+      --mono: ui-monospace, "SF Mono", "Menlo", "Consolas", monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.78;
+      font-weight: 400;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+      padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+    }
+
+    ::selection { background: var(--brick); color: var(--paper); }
+
+    /* —— Sticky nav —— */
+    .topnav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(248, 245, 240, 0.88);
+      backdrop-filter: saturate(180%) blur(18px);
+      -webkit-backdrop-filter: saturate(180%) blur(18px);
+      border-bottom: 1px solid var(--rule);
+    }
+    .topnav-inner {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .nav-brand {
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 800;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .nav-brand .dot { color: var(--brick); margin: 0 6px; font-weight: 900; }
+    .nav-brand .muted { color: var(--ink-3); font-weight: 600; }
+    .nav-links {
+      display: flex;
+      gap: 22px;
+      font-family: var(--mono);
+      font-size: 11.5px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+    .nav-links a {
+      color: var(--ink-2);
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+    .nav-links a:hover { color: var(--brick); }
+
+    .wrap {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* —— Hero —— */
+    .hero { padding: 80px 0 72px; }
+
+    .eyebrow {
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ink);
+      margin-bottom: 32px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .eyebrow .pipe { color: var(--rule); font-weight: 400; }
+
+    .status-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 12px;
+      background: var(--brick);
+      color: var(--paper);
+      border-radius: 999px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      font-size: 10.5px;
+    }
+    .status-chip::before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--paper);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+
+    h1.title {
+      font-family: var(--sans);
+      font-size: 84px;
+      font-weight: 900;
+      line-height: 1.05;
+      color: var(--ink);
+      letter-spacing: -0.025em;
+      margin-bottom: 36px;
+    }
+    h1.title em {
+      font-style: normal;
+      font-weight: 900;
+      color: var(--paper);
+      background: var(--brick);
+      padding: 0.04em 0.16em;
+      box-decoration-break: clone;
+      -webkit-box-decoration-break: clone;
+    }
+    h1.title .wave {
+      display: inline-block;
+      animation: wave 3.2s ease-in-out infinite;
+      transform-origin: 70% 70%;
+    }
+    @keyframes wave {
+      0%, 60%, 100% { transform: rotate(0); }
+      10% { transform: rotate(14deg); }
+      20% { transform: rotate(-8deg); }
+      30% { transform: rotate(14deg); }
+      40% { transform: rotate(-4deg); }
+      50% { transform: rotate(10deg); }
+    }
+
+    .lede {
+      font-family: var(--sans);
+      font-size: 19px;
+      line-height: 1.65;
+      color: var(--ink);
+      max-width: 600px;
+      margin-bottom: 40px;
+      font-weight: 500;
+    }
+    .lede strong { color: var(--brick-deep); font-weight: 800; }
+
+    .byline {
+      font-family: var(--mono);
+      font-size: 11.5px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-2);
+      padding-top: 22px;
+      border-top: 1px solid var(--rule);
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      font-weight: 700;
+    }
+    .byline strong { color: var(--ink); font-weight: 900; letter-spacing: 0.2em; }
+    .byline .sep { color: var(--rule); font-weight: 400; }
+
+    /* —— Section mark —— */
+    .section-mark {
+      font-family: var(--mono);
+      font-size: 11.5px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--brick);
+      margin-bottom: 22px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 900;
+    }
+    .section-mark .emo {
+      font-family: var(--sans);
+      font-size: 16px;
+      letter-spacing: 0;
+      line-height: 1;
+    }
+
+    /* —— Intro · 写在前面 —— */
+    .intro {
+      padding: 64px 0 56px;
+      border-top: 1px solid var(--rule);
+    }
+    .intro-body {
+      font-family: var(--sans);
+      font-size: 17.5px;
+      line-height: 1.78;
+      color: var(--ink);
+      font-weight: 500;
+      margin-bottom: 18px;
+      max-width: 640px;
+    }
+    .intro-body:last-child { margin-bottom: 0; }
+    .intro-body strong { color: var(--brick-deep); font-weight: 800; }
+
+    /* —— TOC —— */
+    .toc {
+      padding: 80px 0;
+      border-top: 1px solid var(--rule);
+    }
+    .toc-title {
+      font-family: var(--sans);
+      font-size: 56px;
+      font-weight: 900;
+      line-height: 1.12;
+      letter-spacing: -0.025em;
+      margin-bottom: 12px;
+      color: var(--ink);
+    }
+    .toc-sub {
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      font-weight: 700;
+      margin-bottom: 40px;
+    }
+
+    .toc-list { list-style: none; }
+
+    .toc-row {
+      display: grid;
+      grid-template-columns: 60px 1fr auto;
+      align-items: baseline;
+      gap: 20px;
+      padding: 22px 0;
+      border-bottom: 1px solid var(--rule-soft);
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.2s ease;
+    }
+    .toc-row:hover { padding-left: 8px; }
+    .toc-row:hover .toc-num { color: var(--brick); }
+    .toc-row:hover .toc-name { color: var(--brick-deep); }
+
+    .toc-num {
+      font-family: var(--sans);
+      font-size: 30px;
+      font-weight: 900;
+      color: var(--ink);
+      letter-spacing: -0.03em;
+      line-height: 1;
+      transition: color 0.2s ease;
+    }
+    .toc-name {
+      font-family: var(--sans);
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--ink);
+      line-height: 1.35;
+      transition: color 0.2s ease;
+      display: inline-flex;
+      align-items: baseline;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .toc-name .emo { font-size: 17px; }
+    .toc-desc {
+      font-family: var(--sans);
+      font-size: 14px;
+      color: var(--ink-2);
+      line-height: 1.55;
+      margin-top: 5px;
+      font-weight: 500;
+    }
+    .toc-meta {
+      font-family: var(--mono);
+      font-size: 10.5px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--brick);
+      white-space: nowrap;
+      font-weight: 800;
+    }
+
+    .toc-side {
+      display: block;
+      margin-top: 26px;
+      padding: 20px 22px;
+      background: var(--brick-soft);
+      border-left: 4px solid var(--brick);
+      border-radius: 0 4px 4px 0;
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.2s ease;
+    }
+    .toc-side:hover { transform: translateX(4px); }
+    .toc-side-label {
+      font-family: var(--mono);
+      font-size: 10.5px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--brick-deep);
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+    .toc-side-text {
+      font-family: var(--sans);
+      font-size: 15.5px;
+      color: var(--ink);
+      line-height: 1.6;
+      font-weight: 600;
+    }
+    .toc-side-text strong { color: var(--brick-deep); font-weight: 900; }
+
+    .pullquote {
+      margin-top: 36px;
+      padding: 22px 0;
+      border-top: 2px solid var(--ink);
+      border-bottom: 2px solid var(--ink);
+    }
+    .pullquote-label {
+      font-family: var(--mono);
+      font-size: 10.5px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--brick);
+      font-weight: 900;
+      margin-bottom: 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .pullquote-body {
+      font-family: var(--sans);
+      font-size: 16.5px;
+      line-height: 1.7;
+      color: var(--ink);
+      font-weight: 500;
+    }
+    .pullquote-body strong {
+      color: var(--brick-deep);
+      font-weight: 800;
+    }
+
+    /* —— Chapter —— */
+    .chapter {
+      padding: 88px 0 64px;
+      border-top: 1px solid var(--rule);
+      scroll-margin-top: 60px;
+    }
+    .chapter-opener { margin-bottom: 44px; }
+
+    .chapter-emoji {
+      font-size: 44px;
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+
+    .chapter-num {
+      font-family: var(--sans);
+      font-size: 140px;
+      font-weight: 900;
+      line-height: 0.92;
+      color: var(--brick);
+      letter-spacing: -0.055em;
+      margin-bottom: 16px;
+    }
+    .chapter-num.aside { font-size: 156px; letter-spacing: -0.02em; }
+
+    .chapter-eyebrow {
+      font-family: var(--mono);
+      font-size: 13px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ink-2);
+      margin-bottom: 14px;
+      font-weight: 800;
+    }
+    .chapter-name {
+      font-family: var(--sans);
+      font-size: 54px;
+      font-weight: 900;
+      line-height: 1.1;
+      color: var(--ink);
+      letter-spacing: -0.025em;
+      margin-bottom: 12px;
+    }
+    .chapter-era {
+      font-family: var(--mono);
+      font-size: 11.5px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--brick);
+      font-weight: 800;
+    }
+
+    .chapter-content { margin-top: 40px; }
+
+    .block { margin-bottom: 32px; }
+    .block:last-child { margin-bottom: 0; }
+
+    .block-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ink);
+      margin-bottom: 14px;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .block-label .emo { font-family: var(--sans); font-size: 14px; letter-spacing: 0; }
+
+    .block-body {
+      font-family: var(--sans);
+      font-size: 16.5px;
+      line-height: 1.72;
+      color: var(--ink);
+      font-weight: 500;
+    }
+    .block-body strong {
+      color: var(--brick-deep);
+      font-weight: 800;
+    }
+
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tag {
+      display: inline-block;
+      padding: 6px 13px;
+      background: var(--paper-deep);
+      border-radius: 999px;
+      font-family: var(--sans);
+      font-size: 13.5px;
+      color: var(--ink);
+      white-space: nowrap;
+      line-height: 1.4;
+      font-weight: 600;
+    }
+    .tag.key {
+      background: var(--ink);
+      color: var(--paper);
+      font-weight: 800;
+    }
+
+    .examples { list-style: none; }
+    .examples li {
+      padding: 12px 0 12px 30px;
+      position: relative;
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--ink);
+      border-bottom: 1px dashed var(--rule-soft);
+      font-weight: 500;
+    }
+    .examples li:last-child { border-bottom: none; }
+    .examples li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      top: 12px;
+      color: var(--brick);
+      font-family: var(--mono);
+      font-size: 15px;
+      font-weight: 900;
+    }
+    .examples li strong {
+      color: var(--brick-deep);
+      font-weight: 800;
+    }
+
+    /* —— Reading order —— */
+    .reading {
+      padding: 88px 0 64px;
+      border-top: 1px solid var(--rule);
+    }
+    .reading-title {
+      font-family: var(--sans);
+      font-size: 56px;
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -0.025em;
+      margin-bottom: 12px;
+    }
+    .reading-sub {
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      font-weight: 700;
+      margin-bottom: 32px;
+    }
+    .reading-lede {
+      font-family: var(--sans);
+      font-size: 17px;
+      line-height: 1.7;
+      color: var(--ink);
+      margin-bottom: 36px;
+      max-width: 620px;
+      font-weight: 500;
+    }
+    .reading-lede strong { color: var(--brick-deep); font-weight: 800; }
+
+    .order-list { list-style: none; }
+    .order-item {
+      display: grid;
+      grid-template-columns: 64px 1fr;
+      gap: 22px;
+      padding: 22px 0;
+      border-bottom: 1px solid var(--rule-soft);
+    }
+    .order-item:last-child { border-bottom: none; }
+    .order-num {
+      font-family: var(--sans);
+      font-size: 36px;
+      font-weight: 900;
+      color: var(--brick);
+      line-height: 1;
+      letter-spacing: -0.04em;
+    }
+    .order-num.skip { color: var(--ink-3); }
+    .order-title {
+      font-family: var(--sans);
+      font-size: 16.5px;
+      font-weight: 800;
+      color: var(--ink);
+      margin-bottom: 5px;
+      line-height: 1.4;
+    }
+    .order-why {
+      font-family: var(--sans);
+      font-size: 14.5px;
+      color: var(--ink-2);
+      line-height: 1.55;
+      font-weight: 500;
+    }
+
+    /* —— Find me —— */
+    .findme {
+      padding: 88px 0 64px;
+      border-top: 1px solid var(--rule);
+    }
+    .findme-title {
+      font-family: var(--sans);
+      font-size: 56px;
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -0.025em;
+      margin-bottom: 12px;
+    }
+    .findme-sub {
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      font-weight: 700;
+      margin-bottom: 36px;
+    }
+    .findme-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+    .findme-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 18px;
+      background: var(--paper-2);
+      border: 1px solid var(--rule);
+      border-radius: 6px;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.2s ease;
+    }
+    .findme-item:hover {
+      border-color: var(--brick);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(181, 87, 61, 0.10);
+    }
+    .findme-emo {
+      font-size: 26px;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+    .findme-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+    }
+    .findme-platform {
+      font-family: var(--mono);
+      font-size: 10.5px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      font-weight: 700;
+    }
+    .findme-handle {
+      font-family: var(--sans);
+      font-size: 14.5px;
+      color: var(--ink);
+      font-weight: 700;
+    }
+    .findme-note {
+      font-family: var(--sans);
+      font-size: 15px;
+      color: var(--ink);
+      line-height: 1.65;
+      font-weight: 500;
+    }
+    .findme-note strong { color: var(--brick-deep); font-weight: 800; }
+
+    /* —— Colophon —— */
+    .colophon {
+      margin-top: 88px;
+      padding: 64px 0 44px;
+      border-top: 2px solid var(--ink);
+    }
+    .colophon-mark {
+      font-family: var(--sans);
+      font-size: 48px;
+      font-weight: 900;
+      color: var(--ink);
+      letter-spacing: -0.025em;
+      margin-bottom: 8px;
+      line-height: 1;
+    }
+    .colophon-mark .accent {
+      color: var(--brick);
+    }
+    .colophon-title {
+      font-family: var(--mono);
+      font-size: 11.5px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      font-weight: 800;
+      margin-bottom: 36px;
+    }
+
+    .colophon-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 22px 32px;
+      margin-bottom: 32px;
+    }
+    .colophon-grid dt {
+      font-family: var(--mono);
+      font-size: 10.5px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--brick);
+      font-weight: 900;
+      margin-bottom: 6px;
+    }
+    .colophon-grid dd {
+      font-family: var(--sans);
+      font-size: 15px;
+      color: var(--ink);
+      font-weight: 700;
+      line-height: 1.5;
+    }
+    .colophon-grid dd .accent { color: var(--brick); font-weight: 900; }
+
+    .colophon-note {
+      font-family: var(--sans);
+      font-size: 14.5px;
+      line-height: 1.78;
+      color: var(--ink);
+      padding: 22px 0 0;
+      border-top: 1px solid var(--rule-soft);
+      font-weight: 500;
+    }
+    .colophon-note p { margin-bottom: 14px; }
+    .colophon-note p:last-child { margin-bottom: 0; }
+    .colophon-note strong { color: var(--ink); font-weight: 800; }
+    .colophon-note a {
+      color: var(--brick);
+      text-decoration: underline;
+      text-decoration-thickness: 2px;
+      text-underline-offset: 3px;
+      font-weight: 700;
+    }
+    .colophon-note a:hover { color: var(--brick-deep); }
+
+    .colophon-end {
+      margin-top: 44px;
+      text-align: center;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.42em;
+      text-transform: uppercase;
+      color: var(--ink);
+      font-weight: 900;
+    }
+    .colophon-end::before,
+    .colophon-end::after { content: '·  ·  ·  '; color: var(--rule); }
+
+    /* —— Back to top —— */
+    .top-btn {
+      position: fixed;
+      bottom: 28px;
+      right: 24px;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: var(--ink);
+      border: 2px solid var(--ink);
+      color: var(--paper);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      opacity: 0;
+      transition: opacity 0.25s, transform 0.2s, background 0.2s;
+      pointer-events: none;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+      font-family: var(--mono);
+      font-weight: 900;
+      z-index: 40;
+    }
+    .top-btn.show { opacity: 1; pointer-events: auto; }
+    .top-btn:hover { background: var(--brick); border-color: var(--brick); }
+    .top-btn:active { transform: scale(0.93); }
+
+    /* —— Reveal —— */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.in { opacity: 1; transform: none; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+      .status-chip::before { animation: none; }
+      h1.title .wave { animation: none; }
+    }
+
+    /* —— Mobile —— */
+    @media (max-width: 640px) {
+      body { font-size: 15.5px; }
+      .topnav-inner { padding: 12px 18px; gap: 10px; }
+      .nav-brand { font-size: 10.5px; letter-spacing: 0.16em; }
+      .nav-links { gap: 13px; font-size: 10.5px; }
+      .nav-links .opt { display: none; }
+      .wrap { padding: 0 20px; }
+
+      .hero { padding: 56px 0 52px; }
+      .eyebrow { font-size: 10.5px; gap: 10px; margin-bottom: 24px; }
+      h1.title { font-size: 46px; line-height: 1.08; letter-spacing: -0.025em; margin-bottom: 24px; }
+      .lede { font-size: 16.5px; margin-bottom: 32px; }
+      .byline { font-size: 10px; gap: 10px; padding-top: 18px; }
+
+      .intro { padding: 48px 0; }
+      .intro-body { font-size: 16.5px; }
+
+      .toc { padding: 60px 0; }
+      .toc-title { font-size: 38px; }
+      .toc-sub { font-size: 11px; margin-bottom: 32px; }
+      .toc-row {
+        grid-template-columns: 44px 1fr;
+        gap: 14px;
+        padding: 18px 0;
+      }
+      .toc-meta {
+        grid-column: 1 / -1;
+        padding-left: 58px;
+        padding-top: 4px;
+        font-size: 10px;
+      }
+      .toc-num { font-size: 24px; }
+      .toc-name { font-size: 16px; }
+      .toc-desc { font-size: 13px; }
+      .toc-side { padding: 16px 18px; }
+      .toc-side-text { font-size: 14.5px; }
+      .pullquote { padding: 18px 0; }
+      .pullquote-body { font-size: 15.5px; }
+
+      .chapter { padding: 64px 0 52px; }
+      .chapter-emoji { font-size: 36px; margin-bottom: 12px; }
+      .chapter-num { font-size: 92px; }
+      .chapter-num.aside { font-size: 104px; }
+      .chapter-name { font-size: 34px; line-height: 1.12; }
+      .chapter-eyebrow { font-size: 11.5px; }
+      .chapter-era { font-size: 10.5px; }
+
+      .block { margin-bottom: 28px; }
+      .block-body { font-size: 16px; }
+      .examples li { font-size: 15.5px; padding: 10px 0 10px 26px; }
+
+      .reading { padding: 60px 0 52px; }
+      .reading-title { font-size: 38px; }
+      .reading-sub { font-size: 11px; margin-bottom: 28px; }
+      .order-item {
+        grid-template-columns: 44px 1fr;
+        gap: 16px;
+        padding: 20px 0;
+      }
+      .order-num { font-size: 28px; }
+
+      .findme { padding: 60px 0 52px; }
+      .findme-title { font-size: 38px; }
+      .findme-sub { font-size: 11px; margin-bottom: 28px; }
+      .findme-list { grid-template-columns: 1fr; gap: 10px; }
+      .findme-item { padding: 14px 16px; }
+      .findme-emo { font-size: 22px; }
+      .findme-handle { font-size: 14px; }
+      .findme-note { font-size: 14.5px; }
+
+      .colophon { margin-top: 68px; padding: 48px 0 32px; }
+      .colophon-mark { font-size: 36px; }
+      .colophon-grid { grid-template-columns: 1fr; gap: 18px; }
+
+      .top-btn { bottom: 20px; right: 16px; width: 42px; height: 42px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="topnav" id="top">
+  <div class="topnav-inner">
+    <a class="nav-brand" href="#top">
+      <span>📡</span>VOL.01<span class="dot">·</span><span class="muted">A FIELD GUIDE</span>
+    </a>
+    <div class="nav-links">
+      <a href="#toc">目录</a>
+      <a href="#reading" class="opt">路线</a>
+      <a href="#findme">找我</a>
+      <a href="#colophon" class="opt">刊载</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="wrap hero reveal">
+  <div class="eyebrow">
+    <span>📡 VOL. 01 · A FIELD GUIDE</span>
+    <span class="pipe">|</span>
+    <span class="status-chip">在播 · 学习中</span>
+  </div>
+
+  <h1 class="title">给内容创作者的<br><em>AI 全景</em>框架<span class="wave">📐</span></h1>
+
+  <p class="lede">听过 Transformer、LLM、Agent、RAG，但<strong>说不清它们到底是啥关系？</strong>我也是。这是我边学边画的脑图——六层金字塔加一条旁支，把市面上听到的 AI 名词全归位。</p>
+
+  <div class="byline">
+    <span>👋 BY <strong>刘玉婷</strong></span>
+    <span class="sep">·</span>
+    <span>YUTING / CLAIRE</span>
+    <span class="sep">·</span>
+    <span>2026.05.13</span>
+    <span class="sep">·</span>
+    <span>12 MIN READ</span>
+  </div>
+</header>
+
+<!-- INTRO · 写在前面 -->
+<section class="wrap intro reveal">
+  <div class="section-mark"><span class="emo">👋</span> Hi from the editor · 写在前面</div>
+  <p class="intro-body">
+    我是<strong>刘玉婷</strong>（Yuting / Claire），曾经做了 5 年的 PM，现在在 ALL IN 做自己的内容生意——小红书、B站、小宇宙三条线并行。
+  </p>
+  <p class="intro-body">
+    我也是 AI 小白。但做内容必须用 AI，所以我决定<strong>边学边把笔记整理出来</strong>——就当是给跟我画像类似的朋友（PM、创业者、自媒体人、技术轻度玩家）省点摸索的功夫 ☕️
+  </p>
+  <p class="intro-body">
+    这是 <strong>Vol. 01</strong>，往后会持续更新。如果觉得有用，<strong>欢迎转给一个跟你画像类似的朋友</strong> 🤝
+  </p>
+</section>
+
+<!-- TOC -->
+<section class="wrap toc reveal" id="toc">
+  <div class="section-mark"><span class="emo">📑</span> Contents · 目录</div>
+  <h2 class="toc-title">六层金字塔<br>＋ 一条旁支</h2>
+  <p class="toc-sub">From The Top Down To The Foundation</p>
+
+  <ul class="toc-list">
+    <li>
+      <a class="toc-row" href="#l6">
+        <span class="toc-num">L6</span>
+        <span class="toc-text">
+          <span class="toc-name"><span class="emo">🏢</span>行业 · 产品 · 岗位</span>
+          <span class="toc-desc">从 PM / 创业者的视角看 AI 怎么变成生意</span>
+        </span>
+        <span class="toc-meta">你的主场</span>
+      </a>
+    </li>
+    <li>
+      <a class="toc-row" href="#l5">
+        <span class="toc-num">L5</span>
+        <span class="toc-text">
+          <span class="toc-name"><span class="emo">🛠️</span>应用层 · RAG · Agent</span>
+          <span class="toc-desc">把大模型装进具体场景的工具箱</span>
+        </span>
+        <span class="toc-meta">最易落地</span>
+      </a>
+    </li>
+    <li>
+      <a class="toc-row" href="#l4">
+        <span class="toc-num">L4</span>
+        <span class="toc-text">
+          <span class="toc-name"><span class="emo">🤖</span>大模型 · Transformer · LLM</span>
+          <span class="toc-desc">ChatGPT、Claude 们背后的引擎</span>
+        </span>
+        <span class="toc-meta">硬通货</span>
+      </a>
+    </li>
+    <li>
+      <a class="toc-row" href="#l3">
+        <span class="toc-num">L3</span>
+        <span class="toc-text">
+          <span class="toc-name"><span class="emo">🧠</span>深度学习 · CNN · RNN</span>
+          <span class="toc-desc">机器学会"自己看特征"的时代</span>
+        </span>
+        <span class="toc-meta">2012–2017</span>
+      </a>
+    </li>
+    <li>
+      <a class="toc-row" href="#l2">
+        <span class="toc-num">L2</span>
+        <span class="toc-text">
+          <span class="toc-name"><span class="emo">📐</span>经典机器学习</span>
+          <span class="toc-desc">KNN · 决策树 · SVM · K-means</span>
+        </span>
+        <span class="toc-meta">~2010</span>
+      </a>
+    </li>
+    <li>
+      <a class="toc-row" href="#l1">
+        <span class="toc-num">L1</span>
+        <span class="toc-text">
+          <span class="toc-name"><span class="emo">🧮</span>数学 & 统计学</span>
+          <span class="toc-desc">地基。不用专门学，碰到再补</span>
+        </span>
+        <span class="toc-meta">地基</span>
+      </a>
+    </li>
+  </ul>
+
+  <a href="#side" class="toc-side">
+    <div class="toc-side-label">🎲 Aside · 旁支</div>
+    <div class="toc-side-text"><strong>推荐系统</strong> — 小红书 / B站 / 小宇宙的发现页全靠它，你天天打交道</div>
+  </a>
+
+  <div class="pullquote">
+    <div class="pullquote-label">✏️ Editor's Note · 编者按</div>
+    <div class="pullquote-body">
+      清单里的 <strong>NLP</strong>（自然语言处理）和 <strong>CV</strong>（计算机视觉）不是某一层，而是<strong>应用方向</strong>。NLP 走「统计语言模型 → RNN/LSTM → Transformer」，CV 走「传统图像处理 → CNN → GAN / Diffusion」，都横跨 L2 到 L4。
+    </div>
+  </div>
+</section>
+
+<!-- L1 -->
+<article class="wrap chapter reveal" id="l1">
+  <header class="chapter-opener">
+    <div class="chapter-emoji">🧮</div>
+    <div class="chapter-num">L1</div>
+    <div class="chapter-eyebrow">The Foundation Layer</div>
+    <h2 class="chapter-name">数学 & 统计学</h2>
+    <div class="chapter-era">L1 · 地基 · Foundation</div>
+  </header>
+
+  <div class="chapter-content">
+    <div class="block">
+      <div class="block-label"><span class="emo">🏷️</span> 落在这层的词</div>
+      <div class="tags">
+        <span class="tag">数学统计学知识</span>
+        <span class="tag">统计学基本概念</span>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="block-label"><span class="emo">🎯</span> 干嘛用的</div>
+      <p class="block-body">给 AI 打底。你<strong>不用专门学</strong>，碰到再补就行。</p>
+    </div>
+
+    <div class="block">
+      <div class="block-label"><span class="emo">💼</span> 对照你的工作</div>
+      <ul class="examples">
+        <li>看后台数据时的均值、标准差、AB 测试就是这层。</li>
+      </ul>
+    </div>
+  </div>
+</article>
+
+<!-- L2 -->
+<article class="wrap chapter reveal" id="l2">
+  <header class="chapter-opener">
+    <div class="chapter-emoji">📐</div>
+    <div class="chapter-num">L2</div>
+    <div class="chapter-eyebrow">Classical Machine Learning</div>
+    <h2 class="chapter-name">经典机器学习</h2>
+    <div class="chapter-era">L2 · ~2010 年前主流</div>
+  </header>
+
+  <div class="chapter-content">
+    <div class="block">
+      <div class="block-label"><span class="emo">🎯</span> 三大问题</div>
+      <div class="tags">
+        <span class="tag key">分类</span>
+        <span class="tag key">回归</span>
+        <span class="tag key">聚类</span>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="block-label"><span class="emo">⚙️</span> 核心算法</div>
+      <div class="tags">
+        <span class="tag">KNN K-近邻</span>
+        <span class="tag">线性回归</span>
+        <span class="tag">逻辑回归</span>
+        <span class="tag">朴素贝叶斯</span>
+        <span class="tag">决策树</span>
+        <span class="tag">随机森林</span>
+        <span class="tag">SVM 支持向量机</span>
+        <span class="tag">K-means</span>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="block-label"><span class="emo">🔁</span> 配套流程</div>
+      <div class="tags">
+        <span class="tag">模型构建过程</span>
+        <span class="tag">模型评估</span>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="block-label"><span class="emo">💡</span> 干嘛用的</div>
+      <p class="block-body">人<strong>先告诉机器看什么特征</strong>，机器再学。</p>
+    </div>
+
+    <div class="block">
+      <div class="block-label"><span class="emo">💼</span> 对照你的工作</div>
+      <ul class="examples">
+        <li><strong>分类</strong>：把笔记分到「穿搭 / 美食 / 职场」</li>
+        <li><strong>回归</strong>：预测一条笔记 24 小时涨多少粉</li>
+        <li><strong>聚类</strong>：粉丝画像分群，没有现成标签</li>
+        <li><strong>KNN</strong>：找跟这条爆款"最像"的 5 条历史笔记</li>
+      </ul>
+    </div>
+  </div>
+</article>
+
+<!-- L3 -->
+<article class="wrap chapter reveal" id="l3">
+  <header class="chapter-opener">
+    <div class="chapter-emoji">🧠</div>
+    <div class="chapter-num">L3</div>
+    <div class="chapter-eyebrow">Deep Learning Era</div>
+    <h2 class="chapter-name">深度学习</h2>
+    <div class="chapter-era">L3 · 2012–2017 主流</div>
+  </header>
+
+  <div class="chapter-content">
+    <div class="block">
+      <div class="block-label"><span class="emo">🏗️</span> 底层架构</div>
+      <div class="tags">
+        <span class="tag">感知机</span>
+        <span class="tag">神经元</span>
+        <span class="tag">激活函数</span>
+        <span class="tag">神经网络</span>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="block-label"><span class="emo">🖼️</span> 图像方向</div>
+      <div class="tags">
+        <span class="tag key">CNN 卷积神经网络</span>
+        <span class="tag">GAN 生成对抗网络</span>
+        <span class="tag">Diffusion 扩散模型</span>
+        <span class="tag">AI 绘画</span>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="block-label"><span class="emo">📝</span> 文本 / 序列方向</div>
+      <div class="tags">
+        <span class="tag key">RNN 循环神经网络</span>
+        <span class="tag key">LSTM 长短时记忆</span>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="block-label"><span class="emo">🎮</span> 特殊范式</div>
+      <div class="tags">
+        <span class="tag">强化学习</span>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="block-label"><span class="emo">💡</span> 和 L2 的区别</div>
+      <p class="block-body">人不用挑特征了，<strong>机器自己学会"该看什么"</strong>。代价是更费数据、更费算力。</p>
+    </div>
+
+    <div class="block">
+      <div class="block-label"><span class="emo">💼</span> 对照你的工作</div>
+      <ul class="examples">
+        <li>小红书识别封面里"有没有人脸、食物、风景"——<strong>CNN</strong></li>
+        <li>你用 Midjourney、可灵生成 AI 短视频——背后是 <strong>Diffusion</strong></li>
+        <li>B站自动生成字幕、弹幕情绪识别——<strong>LSTM</strong></li>
+      </ul>
+    </div>
+  </div>
+</article>
+
+<!-- L4 -->
+<article class="wrap chapter reveal" id="l4">
+  <header class="chapter-opener">
+    <div class="chapter-emoji">🤖</div>
+    <div class="chapter-num">L4</div>
+    <div class="chapter-eyebrow">The Era of Foundation Models</div>
+    <h2 class="chapter-name">大模型时代</h2>
+    <div class="chapter-era">L4 · 2017 至今</div>
+  </header>
+
+  <div class="chapter-content">
+    <div class="block">
+      <div class="block-label"><span class="emo">⚙️</span> 核心引擎</div>
+      <div class="tags">
+        <span class="tag key">Transformer 架构</span>
+        <span class="tag key">注意力机制</span>
+        <span class="tag">嵌入词向量 Embedding</span>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="block-label"><span class="emo">📦</span> 核心产物</div>
+      <div class="tags">
+        <span class="tag">基础模型 Foundation Model</span>
+        <span class="tag key">大语言模型 LLM</span>
+        <span class="tag">ChatGPT</span>
+        <span class="tag">Claude</span>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="block-label"><span class="emo">🛠️</span> 怎么造出来</div>
+      <div class="tags">
+        <span class="tag">模型参数</span>
+        <span class="tag">数据集</span>
+        <span class="tag">数据标注</span>
+        <span class="tag key">预训练</span>
+        <span class="tag key">微调</span>
+        <span class="tag key">RLHF 人类反馈强化</span>
+        <span class="tag">训练要求</span>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="block-label"><span class="emo">📊</span> 怎么验收</div>
+      <div class="tags">
+        <span class="tag">模型评测</span>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="block-label"><span class="emo">🐒</span> 附带概念</div>
+      <div class="tags">
+        <span class="tag">无限猴子定理</span>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="block-label"><span class="emo">💡</span> 干嘛用的</div>
+      <p class="block-body">让机器<strong>理解上下文</strong>，生成像人写的内容。</p>
+    </div>
+
+    <div class="block">
+      <div class="block-label"><span class="emo">💼</span> 对照你的工作</div>
+      <ul class="examples">
+        <li>你用 Claude 起标题、ChatGPT 改播客大纲——都在调用 <strong>LLM</strong></li>
+        <li>把你 100 期播客文稿喂进去训出"你的专属 AI"——叫<strong>微调</strong></li>
+        <li>ChatGPT 一夜爆红背后的秘密——<strong>预训练 + RLHF</strong></li>
+      </ul>
+    </div>
+  </div>
+</article>
+
+<!-- L5 -->
+<article class="wrap chapter reveal" id="l5">
+  <header class="chapter-opener">
+    <div class="chapter-emoji">🛠️</div>
+    <div class="chapter-num">L5</div>
+    <div class="chapter-eyebrow">The Application Layer</div>
+    <h2 class="chapter-name">大模型应用层</h2>
+    <div class="chapter-era">L5 · 产品化工具箱</div>
+  </header>
+
+  <div class="chapter-content">
+    <div class="block">
+      <div class="block-label"><span class="emo">🏷️</span> 落在这层的词</div>
+      <div class="tags">
+        <span class="tag key">RAG 检索增强</span>
+        <span class="tag key">Agent 智能体</span>
+        <span class="tag">知识图谱</span>
+        <span class="tag">智能对话技术</span>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="block-label"><span class="emo">💡</span> 干嘛用的</div>
+      <p class="block-body">光有 LLM 不能直接卖钱，得<strong>装进具体场景</strong>做成产品。</p>
+    </div>
+
+    <div class="block">
+      <div class="block-label"><span class="emo">💼</span> 对照你的工作</div>
+      <ul class="examples">
+        <li><strong>RAG</strong>：把你所有播客文稿做成 AI 的"私人资料库"，问它"我以前讲过这个吗"</li>
+        <li><strong>Agent</strong>：一句话交代——"看完 B站视频 → 提炼亮点 → 改成小红书文案 → 生成封面 → 排期发布"——它自己做完</li>
+        <li><strong>知识图谱</strong>：B站「番剧—UP 主—标签」那种关系网</li>
+      </ul>
+    </div>
+  </div>
+</article>
+
+<!-- L6 -->
+<article class="wrap chapter reveal" id="l6">
+  <header class="chapter-opener">
+    <div class="chapter-emoji">🏢</div>
+    <div class="chapter-num">L6</div>
+    <div class="chapter-eyebrow">Industry · Product · Roles</div>
+    <h2 class="chapter-name">行业 · 产品 · 岗位</h2>
+    <div class="chapter-era">L6 · 你的主场</div>
+  </header>
+
+  <div class="chapter-content">
+    <div class="block">
+      <div class="block-label"><span class="emo">🏷️</span> 落在这层的词</div>
+      <div class="tags">
+        <span class="tag">AI 产品 vs 传统产品</span>
+        <span class="tag">AI 行业现状</span>
+        <span class="tag">AI 全岗位分析</span>
+        <span class="tag">AI 产品落地全流程</span>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="block-label"><span class="emo">💡</span> 干嘛用的</div>
+      <p class="block-body">从 PM / 创业者的视角，看 AI 是怎么落到产品、做成生意的。</p>
+    </div>
+
+    <div class="block">
+      <div class="block-label"><span class="emo">💼</span> 对照你的工作</div>
+      <ul class="examples">
+        <li>这层是你<strong>最不陌生</strong>的。等底下五层打通了，再回来看会有"哦，原来这群人在干这个"的快感 ✨</li>
+      </ul>
+    </div>
+  </div>
+</article>
+
+<!-- ASIDE -->
+<article class="wrap chapter reveal" id="side">
+  <header class="chapter-opener">
+    <div class="chapter-emoji">🎲</div>
+    <div class="chapter-num aside">§</div>
+    <div class="chapter-eyebrow">An Aside · Recommendation Systems</div>
+    <h2 class="chapter-name">旁支 · 推荐系统</h2>
+    <div class="chapter-era">不在主线 · 但你天天打交道</div>
+  </header>
+
+  <div class="chapter-content">
+    <div class="block">
+      <div class="block-label"><span class="emo">🏷️</span> 落在这层的词</div>
+      <div class="tags">
+        <span class="tag">推荐系统架构</span>
+        <span class="tag">推荐算法</span>
+        <span class="tag key">冷启动</span>
+        <span class="tag">协同过滤</span>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="block-label"><span class="emo">🤔</span> 为什么单独列</div>
+      <p class="block-body">它<strong>不在主线上</strong>，但小红书 For You、B站首页、小宇宙发现页<strong>全靠它</strong>。技术上是 L2 + L3 的混搭，近年开始嵌 L4（用大模型理解用户意图）。</p>
+    </div>
+
+    <div class="block">
+      <div class="block-label"><span class="emo">💼</span> 对照你的工作</div>
+      <ul class="examples">
+        <li><strong>冷启动</strong>：你新发的第一条笔记，平台不知道推给谁——这就是冷启动问题</li>
+        <li><strong>协同过滤</strong>：经典推荐算法的灵魂——"喜欢 A 的人也喜欢 B"</li>
+      </ul>
+    </div>
+  </div>
+</article>
+
+<!-- READING ORDER -->
+<section class="wrap reading reveal" id="reading">
+  <div class="section-mark"><span class="emo">🗺️</span> Reading Order · 阅读路线</div>
+  <h2 class="reading-title">建议怎么读</h2>
+  <p class="reading-sub">Don't Start From The Foundation</p>
+  <p class="reading-lede">不要从 L1 往上爬，<strong>太磨人</strong>。按 5 年 PM、计算机本科、自媒体的画像，顺序应该是：</p>
+
+  <ol class="order-list">
+    <li class="order-item">
+      <div class="order-num">01</div>
+      <div>
+        <div class="order-title">L6（产品视角）+ L4（大模型本身）</div>
+        <div class="order-why">先建立体感，先看到全局</div>
+      </div>
+    </li>
+    <li class="order-item">
+      <div class="order-num">02</div>
+      <div>
+        <div class="order-title">L5（RAG / Agent）</div>
+        <div class="order-why">你最有可能直接落地的部分</div>
+      </div>
+    </li>
+    <li class="order-item">
+      <div class="order-num">03</div>
+      <div>
+        <div class="order-title">L2 的"三大问题"</div>
+        <div class="order-why">概念懂了就行，算法可以跳</div>
+      </div>
+    </li>
+    <li class="order-item">
+      <div class="order-num">04</div>
+      <div>
+        <div class="order-title">L3 的 CNN / RNN</div>
+        <div class="order-why">知道是干嘛的就行，不必深究</div>
+      </div>
+    </li>
+    <li class="order-item">
+      <div class="order-num">05</div>
+      <div>
+        <div class="order-title">旁支 · 推荐系统</div>
+        <div class="order-why">跟你的分发业务直接相关</div>
+      </div>
+    </li>
+    <li class="order-item">
+      <div class="order-num skip">06</div>
+      <div>
+        <div class="order-title">L2 的具体算法（KNN / SVM / K-means …）</div>
+        <div class="order-why">能跳就跳，除非你要写代码</div>
+      </div>
+    </li>
+    <li class="order-item">
+      <div class="order-num skip">07</div>
+      <div>
+        <div class="order-title">L1 数学</div>
+        <div class="order-why">不用专门学，要用再回头查</div>
+      </div>
+    </li>
+  </ol>
+</section>
+
+<!-- FIND ME -->
+<section class="wrap findme reveal" id="findme">
+  <div class="section-mark"><span class="emo">🤝</span> Find me · 在哪里找我</div>
+  <h2 class="findme-title">想聊聊？<br>来这些地方找我</h2>
+  <p class="findme-sub">Wherever You Hang Out — I'm Probably There</p>
+
+  <ul class="findme-list">
+    <li>
+      <a class="findme-item" href="#" target="_blank" rel="noopener">
+        <span class="findme-emo">📕</span>
+        <span class="findme-text">
+          <span class="findme-platform">小红书 · Xiaohongshu</span>
+          <span class="findme-handle">@Claire 玉婷</span>
+        </span>
+      </a>
+    </li>
+    <li>
+      <a class="findme-item" href="#" target="_blank" rel="noopener">
+        <span class="findme-emo">📺</span>
+        <span class="findme-text">
+          <span class="findme-platform">B站 · Bilibili</span>
+          <span class="findme-handle">@Claire 玉婷</span>
+        </span>
+      </a>
+    </li>
+    <li>
+      <a class="findme-item" href="#" target="_blank" rel="noopener">
+        <span class="findme-emo">🎙️</span>
+        <span class="findme-text">
+          <span class="findme-platform">小宇宙 · Xiaoyuzhou</span>
+          <span class="findme-handle">Claire 的播客</span>
+        </span>
+      </a>
+    </li>
+    <li>
+      <a class="findme-item" href="mailto:yutingliu1996@gmail.com">
+        <span class="findme-emo">✉️</span>
+        <span class="findme-text">
+          <span class="findme-platform">Email</span>
+          <span class="findme-handle">yutingliu1996@gmail.com</span>
+        </span>
+      </a>
+    </li>
+  </ul>
+
+  <p class="findme-note">
+    <strong>反馈、合作、闲聊、骂我</strong>都可以——哪个平台舒服哪个来 🙋‍♀️ <br>
+    （平台 handle 是占位的，等我有空补上真链接）
+  </p>
+</section>
+
+<!-- COLOPHON -->
+<footer class="wrap colophon reveal" id="colophon">
+  <div class="colophon-mark"><span class="accent">§</span> Colophon</div>
+  <div class="colophon-title">📰 刊载信息 · Issue Information</div>
+
+  <dl class="colophon-grid">
+    <div>
+      <dt>Issue</dt>
+      <dd><span class="accent">Vol. 01</span> · A Field Guide</dd>
+    </div>
+    <div>
+      <dt>Editor</dt>
+      <dd>👋 刘玉婷 · Yuting / Claire</dd>
+    </div>
+    <div>
+      <dt>Published</dt>
+      <dd>📅 2026 · 05 · 13</dd>
+    </div>
+    <div>
+      <dt>Next Issue</dt>
+      <dd>🔮 还没想好</dd>
+    </div>
+    <div>
+      <dt>Built With</dt>
+      <dd>📄 HTML · CSS · JS（就这一个文件）</dd>
+    </div>
+    <div>
+      <dt>Co-author</dt>
+      <dd>🤝 我 + Claude</dd>
+    </div>
+  </dl>
+
+  <div class="colophon-note">
+    <p><strong>关于这一页本身：</strong>这是一份纯静态的 HTML 文件——1500 行代码上下，没用任何框架、没装任何依赖。<strong>所有看起来"像设计师做的"地方，都是我跟 AI 对话写出来的。</strong></p>
+    <p>如果你也想做一份属于自己的"独立刊物"——<strong>这件事真的没那么难</strong>。普通人也能学会 ✊ <a href="#top">回到开头</a> 再看一遍，就当是看了个动手演示。</p>
+  </div>
+
+  <div class="colophon-end">End of Vol. 01</div>
+</footer>
+
+<button class="top-btn" id="topBtn" onclick="scrollTo({top:0,behavior:'smooth'})" aria-label="回到顶部">↑</button>
+
+<script>
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.05, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  const topBtn = document.getElementById('topBtn');
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        topBtn.classList.toggle('show', window.scrollY > 500);
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+</script>
+
+</body>
+</html>

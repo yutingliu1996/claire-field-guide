@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>人生操作系统 · 锁屏</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "PingFang SC", "Hiragino Sans GB", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    background: #2a2a2a;
+  }
+
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 20px;
+    gap: 30px;
+  }
+
+  .label {
+    color: #888;
+    font-size: 12px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  /* === 9:16 frame ratio: 1080x1920 scaled down === */
+  .phone-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .phone {
+    width: 270px;
+    height: 480px;
+    border-radius: 36px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 0 8px #1a1a1a, 0 0 0 9px #333;
+  }
+
+  /* === Variant 1: Pure black === */
+  .v1 {
+    background: linear-gradient(180deg, #000 0%, #0a0a0a 100%);
+    color: #f5f5f7;
+    padding: 60px 24px 50px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .v1 .top-area {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  .v1 .bazi {
+    font-family: "STSong", "Songti SC", serif;
+    font-size: 13px;
+    letter-spacing: 0.5em;
+    color: #6e6e73;
+    font-weight: 300;
+  }
+
+  .v1 .core {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .v1 .quote {
+    font-size: 17px;
+    font-weight: 200;
+    line-height: 1.6;
+    letter-spacing: 0.08em;
+    margin-bottom: 36px;
+    color: #fff;
+  }
+
+  .v1 .principles {
+    list-style: none;
+    text-align: left;
+    padding: 0 12px;
+  }
+
+  .v1 .principles li {
+    font-size: 11px;
+    padding: 4.5px 0;
+    color: #c7c7cc;
+    font-weight: 300;
+    letter-spacing: 0.05em;
+    border-bottom: 0.5px solid #2a2a2c;
+  }
+
+  .v1 .principles li::before {
+    content: "—";
+    margin-right: 8px;
+    color: #6e6e73;
+  }
+
+  .v1 .principles li:last-child { border-bottom: none; }
+
+  .v1 .footer {
+    text-align: center;
+    font-size: 9px;
+    color: #48484a;
+    letter-spacing: 0.4em;
+    margin-top: 20px;
+  }
+
+  /* === Variant 2: Off-white minimal === */
+  .v2 {
+    background: linear-gradient(180deg, #f5f5f0 0%, #ebe7df 100%);
+    color: #1d1d1f;
+    padding: 60px 24px 50px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .v2 .top-area {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  .v2 .bazi {
+    font-family: "STSong", "Songti SC", serif;
+    font-size: 13px;
+    letter-spacing: 0.5em;
+    color: #968f83;
+    font-weight: 300;
+  }
+
+  .v2 .core {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .v2 .quote {
+    font-size: 17px;
+    font-weight: 200;
+    line-height: 1.6;
+    letter-spacing: 0.08em;
+    margin-bottom: 36px;
+    color: #1d1d1f;
+  }
+
+  .v2 .principles {
+    list-style: none;
+    text-align: left;
+    padding: 0 12px;
+  }
+
+  .v2 .principles li {
+    font-size: 11px;
+    padding: 4.5px 0;
+    color: #3d3a36;
+    font-weight: 300;
+    letter-spacing: 0.05em;
+    border-bottom: 0.5px solid #d8d2c7;
+  }
+
+  .v2 .principles li::before {
+    content: "—";
+    margin-right: 8px;
+    color: #968f83;
+  }
+
+  .v2 .principles li:last-child { border-bottom: none; }
+
+  .v2 .footer {
+    text-align: center;
+    font-size: 9px;
+    color: #968f83;
+    letter-spacing: 0.4em;
+    margin-top: 20px;
+  }
+
+  /* === Variant 3: Black gold === */
+  .v3 {
+    background: linear-gradient(180deg, #0a0a0a 0%, #181410 100%);
+    color: #f0ead6;
+    padding: 60px 24px 50px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .v3 .top-area {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  .v3 .bazi {
+    font-family: "STSong", "Songti SC", serif;
+    font-size: 13px;
+    letter-spacing: 0.5em;
+    color: #b08d57;
+    font-weight: 300;
+  }
+
+  .v3 .core {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .v3 .quote {
+    font-size: 17px;
+    font-weight: 200;
+    line-height: 1.6;
+    letter-spacing: 0.08em;
+    margin-bottom: 36px;
+    color: #c9a96a;
+  }
+
+  .v3 .principles {
+    list-style: none;
+    text-align: left;
+    padding: 0 12px;
+  }
+
+  .v3 .principles li {
+    font-size: 11px;
+    padding: 4.5px 0;
+    color: #b8a878;
+    font-weight: 300;
+    letter-spacing: 0.05em;
+    border-bottom: 0.5px solid #2a2520;
+  }
+
+  .v3 .principles li::before {
+    content: "—";
+    margin-right: 8px;
+    color: #8b7355;
+  }
+
+  .v3 .principles li:last-child { border-bottom: none; }
+
+  .v3 .footer {
+    text-align: center;
+    font-size: 9px;
+    color: #6e6356;
+    letter-spacing: 0.4em;
+    margin-top: 20px;
+  }
+
+  /* Multi-phone display */
+  .phones-row {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .phone-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .phone-name {
+    color: #f5f5f7;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+
+  .header-area {
+    text-align: center;
+    margin-bottom: 12px;
+  }
+
+  .header-title {
+    color: #f5f5f7;
+    font-size: 22px;
+    font-weight: 200;
+    letter-spacing: 0.3em;
+    margin-bottom: 6px;
+  }
+
+  .header-sub {
+    color: #888;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+  }
+
+  .instruction {
+    background: #1a1a1a;
+    color: #c7c7cc;
+    padding: 16px 20px;
+    border-radius: 12px;
+    max-width: 600px;
+    font-size: 13px;
+    line-height: 1.7;
+    margin-top: 20px;
+  }
+
+  .instruction strong { color: #f5f5f7; }
+
+  .instruction code {
+    background: #2a2a2a;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    color: #c9a96a;
+  }
+</style>
+</head>
+<body>
+
+<div class="header-area">
+  <div class="header-title">L o c k &nbsp; S c r e e n</div>
+  <div class="header-sub">9 : 1 6 &nbsp;&nbsp; 三 款 极 简 配 色</div>
+</div>
+
+<div class="phones-row">
+
+  <!-- Variant 1: Pure Black -->
+  <div class="phone-col">
+    <div class="phone-name">P U R E &nbsp; B L A C K</div>
+    <div class="phone v1">
+      <div class="top-area">
+        <div class="bazi">癸 水</div>
+      </div>
+      <div class="core">
+        <div class="quote">
+          最 好 的 部 分<br/>
+          还 在 35 岁 之 后
+        </div>
+        <ul class="principles">
+          <li>找老师，别一个人扛</li>
+          <li>穿白戴银朝西睡</li>
+          <li>26-27 不做重大决定</li>
+          <li>金水绿灯 火土红灯</li>
+          <li>早睡 喝水 游泳</li>
+        </ul>
+        <div class="footer">丙 子 · 戊 戌 · 癸 巳 · 壬 戌</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Variant 2: Off-white -->
+  <div class="phone-col">
+    <div class="phone-name">M O R A N D I</div>
+    <div class="phone v2">
+      <div class="top-area">
+        <div class="bazi">癸 水</div>
+      </div>
+      <div class="core">
+        <div class="quote">
+          最 好 的 部 分<br/>
+          还 在 35 岁 之 后
+        </div>
+        <ul class="principles">
+          <li>找老师，别一个人扛</li>
+          <li>穿白戴银朝西睡</li>
+          <li>26-27 不做重大决定</li>
+          <li>金水绿灯 火土红灯</li>
+          <li>早睡 喝水 游泳</li>
+        </ul>
+        <div class="footer">丙 子 · 戊 戌 · 癸 巳 · 壬 戌</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Variant 3: Black Gold -->
+  <div class="phone-col">
+    <div class="phone-name">B L A C K &nbsp; G O L D</div>
+    <div class="phone v3">
+      <div class="top-area">
+        <div class="bazi">癸 水</div>
+      </div>
+      <div class="core">
+        <div class="quote">
+          最 好 的 部 分<br/>
+          还 在 35 岁 之 后
+        </div>
+        <ul class="principles">
+          <li>找老师，别一个人扛</li>
+          <li>穿白戴银朝西睡</li>
+          <li>26-27 不做重大决定</li>
+          <li>金水绿灯 火土红灯</li>
+          <li>早睡 喝水 游泳</li>
+        </ul>
+        <div class="footer">丙 子 · 戊 戌 · 癸 巳 · 壬 戌</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="instruction">
+  <strong>怎么变成手机壁纸：</strong><br/>
+  1. 选你最喜欢的一款，<strong>右键 → 检查（Inspect）</strong> 找到对应的 <code>.phone</code> 元素<br/>
+  2. 或者直接 <strong>截屏</strong>（Mac: <code>Cmd + Shift + 4</code> 框选）<br/>
+  3. AirDrop 给手机，进相册 → 选作壁纸<br/>
+  <br/>
+  <strong>更高分辨率版？</strong> 告诉我哪一款，我做一个 <code>1170 × 2532</code> 的 iPhone 实尺版本（手机原生分辨率，截图后超清晰）。
+</div>
+
+</body>
+</html>
