@@ -1,4 +1,26 @@
-.vercel/
-node_modules/
+# —— Tight gitignore: this repo only tracks the AI Field Guide project. ——
+# Other projects in this directory (OPC, content-pipeline, etc.) live their own life.
+
+# Ignore everything by default
+/*
+
+# Then explicitly UN-ignore the project files
+!.gitignore
+!ai-framework.html
+!index.html
+!archive/
+!vercel.json
+
+# Also keep her existing standalone HTMLs from earlier work
+!我的人生操作系统.html
+!操作系统-纯黑白.html
+!操作系统-莫兰迪.html
+!操作系统-黑金.html
+!锁屏-竖版.html
+
+# Inside archive, track everything
+!archive/**
+
+# System cruft
 .DS_Store
 *.log
