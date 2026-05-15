@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#FAF6EF">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Cover Looks">
+  <title>Cover Looks · 风格沙盒 · Claire 玉婷</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2224%22 fill=%22%23FFC72C%22/><text y=%22.9em%22 x=%2218%22 font-size=%2274%22>🎨</text></svg>">
+
+  <style>
+    :root {
+      --paper: #FAF6EF;
+      --paper-2: #FFFFFF;
+      --paper-3: #F0EAE0;
+      --ink: #1A1A1A;
+      --ink-2: #585858;
+      --ink-3: #9A9A9A;
+
+      --cp-yellow: #FFC72C;
+      --cp-purple: #7B4B94;
+      --cp-teal: #4A90B8;
+      --cp-olive: #7CA982;
+      --cp-orange: #E5762A;
+
+      --shadow-xs: 0 1px 3px rgba(0,0,0,0.05);
+      --shadow-sm: 0 3px 8px rgba(0,0,0,0.05), inset 0 -2px 0 rgba(0,0,0,0.03);
+      --shadow-md: 0 8px 20px rgba(0,0,0,0.07), 0 2px 4px rgba(0,0,0,0.04), inset 0 -3px 0 rgba(0,0,0,0.04);
+      --shadow-lg: 0 16px 36px rgba(0,0,0,0.09), 0 4px 10px rgba(0,0,0,0.05), inset 0 -5px 0 rgba(0,0,0,0.05);
+
+      --sans: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Helvetica Neue", "Microsoft YaHei", system-ui, sans-serif;
+      --mono: ui-monospace, "SF Mono", "Menlo", "Consolas", monospace;
+      --serif: ui-serif, "Iowan Old Style", Georgia, serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.72;
+      -webkit-font-smoothing: antialiased;
+      padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+    }
+
+    /* —— Nav (matches main page) —— */
+    .topnav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(250, 246, 239, 0.85);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+    .topnav-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .nav-brand {
+      font-family: var(--sans);
+      font-size: 16px;
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 900;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .nav-brand .planet { font-size: 18px; line-height: 1; filter: drop-shadow(0 2px 3px rgba(0,0,0,0.12)); margin-right: 4px; }
+    .nav-brand .cdot { font-weight: 900; font-size: 14px; margin: 0 1px; position: relative; top: -1px; }
+    .nav-brand .cdot.c1 { color: var(--cp-orange); }
+    .nav-brand .cdot.c2 { color: var(--cp-yellow); }
+    .nav-brand .cdot.c3 { color: var(--cp-teal); }
+    .nav-brand .cdot.c4 { color: var(--cp-olive); }
+    .nav-brand .cdot.c5 { color: var(--cp-purple); }
+    .nav-brand .muted {
+      color: var(--ink-3);
+      font-weight: 700;
+      font-size: 11px;
+      font-family: var(--mono);
+      letter-spacing: 0.16em;
+      margin-left: 8px;
+      padding-left: 8px;
+      border-left: 1px solid var(--ink-3);
+    }
+    .nav-links {
+      display: flex;
+      gap: 22px;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 800;
+    }
+    .nav-links a {
+      color: var(--ink-2);
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+    .nav-links a:hover { color: var(--cp-orange); }
+    .nav-links a.active { color: var(--cp-orange); }
+
+    .wrap {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* —— Hero —— */
+    .hero {
+      padding: 72px 0 48px;
+    }
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 14px;
+      background: var(--paper-2);
+      border-radius: 999px;
+      box-shadow: var(--shadow-sm);
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      font-weight: 900;
+      color: var(--cp-purple);
+      margin-bottom: 28px;
+    }
+    .hero-title {
+      font-family: var(--sans);
+      font-size: 88px;
+      font-weight: 900;
+      line-height: 1.0;
+      letter-spacing: -0.045em;
+      margin-bottom: 24px;
+    }
+    .hero-title em {
+      font-style: normal;
+      color: var(--paper-2);
+      background: var(--cp-purple);
+      padding: 0.04em 0.18em 0.08em;
+      border-radius: 20px;
+      display: inline-block;
+      transform: rotate(-1.2deg);
+      box-shadow: 0 12px 28px rgba(123,75,148,0.32);
+    }
+    .hero-lede {
+      font-family: var(--sans);
+      font-size: 20px;
+      line-height: 1.6;
+      color: var(--ink);
+      max-width: 720px;
+      margin-bottom: 16px;
+      font-weight: 500;
+    }
+    .hero-lede mark {
+      background: var(--cp-yellow);
+      padding: 0 6px;
+      border-radius: 6px;
+      font-weight: 800;
+    }
+    .hero-howto {
+      font-family: var(--sans);
+      font-size: 15px;
+      color: var(--ink-2);
+      line-height: 1.65;
+      max-width: 720px;
+      font-weight: 500;
+      padding: 16px 20px;
+      background: var(--paper-2);
+      border-radius: 16px;
+      box-shadow: var(--shadow-xs);
+      margin-top: 24px;
+    }
+    .hero-howto strong { font-weight: 800; color: var(--ink); }
+
+    /* —— Looks grid —— */
+    .looks {
+      padding: 32px 0 80px;
+    }
+    .looks-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .look-card {
+      background: var(--paper-2);
+      border-radius: 28px;
+      padding: 28px;
+      box-shadow: var(--shadow-md);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .look-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+
+    .look-num {
+      position: absolute;
+      top: 18px;
+      right: 22px;
+      font-family: var(--mono);
+      font-size: 10.5px;
+      letter-spacing: 0.22em;
+      font-weight: 900;
+      color: var(--ink-3);
+    }
+
+    .look-emoji {
+      font-size: 36px;
+      line-height: 1;
+      margin-bottom: 8px;
+      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.16));
+    }
+    .look-name {
+      font-family: var(--sans);
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      margin-bottom: 4px;
+      line-height: 1.1;
+    }
+    .look-name-cn {
+      font-family: var(--sans);
+      font-size: 14px;
+      color: var(--ink-2);
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    /* —— Preview (varies per style) —— */
+    .preview {
+      padding: 24px;
+      border-radius: 20px;
+      margin-bottom: 18px;
+      position: relative;
+      overflow: hidden;
+    }
+    .preview-palette {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 18px;
+    }
+    .swatch {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      box-shadow: inset 0 -2px 0 rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06);
+    }
+    .preview-tile {
+      display: inline-grid;
+      place-items: center;
+      width: 88px;
+      height: 88px;
+      border-radius: 22px;
+      font-size: 44px;
+      margin-bottom: 14px;
+      position: relative;
+    }
+    .preview-tile span { filter: drop-shadow(0 4px 6px rgba(0,0,0,0.18)); }
+    .preview-tile .tile-num {
+      position: absolute;
+      bottom: -8px;
+      right: -8px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      box-shadow: var(--shadow-xs);
+    }
+    .preview-headline {
+      font-size: 36px;
+      font-weight: 900;
+      line-height: 1.0;
+      letter-spacing: -0.035em;
+      margin-bottom: 6px;
+    }
+    .preview-body {
+      font-size: 13.5px;
+      line-height: 1.5;
+      font-weight: 500;
+    }
+
+    .look-vibe {
+      font-family: var(--mono);
+      font-size: 10.5px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      font-weight: 800;
+      margin-bottom: 12px;
+      line-height: 1.6;
+    }
+    .look-vibe .pill {
+      display: inline-block;
+      padding: 3px 8px;
+      background: var(--paper);
+      border-radius: 999px;
+      margin: 2px 4px 2px 0;
+    }
+    .look-when {
+      font-family: var(--sans);
+      font-size: 14px;
+      color: var(--ink-2);
+      line-height: 1.55;
+      font-weight: 500;
+      margin-bottom: 20px;
+    }
+    .look-when strong { color: var(--ink); font-weight: 800; }
+
+    .look-actions {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    .vote-btn {
+      flex: 1;
+      padding: 12px 16px;
+      background: var(--ink);
+      color: var(--paper-2);
+      border: none;
+      border-radius: 12px;
+      font-family: var(--sans);
+      font-weight: 900;
+      font-size: 13.5px;
+      cursor: pointer;
+      transition: transform 0.18s, background 0.18s;
+      box-shadow: var(--shadow-xs);
+      letter-spacing: 0.02em;
+    }
+    .vote-btn:hover { transform: translateY(-2px); background: var(--cp-orange); }
+    .vote-btn.voted { background: var(--cp-orange); }
+    .vote-btn .count {
+      display: inline-block;
+      padding: 1px 7px;
+      background: var(--cp-yellow);
+      color: var(--ink);
+      border-radius: 999px;
+      font-size: 11px;
+      margin-left: 6px;
+      font-weight: 900;
+    }
+    .look-more {
+      padding: 12px 14px;
+      background: var(--paper-3);
+      color: var(--ink);
+      border: none;
+      border-radius: 12px;
+      font-family: var(--mono);
+      font-weight: 800;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: transform 0.18s, background 0.18s;
+    }
+    .look-more:hover { transform: translateY(-2px); background: var(--paper); }
+
+    /* —— Style 1: Friends (Current) —— */
+    .look-card[data-style="friends"] .preview {
+      background: linear-gradient(135deg, #FAF6EF 0%, #FFF1C2 100%);
+    }
+    .look-card[data-style="friends"] .preview-tile {
+      background: #FCE4DE;
+      box-shadow: 0 6px 16px rgba(255,90,77,0.18), inset 0 -4px 0 rgba(0,0,0,0.05);
+    }
+    .look-card[data-style="friends"] .preview-tile .tile-num {
+      background: var(--cp-yellow);
+      color: var(--ink);
+    }
+    .look-card[data-style="friends"] .preview-headline {
+      color: var(--ink);
+    }
+    .look-card[data-style="friends"] .preview-headline em {
+      font-style: normal;
+      background: #FF5A4D;
+      color: #fff;
+      padding: 0 8px;
+      border-radius: 10px;
+      display: inline-block;
+      transform: rotate(-1.5deg);
+    }
+    .look-card[data-style="friends"] .preview-body {
+      color: var(--ink-2);
+    }
+
+    /* —— Style 2: Monument Valley —— */
+    .look-card[data-style="monument"] .preview {
+      background: linear-gradient(180deg, #F0E5D8 0%, #E8D5DD 100%);
+    }
+    .look-card[data-style="monument"] .preview-tile {
+      background: #C7A8B5;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.10), inset 0 -3px 0 rgba(0,0,0,0.08);
+    }
+    .look-card[data-style="monument"] .preview-tile .tile-num {
+      background: #A8B5C7;
+      color: #fff;
+    }
+    .look-card[data-style="monument"] .preview-headline {
+      color: #5B4A55;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      font-size: 32px;
+    }
+    .look-card[data-style="monument"] .preview-body {
+      color: #7B6970;
+      font-style: italic;
+    }
+
+    /* —— Style 3: GRIS —— */
+    .look-card[data-style="gris"] .preview {
+      background: linear-gradient(160deg, #F5DCE5 0%, #C2A8D8 50%, #8FA8D8 100%);
+    }
+    .look-card[data-style="gris"] .preview-tile {
+      background: rgba(255,255,255,0.55);
+      backdrop-filter: blur(6px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    }
+    .look-card[data-style="gris"] .preview-tile .tile-num {
+      background: #6F86C9;
+      color: #fff;
+    }
+    .look-card[data-style="gris"] .preview-headline {
+      color: #fff;
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 700;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.18);
+    }
+    .look-card[data-style="gris"] .preview-body {
+      color: rgba(255,255,255,0.92);
+      font-style: italic;
+    }
+
+    /* —— Style 4: Sky · 光遇 —— */
+    .look-card[data-style="sky"] .preview {
+      background: linear-gradient(160deg, #FFF1E0 0%, #F5D86A 65%, #FFB088 100%);
+    }
+    .look-card[data-style="sky"] .preview-tile {
+      background: #FFF7E0;
+      box-shadow: 0 0 28px rgba(245,216,106,0.55), 0 6px 16px rgba(0,0,0,0.08);
+    }
+    .look-card[data-style="sky"] .preview-tile .tile-num {
+      background: #F5D86A;
+      color: #5C4500;
+    }
+    .look-card[data-style="sky"] .preview-headline {
+      color: #4A2E00;
+      text-shadow: 0 2px 8px rgba(255,255,255,0.6);
+    }
+    .look-card[data-style="sky"] .preview-body {
+      color: #6E4A1A;
+    }
+
+    /* —— Style 5: Hades —— */
+    .look-card[data-style="hades"] .preview {
+      background: linear-gradient(135deg, #1A0F2E 0%, #4A148C 60%, #B71C5C 100%);
+    }
+    .look-card[data-style="hades"] .preview-tile {
+      background: #FFD700;
+      box-shadow: 0 8px 20px rgba(255,215,0,0.35), inset 0 -4px 0 rgba(0,0,0,0.18);
+      border: 3px solid #1A0F2E;
+    }
+    .look-card[data-style="hades"] .preview-tile .tile-num {
+      background: #E91E63;
+      color: #fff;
+    }
+    .look-card[data-style="hades"] .preview-headline {
+      color: #FFD700;
+      text-shadow: 2px 2px 0 #1A0F2E, 0 4px 12px rgba(0,0,0,0.3);
+      font-style: italic;
+    }
+    .look-card[data-style="hades"] .preview-body {
+      color: #F5E6D3;
+    }
+
+    /* —— Style 6: Florence —— */
+    .look-card[data-style="florence"] .preview {
+      background: linear-gradient(180deg, #FFF8F0 0%, #FCE5E5 100%);
+    }
+    .look-card[data-style="florence"] .preview-tile {
+      background: #F5C2C7;
+      box-shadow: 0 4px 14px rgba(245,194,199,0.5), inset 0 -3px 0 rgba(0,0,0,0.06);
+    }
+    .look-card[data-style="florence"] .preview-tile .tile-num {
+      background: #2C3E50;
+      color: #FCE5E5;
+    }
+    .look-card[data-style="florence"] .preview-headline {
+      color: #2C3E50;
+      font-family: var(--serif);
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      font-size: 32px;
+    }
+    .look-card[data-style="florence"] .preview-body {
+      color: #6B4A55;
+    }
+
+    /* —— Notes / footer —— */
+    .next {
+      padding: 56px 0 80px;
+    }
+    .next-card {
+      padding: 32px 28px;
+      background: var(--paper-2);
+      border-radius: 24px;
+      box-shadow: var(--shadow-sm);
+      max-width: 720px;
+    }
+    .next-mark {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--cp-purple);
+      font-weight: 900;
+      margin-bottom: 16px;
+    }
+    .next-title {
+      font-family: var(--sans);
+      font-size: 32px;
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -0.025em;
+      margin-bottom: 16px;
+    }
+    .next-body {
+      font-family: var(--sans);
+      font-size: 15.5px;
+      line-height: 1.7;
+      color: var(--ink-2);
+      font-weight: 500;
+    }
+    .next-body strong { color: var(--ink); font-weight: 800; background: var(--cp-yellow); padding: 1px 6px; border-radius: 5px; }
+    .next-body a { color: var(--cp-orange); font-weight: 800; text-decoration: underline; }
+
+    /* —— Mobile —— */
+    @media (max-width: 700px) {
+      .topnav-inner { padding: 11px 16px; gap: 8px; }
+      .nav-brand { font-size: 10.5px; letter-spacing: 0.04em; }
+      .nav-brand .muted { display: none; }
+      .nav-links { gap: 12px; font-size: 10px; }
+      .wrap { padding: 0 18px; }
+      .hero { padding: 48px 0 32px; }
+      .hero-title { font-size: 44px; letter-spacing: -0.035em; }
+      .hero-title em { border-radius: 14px; }
+      .hero-lede { font-size: 16px; }
+      .hero-howto { font-size: 13.5px; padding: 14px 16px; }
+      .looks { padding: 24px 0 56px; }
+      .looks-grid { grid-template-columns: 1fr; gap: 16px; }
+      .look-card { padding: 22px 20px; border-radius: 22px; }
+      .look-name { font-size: 22px; }
+      .preview { padding: 18px; border-radius: 16px; }
+      .preview-tile { width: 72px; height: 72px; font-size: 36px; border-radius: 18px; }
+      .preview-headline { font-size: 26px; }
+      .preview-headline em { padding: 0 6px; }
+      .next { padding: 32px 0 56px; }
+      .next-card { padding: 22px 18px; border-radius: 20px; }
+      .next-title { font-size: 24px; }
+      .next-body { font-size: 14.5px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="topnav-inner">
+    <a class="nav-brand" href="/">
+      <span class="planet">🪐</span><span>C</span><span class="cdot c1">·</span><span>L</span><span class="cdot c2">·</span><span>A</span><span class="cdot c3">·</span><span>I</span><span class="cdot c4">·</span><span>R</span><span class="cdot c5">·</span><span>E</span><span class="muted">STUDIO</span>
+    </a>
+    <div class="nav-links">
+      <a href="/">主刊</a>
+      <a href="/looks" class="active">风格</a>
+      <a href="/#guests">嘉宾</a>
+      <a href="/#findme">找我</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="wrap hero">
+  <div class="hero-eyebrow">🎨 STUDIO · Cover Looks Lab</div>
+  <h1 class="hero-title">下一期 Vol<br>该穿哪件<em>衣服</em>？</h1>
+  <p class="hero-lede">这是 STUDIO 的「<mark>风格沙盒</mark>」——6 个候选视觉方向，每张卡是一片真实切片：实际颜色、实际字、实际 emoji 块——让你<strong>看见</strong>而不是<strong>想象</strong>。</p>
+  <div class="hero-howto">
+    👀 <strong>怎么用</strong>：扫一眼 6 张卡 → 选你最戳的 → 点「❤️ 投这个一票」。最终某一期 Vol 会被 cosplay 成你选的样子。**多选不限**，相邻方向可以撞色。
+  </div>
+</header>
+
+<!-- LOOKS GRID -->
+<main class="wrap looks">
+  <div class="looks-grid">
+
+    <!-- 1. Friends (current) -->
+    <article class="look-card" data-style="friends">
+      <span class="look-num">01 / 06</span>
+      <div class="look-emoji">☕</div>
+      <h2 class="look-name">Friends</h2>
+      <p class="look-name-cn">老友记 · 现在的样子</p>
+
+      <div class="preview">
+        <div class="preview-palette">
+          <span class="swatch" style="background:#FAF6EF"></span>
+          <span class="swatch" style="background:#FF5A4D"></span>
+          <span class="swatch" style="background:#FFC72C"></span>
+          <span class="swatch" style="background:#7B4B94"></span>
+          <span class="swatch" style="background:#7CA982"></span>
+        </div>
+        <div class="preview-tile">
+          <span>🤖</span>
+          <span class="tile-num">L4</span>
+        </div>
+        <div class="preview-headline">向上<em>长</em></div>
+        <div class="preview-body">大字报排版 · 软糖 3D tile · 黄色门洞框 · 主题曲彩蛋</div>
+      </div>
+
+      <div class="look-vibe">
+        <span class="pill">热血</span><span class="pill">社交</span><span class="pill">主理人</span><span class="pill">3D 软糖</span>
+      </div>
+      <p class="look-when"><strong>适合</strong>：当下 Vol.01-02、播客发布期、社群活动招募</p>
+
+      <div class="look-actions">
+        <button class="vote-btn" data-vote="friends">❤️ 投这个一票<span class="count">0</span></button>
+        <button class="look-more">完整页 →</button>
+      </div>
+    </article>
+
+    <!-- 2. Monument Valley -->
+    <article class="look-card" data-style="monument">
+      <span class="look-num">02 / 06</span>
+      <div class="look-emoji">🗿</div>
+      <h2 class="look-name">Monument Valley</h2>
+      <p class="look-name-cn">纪念碑谷 · 等距几何</p>
+
+      <div class="preview">
+        <div class="preview-palette">
+          <span class="swatch" style="background:#F0E5D8"></span>
+          <span class="swatch" style="background:#E8D5DD"></span>
+          <span class="swatch" style="background:#C7A8B5"></span>
+          <span class="swatch" style="background:#A8B5C7"></span>
+          <span class="swatch" style="background:#C9956E"></span>
+        </div>
+        <div class="preview-tile">
+          <span>🗺️</span>
+          <span class="tile-num">L6</span>
+        </div>
+        <div class="preview-headline">向上 长</div>
+        <div class="preview-body">莫兰迪粉紫蓝 · 等距几何 · M.C. Escher 错位 · 慢呼吸</div>
+      </div>
+
+      <div class="look-vibe">
+        <span class="pill">极简</span><span class="pill">优雅</span><span class="pill">高级</span><span class="pill">耐看一年</span>
+      </div>
+      <p class="look-when"><strong>适合</strong>：Vol.03+ 深度长文、年度总结、做一辑"哲学性"内容时</p>
+
+      <div class="look-actions">
+        <button class="vote-btn" data-vote="monument">❤️ 投这个一票<span class="count">0</span></button>
+        <button class="look-more">完整页 →</button>
+      </div>
+    </article>
+
+    <!-- 3. GRIS -->
+    <article class="look-card" data-style="gris">
+      <span class="look-num">03 / 06</span>
+      <div class="look-emoji">🌊</div>
+      <h2 class="look-name">GRIS</h2>
+      <p class="look-name-cn">水彩晕染 · 情绪渐变</p>
+
+      <div class="preview">
+        <div class="preview-palette">
+          <span class="swatch" style="background:#F5DCE5"></span>
+          <span class="swatch" style="background:#E5B8D8"></span>
+          <span class="swatch" style="background:#C2A8D8"></span>
+          <span class="swatch" style="background:#8FA8D8"></span>
+          <span class="swatch" style="background:#5C7AAA"></span>
+        </div>
+        <div class="preview-tile">
+          <span>🧠</span>
+          <span class="tile-num">L3</span>
+        </div>
+        <div class="preview-headline">向上 长</div>
+        <div class="preview-body">水彩渐变 · 情绪色阶 · 衬线斜体 · 一整页一种心境</div>
+      </div>
+
+      <div class="look-vibe">
+        <span class="pill">情绪</span><span class="pill">水彩</span><span class="pill">抒情</span><span class="pill">艺术展</span>
+      </div>
+      <p class="look-when"><strong>适合</strong>：访谈情感深的嘉宾、女性主题特辑、关于"过程"的一期</p>
+
+      <div class="look-actions">
+        <button class="vote-btn" data-vote="gris">❤️ 投这个一票<span class="count">0</span></button>
+        <button class="look-more">完整页 →</button>
+      </div>
+    </article>
+
+    <!-- 4. Sky -->
+    <article class="look-card" data-style="sky">
+      <span class="look-num">04 / 06</span>
+      <div class="look-emoji">☁️</div>
+      <h2 class="look-name">Sky · 光·遇</h2>
+      <p class="look-name-cn">柔光 3D · 暖金漂浮</p>
+
+      <div class="preview">
+        <div class="preview-palette">
+          <span class="swatch" style="background:#FFF1E0"></span>
+          <span class="swatch" style="background:#F5D86A"></span>
+          <span class="swatch" style="background:#FFB088"></span>
+          <span class="swatch" style="background:#B8D4F0"></span>
+          <span class="swatch" style="background:#D4C0E8"></span>
+        </div>
+        <div class="preview-tile">
+          <span>🪐</span>
+          <span class="tile-num">★</span>
+        </div>
+        <div class="preview-headline">向上 长</div>
+        <div class="preview-body">柔光 · 暖金 · 漂浮感 · 最贴 Apple Vision OS 玻璃感</div>
+      </div>
+
+      <div class="look-vibe">
+        <span class="pill">柔光</span><span class="pill">温暖</span><span class="pill">疗愈</span><span class="pill">Apple-玻璃</span>
+      </div>
+      <p class="look-when"><strong>适合</strong>：晚间发布期、播客睡前听单、"治愈系"嘉宾</p>
+
+      <div class="look-actions">
+        <button class="vote-btn" data-vote="sky">❤️ 投这个一票<span class="count">0</span></button>
+        <button class="look-more">完整页 →</button>
+      </div>
+    </article>
+
+    <!-- 5. Hades -->
+    <article class="look-card" data-style="hades">
+      <span class="look-num">05 / 06</span>
+      <div class="look-emoji">⚔️</div>
+      <h2 class="look-name">Hades</h2>
+      <p class="look-name-cn">漫画格 · 神祇人物像</p>
+
+      <div class="preview">
+        <div class="preview-palette">
+          <span class="swatch" style="background:#1A0F2E"></span>
+          <span class="swatch" style="background:#4A148C"></span>
+          <span class="swatch" style="background:#E91E63"></span>
+          <span class="swatch" style="background:#FFD700"></span>
+          <span class="swatch" style="background:#F5E6D3"></span>
+        </div>
+        <div class="preview-tile">
+          <span>🔥</span>
+          <span class="tile-num">★</span>
+        </div>
+        <div class="preview-headline">向上 长</div>
+        <div class="preview-body">金紫黑 · 漫画对话框 · 强人物像 · 嘉宾像希腊众神</div>
+      </div>
+
+      <div class="look-vibe">
+        <span class="pill">浓烈</span><span class="pill">人物驱动</span><span class="pill">漫画</span><span class="pill">戏剧化</span>
+      </div>
+      <p class="look-when"><strong>适合</strong>：超级嘉宾特辑、年度封神、需要"标志性时刻"的一期</p>
+
+      <div class="look-actions">
+        <button class="vote-btn" data-vote="hades">❤️ 投这个一票<span class="count">0</span></button>
+        <button class="look-more">完整页 →</button>
+      </div>
+    </article>
+
+    <!-- 6. Florence -->
+    <article class="look-card" data-style="florence">
+      <span class="look-num">06 / 06</span>
+      <div class="look-emoji">📖</div>
+      <h2 class="look-name">Florence</h2>
+      <p class="look-name-cn">分格漫画 · 亲密叙事</p>
+
+      <div class="preview">
+        <div class="preview-palette">
+          <span class="swatch" style="background:#FFF8F0"></span>
+          <span class="swatch" style="background:#FCE5E5"></span>
+          <span class="swatch" style="background:#F5C2C7"></span>
+          <span class="swatch" style="background:#E6BE5C"></span>
+          <span class="swatch" style="background:#2C3E50"></span>
+        </div>
+        <div class="preview-tile">
+          <span>💌</span>
+          <span class="tile-num">→</span>
+        </div>
+        <div class="preview-headline">向上 长</div>
+        <div class="preview-body">软粉 · 漫画分格 · 衬线 · mobile-first · 轻盈亲密</div>
+      </div>
+
+      <div class="look-vibe">
+        <span class="pill">轻盈</span><span class="pill">叙事</span><span class="pill">分格</span><span class="pill">mobile-first</span>
+      </div>
+      <p class="look-when"><strong>适合</strong>：嘉宾故事页、个人成长向、播客"番外篇"短文</p>
+
+      <div class="look-actions">
+        <button class="vote-btn" data-vote="florence">❤️ 投这个一票<span class="count">0</span></button>
+        <button class="look-more">完整页 →</button>
+      </div>
+    </article>
+
+  </div>
+</main>
+
+<!-- NEXT -->
+<section class="wrap next">
+  <div class="next-card">
+    <div class="next-mark">↑ 投完票之后</div>
+    <h2 class="next-title">你的票数我会**记住**</h2>
+    <p class="next-body">
+      投票存在你的浏览器里——再来 /looks 还能看到。<br>
+      下一期 Vol 我会按**得票最高**或**你点名**的风格做完整版（不止预览，是整页换装）。<br><br>
+      想直接看完整版？回信告诉我你的 top 1。 <a href="mailto:yutingliu1996@gmail.com?subject=Cover%20Look%20%E6%88%91%E9%80%89%E2%80%A6">写信给我 →</a>
+    </p>
+  </div>
+</section>
+
+<script>
+  // Vote buttons (localStorage)
+  const VOTE_KEY = 'claire_field_guide_votes_v1';
+  const votes = JSON.parse(localStorage.getItem(VOTE_KEY) || '{}');
+
+  function renderCounts() {
+    document.querySelectorAll('.vote-btn').forEach(btn => {
+      const key = btn.dataset.vote;
+      const count = votes[key] || 0;
+      btn.querySelector('.count').textContent = count;
+      btn.classList.toggle('voted', count > 0);
+    });
+  }
+  renderCounts();
+
+  document.querySelectorAll('.vote-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const key = btn.dataset.vote;
+      votes[key] = (votes[key] || 0) + 1;
+      localStorage.setItem(VOTE_KEY, JSON.stringify(votes));
+      renderCounts();
+      btn.style.transform = 'scale(0.95)';
+      setTimeout(() => btn.style.transform = '', 150);
+    });
+  });
+
+  // "完整页 →" — placeholder for future deep-preview
+  document.querySelectorAll('.look-more').forEach(btn => {
+    btn.addEventListener('click', () => {
+      alert('完整页预览正在路上 —— 等你投完票，得票最高的那个我会先做完整版！');
+    });
+  });
+</script>
+
+</body>
+</html>
