@@ -1231,6 +1231,84 @@
     .colophon-end::before,
     .colophon-end::after { content: ' ·  ·  · '; color: var(--ink-3); }
 
+    /* —— Chapter progress dots (right side, desktop) —— */
+    .chapter-dots {
+      position: fixed;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      z-index: 30;
+      padding: 14px 10px;
+      background: rgba(255,255,255,0.75);
+      backdrop-filter: saturate(180%) blur(14px);
+      -webkit-backdrop-filter: saturate(180%) blur(14px);
+      border-radius: 999px;
+      box-shadow: var(--shadow-md);
+    }
+    .chapter-dots a {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--ink-3);
+      opacity: 0.35;
+      transition: all 0.3s ease;
+      display: block;
+      position: relative;
+    }
+    .chapter-dots a:hover {
+      transform: scale(1.6);
+      opacity: 1;
+    }
+    .chapter-dots a.active {
+      opacity: 1;
+      transform: scale(1.5);
+    }
+    .chapter-dots a[data-tone="sky"].active    { background: var(--sky); }
+    .chapter-dots a[data-tone="grass"].active  { background: var(--grass-deep); }
+    .chapter-dots a[data-tone="sun"].active    { background: var(--sun-deep); }
+    .chapter-dots a[data-tone="tomato"].active { background: var(--tomato); }
+    .chapter-dots a[data-tone="mint"].active   { background: var(--grass); }
+    .chapter-dots a[data-tone="purple"].active { background: var(--purple); }
+
+    /* —— Emoji parade (end of issue) —— */
+    .emoji-parade {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      padding: 40px 24px 8px;
+      flex-wrap: wrap;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .parade-emo {
+      width: 64px;
+      height: 64px;
+      border-radius: 20px;
+      background: var(--paper-2);
+      display: grid;
+      place-items: center;
+      font-size: 36px;
+      line-height: 1;
+      box-shadow: var(--shadow-md);
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+      cursor: default;
+    }
+    .parade-emo span { filter: drop-shadow(0 5px 7px rgba(0,0,0,0.18)); }
+    .parade-emo:nth-child(1) { background: var(--tint-tomato); }
+    .parade-emo:nth-child(2) { background: var(--tint-purple); }
+    .parade-emo:nth-child(3) { background: var(--tint-mint); }
+    .parade-emo:nth-child(4) { background: var(--tint-tomato); }
+    .parade-emo:nth-child(5) { background: var(--tint-sun); }
+    .parade-emo:nth-child(6) { background: var(--tint-grass); }
+    .parade-emo:nth-child(7) { background: var(--tint-sky); }
+    .parade-emo:nth-child(8) { background: var(--tint-tomato); }
+    .parade-emo:hover {
+      transform: translateY(-8px) rotate(-8deg) scale(1.12);
+    }
+
     /* —— Back to top —— */
     .top-btn {
       position: fixed;
@@ -1392,6 +1470,9 @@
       .colophon-grid > div { padding: 14px 16px; }
 
       .top-btn { bottom: 20px; right: 16px; width: 44px; height: 44px; }
+      .chapter-dots { display: none; }
+      .emoji-parade { gap: 10px; padding: 32px 20px 8px; }
+      .parade-emo { width: 48px; height: 48px; font-size: 28px; border-radius: 16px; }
     }
   </style>
 </head>
@@ -2139,7 +2220,28 @@
   </div>
 </footer>
 
+<div class="emoji-parade" aria-hidden="true">
+  <span class="parade-emo"><span>🪐</span></span>
+  <span class="parade-emo"><span>🧊</span></span>
+  <span class="parade-emo"><span>🎯</span></span>
+  <span class="parade-emo"><span>🧠</span></span>
+  <span class="parade-emo"><span>🤖</span></span>
+  <span class="parade-emo"><span>🧰</span></span>
+  <span class="parade-emo"><span>🗺️</span></span>
+  <span class="parade-emo"><span>🎲</span></span>
+</div>
+
 <div class="colophon-end">End of Vol. 01 · 下期见</div>
+
+<nav class="chapter-dots" aria-label="章节进度">
+  <a href="#l6" data-tone="sky" title="L6 行业"></a>
+  <a href="#l5" data-tone="grass" title="L5 应用"></a>
+  <a href="#l4" data-tone="sun" title="L4 大模型"></a>
+  <a href="#l3" data-tone="tomato" title="L3 深度学习"></a>
+  <a href="#l2" data-tone="mint" title="L2 经典 ML"></a>
+  <a href="#l1" data-tone="purple" title="L1 数学"></a>
+  <a href="#side" data-tone="tomato" title="§ 旁支"></a>
+</nav>
 
 <button class="top-btn" id="topBtn" onclick="scrollTo({top:0,behavior:'smooth'})" aria-label="回到顶部">↑</button>
 
@@ -2153,6 +2255,19 @@
     });
   }, { threshold: 0.05, rootMargin: '0px 0px -40px 0px' });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // Chapter progress dots — track active chapter
+  const dotIO = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      const id = '#' + e.target.id;
+      const dot = document.querySelector(`.chapter-dots a[href="${id}"]`);
+      if (dot) dot.classList.toggle('active', e.isIntersecting);
+    });
+  }, { rootMargin: '-45% 0px -45% 0px' });
+  ['l1','l2','l3','l4','l5','l6','side'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) dotIO.observe(el);
+  });
 
   const topBtn = document.getElementById('topBtn');
   let ticking = false;
