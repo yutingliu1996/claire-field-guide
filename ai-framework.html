@@ -1160,6 +1160,514 @@
     }
     .findme-note strong { background: var(--tint-sun); font-weight: 800; padding: 1px 6px; border-radius: 6px; }
 
+    /* —— Bookshelf · 书房 (live data from WeRead) —— */
+    .bookshelf { padding: 80px 0 64px; }
+    .bookshelf-title {
+      font-family: var(--sans);
+      font-size: 64px;
+      font-weight: 900;
+      line-height: 1.02;
+      letter-spacing: -0.04em;
+      margin-bottom: 12px;
+    }
+    .bookshelf-sub {
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      font-weight: 700;
+      margin-bottom: 22px;
+    }
+    .bookshelf-lede {
+      font-family: var(--sans);
+      font-size: 18px;
+      color: var(--ink-2);
+      line-height: 1.7;
+      font-weight: 500;
+      margin-bottom: 32px;
+      max-width: 720px;
+    }
+    .bookshelf-lede strong {
+      background: var(--tint-sun);
+      font-weight: 800;
+      padding: 1px 6px;
+      border-radius: 6px;
+      color: var(--ink);
+    }
+    .bookshelf-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 44px;
+    }
+    .stat-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 26px 16px 22px;
+      background: var(--paper-2);
+      border-radius: 22px;
+      box-shadow: var(--shadow-md);
+      text-align: center;
+    }
+    .stat-card[data-tone="tomato"] { background: var(--tint-tomato); }
+    .stat-card[data-tone="sun"]    { background: var(--tint-sun); }
+    .stat-card[data-tone="grass"]  { background: var(--tint-grass); }
+    .stat-num {
+      font-family: var(--sans);
+      font-size: 48px;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      color: var(--ink);
+      margin-bottom: 8px;
+    }
+    .stat-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-2);
+      font-weight: 800;
+    }
+    .bookshelf-h3 {
+      font-family: var(--sans);
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      margin: 0 0 18px 4px;
+    }
+    .book-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+    .book-card {
+      background: var(--paper-2);
+      border-radius: 20px;
+      padding: 16px;
+      display: flex;
+      gap: 14px;
+      box-shadow: var(--shadow-md);
+      transition: transform 0.28s ease, box-shadow 0.28s ease;
+      align-items: flex-start;
+    }
+    .book-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+    .book-cover {
+      flex-shrink: 0;
+      width: 62px;
+      height: 88px;
+      border-radius: 6px;
+      background: var(--paper-3);
+      background-size: cover;
+      background-position: center;
+      box-shadow: var(--shadow-sm);
+    }
+    .book-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      min-width: 0;
+    }
+    .book-cat {
+      font-family: var(--mono);
+      font-size: 9.5px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      font-weight: 800;
+    }
+    .book-title {
+      font-family: var(--sans);
+      font-size: 14.5px;
+      font-weight: 800;
+      color: var(--ink);
+      line-height: 1.3;
+      letter-spacing: -0.005em;
+    }
+    .book-author {
+      font-family: var(--sans);
+      font-size: 12px;
+      color: var(--ink-2);
+      font-weight: 600;
+      margin-top: 2px;
+    }
+    .book-card.finished { background: var(--tint-grass); }
+    .book-card.finished .book-cat::after { content: " · ✓ 已读完"; color: var(--grass-deep); font-weight: 900; }
+    .theme-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 32px;
+    }
+    .theme-chip {
+      font-family: var(--sans);
+      font-size: 13.5px;
+      font-weight: 800;
+      color: var(--ink);
+      padding: 10px 16px;
+      background: var(--paper-2);
+      border-radius: 999px;
+      box-shadow: var(--shadow-sm);
+      letter-spacing: -0.005em;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .theme-chip[data-tone="tomato"] { background: var(--tint-tomato); }
+    .theme-chip[data-tone="sun"]    { background: var(--tint-sun); }
+    .theme-chip[data-tone="grass"]  { background: var(--tint-grass); }
+    .theme-chip[data-tone="sky"]    { background: var(--tint-sky); }
+    .theme-chip[data-tone="purple"] { background: var(--tint-purple); }
+    .theme-chip[data-tone="mint"]   { background: var(--tint-mint); }
+    .bookshelf-note {
+      font-family: var(--sans);
+      font-size: 15px;
+      color: var(--ink);
+      line-height: 1.65;
+      font-weight: 500;
+      padding: 18px 20px;
+      background: var(--paper-2);
+      border-radius: 16px;
+      box-shadow: var(--shadow-xs);
+    }
+    .bookshelf-note strong {
+      background: var(--tint-sun);
+      font-weight: 800;
+      padding: 1px 6px;
+      border-radius: 6px;
+    }
+
+    /* —— Hangouts · 客厅小聚 (听友/书友/答疑) —— */
+    .hangouts { padding: 80px 0 64px; }
+    .hangouts-title {
+      font-family: var(--sans);
+      font-size: 64px;
+      font-weight: 900;
+      line-height: 1.02;
+      letter-spacing: -0.04em;
+      margin-bottom: 12px;
+    }
+    .hangouts-sub {
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      font-weight: 700;
+      margin-bottom: 22px;
+    }
+    .hangouts-lede {
+      font-family: var(--sans);
+      font-size: 18px;
+      color: var(--ink-2);
+      line-height: 1.7;
+      font-weight: 500;
+      margin-bottom: 36px;
+      max-width: 720px;
+    }
+    .hangouts-lede strong {
+      background: var(--tint-sun);
+      font-weight: 800;
+      padding: 1px 6px;
+      border-radius: 6px;
+      color: var(--ink);
+    }
+    .hangouts-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+    .hangouts-card {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding: 26px 22px 22px;
+      border-radius: 24px;
+      background: var(--paper-2);
+      box-shadow: var(--shadow-md);
+      transition: transform 0.28s ease, box-shadow 0.28s ease;
+    }
+    .hangouts-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+    .hangouts-card[data-tone="grass"]  { background: var(--tint-grass); }
+    .hangouts-card[data-tone="sky"]    { background: var(--tint-sky); }
+    .hangouts-card[data-tone="tomato"] { background: var(--tint-tomato); }
+    .hangouts-tag {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ink);
+      font-weight: 900;
+      background: var(--paper-2);
+      padding: 6px 12px;
+      border-radius: 999px;
+      align-self: flex-start;
+      box-shadow: var(--shadow-xs);
+    }
+    .hangouts-emo {
+      font-size: 48px;
+      margin: 6px 0 2px;
+      line-height: 1;
+      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.16));
+    }
+    .hangouts-name {
+      font-family: var(--sans);
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: -0.015em;
+      color: var(--ink);
+      margin: 4px 0 0;
+      line-height: 1.2;
+    }
+    .hangouts-sub-en {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      font-weight: 800;
+      margin-top: -6px;
+    }
+    .hangouts-pitch {
+      font-family: var(--sans);
+      font-size: 14.5px;
+      color: var(--ink);
+      line-height: 1.55;
+      font-weight: 500;
+      margin: 0;
+    }
+    .hangouts-meta {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+    }
+    .hangouts-meta li {
+      font-family: var(--sans);
+      font-size: 12.5px;
+      color: var(--ink);
+      font-weight: 700;
+      background: var(--paper-2);
+      padding: 6px 12px;
+      border-radius: 999px;
+      box-shadow: var(--shadow-xs);
+    }
+    .hangouts-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--sans);
+      font-size: 14.5px;
+      font-weight: 900;
+      color: var(--paper-2);
+      background: var(--ink);
+      padding: 12px 18px;
+      border-radius: 999px;
+      text-decoration: none;
+      margin-top: auto;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      letter-spacing: -0.005em;
+    }
+    .hangouts-cta:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+    .hangouts-note {
+      font-family: var(--sans);
+      font-size: 15px;
+      color: var(--ink);
+      line-height: 1.65;
+      font-weight: 500;
+      padding: 18px 20px;
+      background: var(--paper-2);
+      border-radius: 16px;
+      box-shadow: var(--shadow-xs);
+    }
+    .hangouts-note strong {
+      background: var(--tint-sun);
+      font-weight: 800;
+      padding: 1px 6px;
+      border-radius: 6px;
+    }
+
+    /* —— Workshop · 线下工作坊 —— */
+    .workshop { padding: 80px 0 64px; }
+    .workshop-title {
+      font-family: var(--sans);
+      font-size: 64px;
+      font-weight: 900;
+      line-height: 1.02;
+      letter-spacing: -0.04em;
+      margin-bottom: 12px;
+    }
+    .workshop-sub {
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      font-weight: 700;
+      margin-bottom: 22px;
+    }
+    .workshop-lede {
+      font-family: var(--sans);
+      font-size: 18px;
+      color: var(--ink-2);
+      line-height: 1.7;
+      font-weight: 500;
+      margin-bottom: 32px;
+      max-width: 720px;
+    }
+    .workshop-lede strong {
+      background: var(--tint-sun);
+      font-weight: 800;
+      padding: 1px 6px;
+      border-radius: 6px;
+      color: var(--ink);
+    }
+    .workshop-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+    .workshop-card {
+      background: var(--paper-2);
+      border-radius: 24px;
+      padding: 24px 22px 22px;
+      box-shadow: var(--shadow-md);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      transition: transform 0.28s ease, box-shadow 0.28s ease;
+    }
+    .workshop-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+    .workshop-card[data-status="open"]   { background: var(--tint-sun); }
+    .workshop-card[data-status="coming"] { background: var(--tint-grass); }
+    .workshop-card[data-status="tba"]    { background: var(--tint-purple); }
+    .workshop-status {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ink);
+      font-weight: 900;
+      background: var(--paper-2);
+      padding: 6px 12px;
+      border-radius: 999px;
+      align-self: flex-start;
+      box-shadow: var(--shadow-xs);
+    }
+    .workshop-when {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .workshop-date {
+      font-family: var(--sans);
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+      line-height: 1;
+    }
+    .workshop-city {
+      font-family: var(--sans);
+      font-size: 14px;
+      color: var(--ink-2);
+      font-weight: 700;
+    }
+    .workshop-name {
+      font-family: var(--sans);
+      font-size: 20px;
+      font-weight: 900;
+      color: var(--ink);
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+      margin: 0;
+    }
+    .workshop-for {
+      font-family: var(--sans);
+      font-size: 14px;
+      color: var(--ink-2);
+      font-weight: 600;
+      line-height: 1.45;
+      margin: 0;
+    }
+    .workshop-meta {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+    }
+    .workshop-meta li {
+      font-family: var(--sans);
+      font-size: 12.5px;
+      color: var(--ink);
+      font-weight: 700;
+      background: var(--paper-2);
+      padding: 6px 12px;
+      border-radius: 999px;
+      box-shadow: var(--shadow-xs);
+    }
+    .workshop-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--sans);
+      font-size: 14.5px;
+      font-weight: 900;
+      color: var(--paper-2);
+      background: var(--ink);
+      padding: 12px 18px;
+      border-radius: 999px;
+      text-decoration: none;
+      margin-top: auto;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: var(--shadow-sm);
+      letter-spacing: -0.005em;
+    }
+    .workshop-cta:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+    .workshop-cta-disabled {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--sans);
+      font-size: 13.5px;
+      font-weight: 800;
+      color: var(--ink-3);
+      background: var(--paper-2);
+      padding: 12px 18px;
+      border-radius: 999px;
+      margin-top: auto;
+      box-shadow: var(--shadow-xs);
+    }
+    .workshop-note {
+      font-family: var(--sans);
+      font-size: 15px;
+      color: var(--ink);
+      line-height: 1.65;
+      font-weight: 500;
+      padding: 18px 20px;
+      background: var(--paper-2);
+      border-radius: 16px;
+      box-shadow: var(--shadow-xs);
+    }
+    .workshop-note strong {
+      background: var(--tint-sun);
+      font-weight: 800;
+      padding: 1px 6px;
+      border-radius: 6px;
+    }
+
     /* —— Guest Room (嘉宾席) —— */
     .guests {
       padding: 80px 0 64px;
@@ -1830,6 +2338,49 @@
       .findme-handle { font-size: 14px; }
       .findme-note { font-size: 14px; }
 
+      .bookshelf { padding: 56px 0 48px; }
+      .bookshelf-title { font-size: 40px; line-height: 1.02; letter-spacing: -0.035em; -webkit-text-stroke: 0.3px var(--ink); }
+      .bookshelf-sub { font-size: 11px; margin-bottom: 18px; }
+      .bookshelf-lede { font-size: 15px; margin-bottom: 24px; }
+      .bookshelf-stats { gap: 8px; margin-bottom: 32px; }
+      .stat-card { padding: 18px 8px 16px; border-radius: 16px; }
+      .stat-num { font-size: 32px; }
+      .stat-label { font-size: 9px; letter-spacing: 0.14em; }
+      .bookshelf-h3 { font-size: 18px; margin-bottom: 14px; }
+      .book-grid { grid-template-columns: 1fr; gap: 12px; margin-bottom: 28px; }
+      .book-card { padding: 14px; gap: 12px; border-radius: 18px; }
+      .book-cover { width: 56px; height: 78px; }
+      .book-title { font-size: 14px; }
+      .book-author { font-size: 11.5px; }
+      .theme-chip { font-size: 12.5px; padding: 8px 14px; }
+      .bookshelf-note { font-size: 14px; }
+
+      .hangouts { padding: 56px 0 48px; }
+      .hangouts-title { font-size: 40px; line-height: 1.02; letter-spacing: -0.035em; -webkit-text-stroke: 0.3px var(--ink); }
+      .hangouts-sub { font-size: 11px; margin-bottom: 18px; }
+      .hangouts-lede { font-size: 15px; margin-bottom: 24px; }
+      .hangouts-grid { grid-template-columns: 1fr; gap: 12px; margin-bottom: 24px; }
+      .hangouts-card { padding: 22px 18px; border-radius: 20px; gap: 10px; }
+      .hangouts-emo { font-size: 40px; }
+      .hangouts-name { font-size: 19px; }
+      .hangouts-pitch { font-size: 14px; }
+      .hangouts-meta li { font-size: 12px; padding: 5px 10px; }
+      .hangouts-cta { font-size: 14px; padding: 11px 16px; }
+      .hangouts-note { font-size: 14px; }
+
+      .workshop { padding: 56px 0 48px; }
+      .workshop-title { font-size: 40px; line-height: 1.02; letter-spacing: -0.035em; -webkit-text-stroke: 0.3px var(--ink); }
+      .workshop-sub { font-size: 11px; margin-bottom: 18px; }
+      .workshop-lede { font-size: 15px; margin-bottom: 24px; }
+      .workshop-grid { grid-template-columns: 1fr; gap: 12px; margin-bottom: 24px; }
+      .workshop-card { padding: 20px 18px; border-radius: 20px; gap: 12px; }
+      .workshop-date { font-size: 24px; }
+      .workshop-name { font-size: 18px; }
+      .workshop-meta li { font-size: 12px; padding: 5px 10px; }
+      .workshop-cta { font-size: 14px; padding: 11px 16px; }
+      .workshop-cta-disabled { font-size: 13px; padding: 11px 16px; }
+      .workshop-note { font-size: 14px; }
+
       .join { padding: 32px 16px 56px; }
       .join-inner { padding: 42px 24px 44px; border-radius: 30px; }
       .join-emoji { width: 88px; height: 88px; font-size: 48px; border-radius: 24px; }
@@ -1881,6 +2432,9 @@
       <a href="#guests" class="opt">嘉宾</a>
       <a href="/looks">风格</a>
       <a href="/studio">IP</a>
+      <a href="#bookshelf" class="opt">书房</a>
+      <a href="#hangouts" class="opt">小聚</a>
+      <a href="#workshop" class="opt">工作坊</a>
       <a href="#findme" class="opt">找我</a>
     </div>
   </div>
@@ -2627,6 +3181,155 @@
   </p>
 </section>
 
+<!-- BOOKSHELF · 书房 (real-time from WeRead) -->
+<section class="wrap bookshelf reveal" id="bookshelf">
+  <div class="section-mark"><span class="emo">📚</span> Bookshelf · 书房</div>
+  <h2 class="bookshelf-title">最近在啃<br>这些书</h2>
+  <p class="bookshelf-sub">From My WeRead · 微信读书直连</p>
+  <p class="bookshelf-lede">
+    我相信"<strong>你读什么，就成为什么</strong>"。所以把书架摊给你看——比"我推荐 100 本"更真实，这是我<em>正在</em>读的，不是我装作读过的。数据接微信读书 AI 助手，每月更新。
+  </p>
+
+  <!-- Stats -->
+  <div class="bookshelf-stats">
+    <div class="stat-card" data-tone="tomato">
+      <span class="stat-num">41</span>
+      <span class="stat-label">书架在册</span>
+    </div>
+    <div class="stat-card" data-tone="grass">
+      <span class="stat-num">6</span>
+      <span class="stat-label">已读完</span>
+    </div>
+    <div class="stat-card" data-tone="sun">
+      <span class="stat-num">35</span>
+      <span class="stat-label">在读 / 待读</span>
+    </div>
+  </div>
+
+  <!-- Currently reading -->
+  <h3 class="bookshelf-h3">📖 最近在读 · Currently Reading</h3>
+  <div class="book-grid">
+    <article class="book-card">
+      <div class="book-cover" style="background-image: url('https://res.weread.qq.com/wrepub/CB_GHi8Yk8YP7sZ6wl6xA2op3Fg_parsecover');"></div>
+      <div class="book-meta">
+        <span class="book-cat">投资 · 段永平</span>
+        <span class="book-title">大道：段永平投资问答录</span>
+        <span class="book-author">段永平</span>
+      </div>
+    </article>
+    <article class="book-card">
+      <div class="book-cover" style="background-image: url('https://cdn.weread.qq.com/weread/cover/89/cpPlatform_nVqL1T1SuysradaMks3Dbi/t6_cpPlatform_nVqL1T1SuysradaMks3Dbi.jpg');"></div>
+      <div class="book-meta">
+        <span class="book-cat">社科 · 中国基层</span>
+        <span class="book-title">小镇喧嚣：一个乡镇政治运作的演绎与阐释</span>
+        <span class="book-author">吴毅</span>
+      </div>
+    </article>
+    <article class="book-card">
+      <div class="book-cover" style="background-image: url('https://cdn.weread.qq.com/weread/cover/1/cpplatform_jx9sxr6m9sezufvjgqg7wr/t6_cpplatform_jx9sxr6m9sezufvjgqg7wr1775811594.jpg');"></div>
+      <div class="book-meta">
+        <span class="book-cat">个人成长 · 顶级表现</span>
+        <span class="book-title">学会卓越</span>
+        <span class="book-author">埃里克·波特拉特 / 艾伦·伊格尔</span>
+      </div>
+    </article>
+    <article class="book-card">
+      <div class="book-cover" style="background-image: url('https://cdn.weread.qq.com/weread/cover/30/cpplatform_hh1emysxgi7whrsr4qryfq/t6_cpplatform_hh1emysxgi7whrsr4qryfq1717404127.jpg');"></div>
+      <div class="book-meta">
+        <span class="book-cat">内容方法论</span>
+        <span class="book-title">新媒体写作：从提笔就怕到成就 IP</span>
+        <span class="book-author">赵博平</span>
+      </div>
+    </article>
+    <article class="book-card">
+      <div class="book-cover" style="background-image: url('https://cdn.weread.qq.com/weread/cover/6/cpplatform_qbfgveet8mwtowlrnyiz1x/t6_cpplatform_qbfgveet8mwtowlrnyiz1x1777006041.jpg');"></div>
+      <div class="book-meta">
+        <span class="book-cat">主体性 · 关系</span>
+        <span class="book-title">活出主体性：彻底改变被动人生的指南</span>
+        <span class="book-author">苏尼塔·萨</span>
+      </div>
+    </article>
+    <article class="book-card">
+      <div class="book-cover" style="background-image: url('https://cdn.weread.qq.com/weread/cover/23/YueWen_921568/t6_YueWen_921568.jpg');"></div>
+      <div class="book-meta">
+        <span class="book-cat">投资思想</span>
+        <span class="book-title">原则</span>
+        <span class="book-author">瑞·达利欧</span>
+      </div>
+    </article>
+  </div>
+
+  <!-- Recently finished -->
+  <h3 class="bookshelf-h3">✅ 最近读完 · Just Finished</h3>
+  <div class="book-grid">
+    <article class="book-card finished">
+      <div class="book-cover" style="background-image: url('https://cdn.weread.qq.com/weread/cover/52/YueWen_40055543/t6_YueWen_40055543.jpg');"></div>
+      <div class="book-meta">
+        <span class="book-cat">中国政经</span>
+        <span class="book-title">置身事内：中国政府与经济发展</span>
+        <span class="book-author">兰小欢</span>
+      </div>
+    </article>
+    <article class="book-card finished">
+      <div class="book-cover" style="background-image: url('https://cdn.weread.qq.com/weread/cover/90/3300011390/t6_3300011390.jpg');"></div>
+      <div class="book-meta">
+        <span class="book-cat">认知思维</span>
+        <span class="book-title">无界成长</span>
+        <span class="book-author">谢胜子</span>
+      </div>
+    </article>
+    <article class="book-card finished">
+      <div class="book-cover" style="background-image: url('https://cdn.weread.qq.com/weread/cover/89/YueWen_44026191/t6_YueWen_44026191.jpg');"></div>
+      <div class="book-meta">
+        <span class="book-cat">理财 · 人生哲学</span>
+        <span class="book-title">纳瓦尔宝典</span>
+        <span class="book-author">埃里克·乔根森</span>
+      </div>
+    </article>
+    <article class="book-card finished">
+      <div class="book-cover" style="background-image: url('https://cdn.weread.qq.com/weread/cover/35/cpplatform_1mevksbugsx8pv5hyjztvf/t6_cpplatform_1mevksbugsx8pv5hyjztvf1743389852.jpg');"></div>
+      <div class="book-meta">
+        <span class="book-cat">企业管理</span>
+        <span class="book-title">效率为王</span>
+        <span class="book-author">卫哲</span>
+      </div>
+    </article>
+    <article class="book-card finished">
+      <div class="book-cover" style="background-image: url('https://cdn.weread.qq.com/weread/cover/17/cpplatform_pdrag5phynati4qhglgss1/t6_cpplatform_pdrag5phynati4qhglgss11751019997.jpg');"></div>
+      <div class="book-meta">
+        <span class="book-cat">理财 · 人生</span>
+        <span class="book-title">赚钱的艺术</span>
+        <span class="book-author">蔡澜</span>
+      </div>
+    </article>
+    <article class="book-card finished">
+      <div class="book-cover" style="background-image: url('https://cdn.weread.qq.com/weread/cover/94/cpplatform_8gzpruz2anqtbvpacaoil6/t6_cpplatform_8gzpruz2anqtbvpacaoil61769770993.jpg');"></div>
+      <div class="book-meta">
+        <span class="book-cat">内容方法论</span>
+        <span class="book-title">内容力：可复制的爆款逻辑</span>
+        <span class="book-author">夏翰杰</span>
+      </div>
+    </article>
+  </div>
+
+  <!-- Themes -->
+  <h3 class="bookshelf-h3">🎯 我在啃什么 · What I'm Into</h3>
+  <div class="theme-strip">
+    <span class="theme-chip" data-tone="tomato">📊 投资思想（Dalio · 段永平 · Munger）</span>
+    <span class="theme-chip" data-tone="sun">✍️ 内容创作 & IP</span>
+    <span class="theme-chip" data-tone="grass">🇨🇳 中国社会观察</span>
+    <span class="theme-chip" data-tone="purple">🪞 主体性 · 个人哲学</span>
+    <span class="theme-chip" data-tone="sky">🧠 认知 · 顶级表现</span>
+    <span class="theme-chip" data-tone="mint">📖 东方哲学 · 散文</span>
+  </div>
+
+  <p class="bookshelf-note">
+    <strong>为啥放这个？</strong> 阅读复盘、给播客挖素材、做决策、给品牌内容找根——书架是这一切的上游。<br>
+    之后会加：<strong>嘉宾书单</strong>（每期播客嘉宾推一本）· <strong>金句墙</strong>（我的划线集锦）· <strong>本月主题</strong>（深读一个主题）。
+  </p>
+</section>
+
+
 <!-- GUEST ROOM -->
 <section class="wrap guests reveal" id="guests">
   <div class="section-mark"><span class="emo">🎙️</span> Guest Room · 嘉宾席</div>
@@ -2686,6 +3389,129 @@
     <a class="guests-cta-link" href="mailto:yutingliu1996@gmail.com?subject=%E6%8E%A8%E8%8D%90%E5%98%89%E5%AE%BE">写信给我 →</a>
   </div>
 </section>
+
+<!-- HANGOUTS · 客厅小聚 -->
+<section class="wrap hangouts reveal" id="hangouts">
+  <div class="section-mark"><span class="emo">🍵</span> Hangouts · 客厅小聚</div>
+  <h2 class="hangouts-title">不止听播客<br>来客厅小聚</h2>
+  <p class="hangouts-sub">Listener Club · Book Circle · Office Hours</p>
+  <p class="hangouts-lede">
+    会客厅不是单向广播——是<strong>双向客厅</strong>。听众变朋友、读者变共读者、有问题的人有处可问。<em>都在筹备中</em>，候补登记我会一对一通知。
+  </p>
+
+  <div class="hangouts-grid">
+    <article class="hangouts-card" data-tone="grass">
+      <span class="hangouts-tag">免费 · FREE</span>
+      <span class="hangouts-emo">☕</span>
+      <h3 class="hangouts-name">听友群</h3>
+      <span class="hangouts-sub-en">Listener Club</span>
+      <p class="hangouts-pitch">每期播客的"返场咖啡馆"——聊感受、推嘉宾、互相安利你最近喜欢的内容。Vol.01 上线后开放第一批。</p>
+      <ul class="hangouts-meta">
+        <li>📱 微信群</li>
+        <li>👥 不限</li>
+        <li>💸 免费</li>
+      </ul>
+      <a class="hangouts-cta" href="mailto:yutingliu1996@gmail.com?subject=%E5%90%AC%E5%8F%8B%E7%BE%A4%E5%80%99%E8%A1%A5">候补登记 →</a>
+    </article>
+
+    <article class="hangouts-card" data-tone="sky">
+      <span class="hangouts-tag">免费 · FREE</span>
+      <span class="hangouts-emo">📚</span>
+      <h3 class="hangouts-name">书友共读</h3>
+      <span class="hangouts-sub-en">Book Circle</span>
+      <p class="hangouts-pitch">每月一本，跟着我的书架挑——投资思想 / 内容方法 / 中国社会观察。和「书房」板块联动，月底 1 小时语音 club。</p>
+      <ul class="hangouts-meta">
+        <li>📱 微信群</li>
+        <li>📅 月度</li>
+        <li>💸 免费</li>
+      </ul>
+      <a class="hangouts-cta" href="mailto:yutingliu1996@gmail.com?subject=%E4%B9%A6%E5%8F%8B%E5%85%B1%E8%AF%BB%E5%80%99%E8%A1%A5">候补登记 →</a>
+    </article>
+
+    <article class="hangouts-card" data-tone="tomato">
+      <span class="hangouts-tag">付费 · PAID</span>
+      <span class="hangouts-emo">🎓</span>
+      <h3 class="hangouts-name">答疑小屋</h3>
+      <span class="hangouts-sub-en">Office Hours</span>
+      <p class="hangouts-pitch">AI / 内容 / 个人品牌 三大主题月度答疑。群里 24h 内必回 + 每月一次 1v1 视频，试运营期定价。</p>
+      <ul class="hangouts-meta">
+        <li>📱 微信群 + 1v1</li>
+        <li>📅 月订阅</li>
+        <li>💸 待定</li>
+      </ul>
+      <a class="hangouts-cta" href="mailto:yutingliu1996@gmail.com?subject=%E7%AD%94%E7%96%91%E5%B0%8F%E5%B1%8B%E5%80%99%E8%A1%A5">申请加入 →</a>
+    </article>
+  </div>
+
+  <p class="hangouts-note">
+    <strong>都在候补中</strong>——播客 Vol.01 稳定上线后，第一个开放的是<strong>听友群</strong>。如果某项你特别想要，邮件里多说几句，我会优先推那条线。
+  </p>
+</section>
+
+
+<!-- WORKSHOP · 线下工作坊 -->
+<section class="wrap workshop reveal" id="workshop">
+  <div class="section-mark"><span class="emo">🛠️</span> Workshop · 线下工作坊</div>
+  <h2 class="workshop-title">不止屏幕上<br>线下见</h2>
+  <p class="workshop-sub">In-Person · 一日闭门</p>
+  <p class="workshop-lede">
+    <strong>能写出来 ≠ 真的会教</strong>。我会定期开<strong>小班线下</strong>，把播客 / AI / 内容创作里我趟过的坑、试出来的方法，手把手过一遍。一次不超过 12 人——确保每个人都能问到、做到、带走点什么。
+  </p>
+
+  <div class="workshop-grid">
+    <article class="workshop-card" data-status="open">
+      <div class="workshop-status">报名中 · NOW OPEN</div>
+      <div class="workshop-when">
+        <span class="workshop-date">主题待定</span>
+      </div>
+      <h3 class="workshop-name">首场 · 给内容创作者的工作坊</h3>
+      <p class="workshop-for">给：内容创作者 · 想做播客的人 · 想用 AI 但不知道从哪开始的人</p>
+      <ul class="workshop-meta">
+        <li>📍 上海</li>
+        <li>⏱️ 1 天</li>
+        <li>👥 8-12 人</li>
+        <li>💸 待定</li>
+      </ul>
+      <a class="workshop-cta" href="mailto:yutingliu1996@gmail.com?subject=%E5%B7%A5%E4%BD%9C%E5%9D%8A%E6%8A%A5%E5%90%8D">写信报名 →</a>
+    </article>
+
+    <article class="workshop-card" data-status="coming">
+      <div class="workshop-status">即将开放 · COMING SOON</div>
+      <div class="workshop-when">
+        <span class="workshop-date">主题待定</span>
+      </div>
+      <h3 class="workshop-name">第二场 · 主题更新中</h3>
+      <p class="workshop-for">先收意向——告诉我你最想学什么，我据此排主题</p>
+      <ul class="workshop-meta">
+        <li>📍 上海</li>
+        <li>⏱️ 半日 / 整日</li>
+        <li>👥 ≤ 12</li>
+      </ul>
+      <a class="workshop-cta" href="mailto:yutingliu1996@gmail.com?subject=%E5%B7%A5%E4%BD%9C%E5%9D%8A%E6%84%8F%E5%90%91">投我一票 →</a>
+    </article>
+
+    <article class="workshop-card" data-status="tba">
+      <div class="workshop-status">TBA · 持续更新</div>
+      <div class="workshop-when">
+        <span class="workshop-date">你的城市？</span>
+      </div>
+      <h3 class="workshop-name">下一站 · Anywhere</h3>
+      <p class="workshop-for">你所在的城市如果有 <strong>5+</strong> 人想见，告诉我，我们安排</p>
+      <ul class="workshop-meta">
+        <li>🌏 全国</li>
+        <li>🎯 攒局制</li>
+        <li>📨 自荐</li>
+      </ul>
+      <a class="workshop-cta" href="mailto:yutingliu1996@gmail.com?subject=%E6%83%B3%E5%9C%A8%E6%88%91%E7%9A%84%E5%9F%8E%E5%B8%82%E5%8A%9E%E5%B7%A5%E4%BD%9C%E5%9D%8A">毛遂自荐 →</a>
+    </article>
+  </div>
+
+  <p class="workshop-note">
+    <strong>不只是上课</strong>——每场都是一群"想做事的人"在一起 8-12 小时高密度时间。准备 1 个你最想问的问题来。<br>
+    <strong>报名规则</strong>：写信告诉我你做什么、为什么想来、想带走什么——<strong>不是先到先得，是配对最好</strong>。
+  </p>
+</section>
+
 
 <!-- JOIN CTA -->
 <section class="join reveal" id="join">
