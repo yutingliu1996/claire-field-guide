@@ -2526,11 +2526,11 @@
       </a>
     </li>
     <li>
-      <a class="findme-item" href="https://www.douyin.com/search/48200242504" target="_blank" rel="noopener" data-platform="douyin">
+      <a class="findme-item" href="#douyin-qr" onclick="event.preventDefault(); openDouyinModal();" data-platform="douyin">
         <span class="findme-emo-tile"><span>🎵</span></span>
         <span class="findme-text">
           <span class="findme-platform">抖音 · Douyin</span>
-          <span class="findme-handle">抖音号 48200242504</span>
+          <span class="findme-handle">点击扫码关注 →</span>
         </span>
       </a>
     </li>
@@ -2767,14 +2767,32 @@
     <div class="qr-title">Claire 的会客厅</div>
     <div class="qr-sub">公众号 · WeChat</div>
     <div class="qr-img-wrap">
-      <img src="./wechat-qr.png" alt="WeChat QR Code"
+      <img src="./wechat-qr.jpg" alt="WeChat QR Code"
            onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
       <div class="qr-img-fallback" style="display:none;">
         二维码图待加载 ☕<br><br>
-        请把图存为 <code>wechat-qr.png</code> 放到项目根目录
+        请把图存为 <code>wechat-qr.jpg</code> 放到项目根目录
       </div>
     </div>
     <div class="qr-caption">📱 <strong>微信扫一扫</strong>，关注 Claire 的会客厅</div>
+  </div>
+</div>
+
+<!-- Douyin QR Modal -->
+<div class="qr-overlay" id="douyinModal" onclick="if(event.target===this) closeDouyinModal()">
+  <div class="qr-card">
+    <button class="qr-close" onclick="closeDouyinModal()" aria-label="关闭">✕</button>
+    <div class="qr-title">Claire</div>
+    <div class="qr-sub">抖音 · Douyin</div>
+    <div class="qr-img-wrap">
+      <img src="./douyin-qr.jpg" alt="Douyin QR Code"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+      <div class="qr-img-fallback" style="display:none;">
+        二维码图待加载 🎵<br><br>
+        请把图存为 <code>douyin-qr.jpg</code> 放到项目根目录
+      </div>
+    </div>
+    <div class="qr-caption">📱 用 <strong>抖音 App 扫一扫</strong>，关注 Claire</div>
   </div>
 </div>
 
@@ -2804,7 +2822,7 @@
     if (el) dotIO.observe(el);
   });
 
-  // WeChat QR modal
+  // QR modals (WeChat + Douyin)
   function openWechatModal() {
     document.getElementById('wechatModal').classList.add('open');
     document.body.style.overflow = 'hidden';
@@ -2813,8 +2831,16 @@
     document.getElementById('wechatModal').classList.remove('open');
     document.body.style.overflow = '';
   }
+  function openDouyinModal() {
+    document.getElementById('douyinModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeDouyinModal() {
+    document.getElementById('douyinModal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeWechatModal();
+    if (e.key === 'Escape') { closeWechatModal(); closeDouyinModal(); }
   });
 
   const topBtn = document.getElementById('topBtn');
