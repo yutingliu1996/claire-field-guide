@@ -1572,6 +1572,106 @@
       transform: translateY(-8px) rotate(-8deg) scale(1.12);
     }
 
+    /* —— WeChat QR Modal —— */
+    .qr-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      animation: fadeIn 0.25s ease;
+    }
+    .qr-overlay.open { display: flex; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    .qr-card {
+      background: var(--paper-2);
+      padding: 36px 32px 28px;
+      border-radius: 28px;
+      max-width: 360px;
+      width: calc(100% - 40px);
+      text-align: center;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.25);
+      position: relative;
+      animation: scaleIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    @keyframes scaleIn { from { transform: scale(0.85); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+    .qr-close {
+      position: absolute;
+      top: 14px; right: 14px;
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: var(--paper-3);
+      border: none;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      font-size: 16px;
+      color: var(--ink);
+      font-family: var(--mono);
+      font-weight: 700;
+      transition: background 0.18s;
+    }
+    .qr-close:hover { background: var(--cp-yellow); }
+    .qr-title {
+      font-family: var(--sans);
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+      color: var(--ink);
+    }
+    .qr-sub {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+    .qr-img-wrap {
+      width: 240px;
+      height: 240px;
+      margin: 0 auto 18px;
+      border-radius: 16px;
+      background: var(--paper);
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      box-shadow: inset 0 0 0 1px var(--rule-soft);
+    }
+    .qr-img-wrap img {
+      width: 100%; height: 100%;
+      object-fit: contain;
+    }
+    .qr-img-fallback {
+      font-family: var(--sans);
+      font-size: 13px;
+      color: var(--ink-2);
+      padding: 24px;
+      line-height: 1.55;
+      font-weight: 500;
+    }
+    .qr-img-fallback code {
+      font-family: var(--mono);
+      background: var(--paper-3);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 11px;
+    }
+    .qr-caption {
+      font-family: var(--sans);
+      font-size: 14px;
+      color: var(--ink-2);
+      font-weight: 500;
+      line-height: 1.55;
+    }
+    .qr-caption strong { color: var(--cp-purple); font-weight: 800; }
+
     /* —— Back to top —— */
     .top-btn {
       position: fixed;
@@ -2408,34 +2508,34 @@
   <ul class="findme-list">
     <!-- 🇨🇳 中国平台 -->
     <li>
-      <a class="findme-item" href="https://www.xiaohongshu.com" target="_blank" rel="noopener" data-platform="rednote">
+      <a class="findme-item" href="https://xhslink.com/m/A7Sw3zZLj08" target="_blank" rel="noopener" data-platform="rednote">
         <span class="findme-emo-tile"><span>📕</span></span>
         <span class="findme-text">
           <span class="findme-platform">小红书 · Xiaohongshu</span>
-          <span class="findme-handle">@Claire</span>
+          <span class="findme-handle">@Claire · 29.8K 赞 ⭐</span>
         </span>
       </a>
     </li>
     <li>
-      <a class="findme-item" href="https://www.bilibili.com" target="_blank" rel="noopener" data-platform="bili">
+      <a class="findme-item" href="https://space.bilibili.com/293315913" target="_blank" rel="noopener" data-platform="bili">
         <span class="findme-emo-tile"><span>📺</span></span>
         <span class="findme-text">
           <span class="findme-platform">B站 · Bilibili</span>
-          <span class="findme-handle">@Claire</span>
+          <span class="findme-handle">UID 293315913</span>
         </span>
       </a>
     </li>
     <li>
-      <a class="findme-item" href="https://www.douyin.com" target="_blank" rel="noopener" data-platform="douyin">
+      <a class="findme-item" href="https://www.douyin.com/search/48200242504" target="_blank" rel="noopener" data-platform="douyin">
         <span class="findme-emo-tile"><span>🎵</span></span>
         <span class="findme-text">
           <span class="findme-platform">抖音 · Douyin</span>
-          <span class="findme-handle">@Claire</span>
+          <span class="findme-handle">抖音号 48200242504</span>
         </span>
       </a>
     </li>
     <li>
-      <a class="findme-item" href="https://www.xiaoyuzhoufm.com" target="_blank" rel="noopener" data-platform="xyz">
+      <a class="findme-item" href="https://www.xiaoyuzhoufm.com/podcast/69e4c6803a001fce5f9c48a2" target="_blank" rel="noopener" data-platform="xyz">
         <span class="findme-emo-tile"><span>🎙️</span></span>
         <span class="findme-text">
           <span class="findme-platform">小宇宙 · Podcast</span>
@@ -2448,25 +2548,25 @@
         <span class="findme-emo-tile"><span>🎧</span></span>
         <span class="findme-text">
           <span class="findme-platform">网易云 · 播客</span>
-          <span class="findme-handle">Claire 的会客厅</span>
+          <span class="findme-handle">Claire 的会客厅（待发布）</span>
         </span>
       </a>
     </li>
     <li>
-      <a class="findme-item" href="https://mp.weixin.qq.com" target="_blank" rel="noopener" data-platform="wechat">
+      <a class="findme-item" href="#wechat-qr" onclick="event.preventDefault(); openWechatModal();" data-platform="wechat">
         <span class="findme-emo-tile"><span>💬</span></span>
         <span class="findme-text">
           <span class="findme-platform">公众号 · WeChat</span>
-          <span class="findme-handle">Claire 的会客厅</span>
+          <span class="findme-handle">点击扫码关注 →</span>
         </span>
       </a>
     </li>
     <li>
-      <a class="findme-item" href="https://web.okjike.com" target="_blank" rel="noopener" data-platform="jike">
+      <a class="findme-item" href="https://web.okjike.com/u/3b2eb514-7b8d-4bb3-aa5b-5501f34dd4b2" target="_blank" rel="noopener" data-platform="jike">
         <span class="findme-emo-tile"><span>⏱️</span></span>
         <span class="findme-text">
           <span class="findme-platform">即刻 · Jike</span>
-          <span class="findme-handle">@clairesparlor</span>
+          <span class="findme-handle">@Claire</span>
         </span>
       </a>
     </li>
@@ -2660,6 +2760,24 @@
   <a href="#side" data-tone="tomato" title="§ 旁支"></a>
 </nav>
 
+<!-- WeChat QR Modal -->
+<div class="qr-overlay" id="wechatModal" onclick="if(event.target===this) closeWechatModal()">
+  <div class="qr-card">
+    <button class="qr-close" onclick="closeWechatModal()" aria-label="关闭">✕</button>
+    <div class="qr-title">Claire 的会客厅</div>
+    <div class="qr-sub">公众号 · WeChat</div>
+    <div class="qr-img-wrap">
+      <img src="./wechat-qr.png" alt="WeChat QR Code"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+      <div class="qr-img-fallback" style="display:none;">
+        二维码图待加载 ☕<br><br>
+        请把图存为 <code>wechat-qr.png</code> 放到项目根目录
+      </div>
+    </div>
+    <div class="qr-caption">📱 <strong>微信扫一扫</strong>，关注 Claire 的会客厅</div>
+  </div>
+</div>
+
 <button class="top-btn" id="topBtn" onclick="scrollTo({top:0,behavior:'smooth'})" aria-label="回到顶部">↑</button>
 
 <script>
@@ -2684,6 +2802,19 @@
   ['l1','l2','l3','l4','l5','l6','side'].forEach(id => {
     const el = document.getElementById(id);
     if (el) dotIO.observe(el);
+  });
+
+  // WeChat QR modal
+  function openWechatModal() {
+    document.getElementById('wechatModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeWechatModal() {
+    document.getElementById('wechatModal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeWechatModal();
   });
 
   const topBtn = document.getElementById('topBtn');

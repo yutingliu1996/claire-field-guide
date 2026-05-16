@@ -13,6 +13,10 @@
 !ip.html
 !archive/
 !vercel.json
+!wechat-qr.png
+!*.png
+!*.jpg
+!*.svg
 
 # Also keep her existing standalone HTMLs from earlier work
 !我的人生操作系统.html
