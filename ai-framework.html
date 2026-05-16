@@ -983,6 +983,66 @@
       font-weight: 900;
     }
 
+    /* —— Chapter canvas · 横向 swipe 区 (L1-L6 + 旁支) —— */
+    .chapter-canvas-wrap {
+      position: relative;
+      margin: 24px 0 32px;
+    }
+    .chapter-canvas {
+      display: flex;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+      scrollbar-color: var(--ink-3) transparent;
+      padding-bottom: 12px;
+    }
+    .chapter-canvas::-webkit-scrollbar { height: 8px; }
+    .chapter-canvas::-webkit-scrollbar-track { background: transparent; }
+    .chapter-canvas::-webkit-scrollbar-thumb { background: var(--ink-3); border-radius: 4px; }
+    .chapter-canvas > .chapter {
+      flex: 0 0 100vw;
+      max-width: 100vw;
+      width: 100vw;
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+      padding: 60px 24px 56px;
+      margin: 0;
+      overflow-y: auto;
+      box-sizing: border-box;
+      min-height: min(100vh, 900px);
+      max-height: min(100vh, 900px);
+    }
+    .chapter-canvas > .chapter::-webkit-scrollbar { width: 6px; }
+    .chapter-canvas > .chapter::-webkit-scrollbar-thumb { background: var(--ink-3); border-radius: 3px; }
+    .chapter-canvas-hint {
+      position: absolute;
+      top: -8px;
+      right: 18px;
+      z-index: 5;
+      padding: 8px 14px;
+      background: var(--paper-2);
+      border-radius: 999px;
+      box-shadow: var(--shadow-md);
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--ink);
+      letter-spacing: -0.005em;
+      pointer-events: none;
+      animation: hint-bounce 1.8s ease-in-out infinite;
+    }
+    .chapter-canvas-hint .arrow { display: inline-block; margin-left: 4px; }
+    @keyframes hint-bounce {
+      0%, 100% { transform: translateX(0); }
+      50%      { transform: translateX(8px); }
+    }
+
     /* —— Reading order —— */
     .reading {
       padding: 80px 0 64px;
@@ -2681,6 +2741,11 @@
   </div>
 </section>
 
+<!-- CHAPTER CANVAS · 横向 swipe (L1-L6 + 旁支) -->
+<div class="chapter-canvas-wrap">
+  <div class="chapter-canvas-hint">横滑切换章节<span class="arrow">→</span></div>
+  <div class="chapter-canvas">
+
 <!-- L1 -->
 <article class="wrap chapter reveal" id="l1" data-tone="purple">
   <header class="chapter-opener">
@@ -2992,6 +3057,9 @@
     </div>
   </div>
 </article>
+
+  </div><!-- /.chapter-canvas -->
+</div><!-- /.chapter-canvas-wrap -->
 
 <!-- READING ORDER -->
 <section class="wrap reading reveal" id="reading">
