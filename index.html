@@ -1089,7 +1089,7 @@
     .findme-list {
       list-style: none;
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(3, 1fr);
       gap: 14px;
       margin-bottom: 28px;
     }
@@ -1118,12 +1118,19 @@
       box-shadow: var(--shadow-sm);
     }
     .findme-emo-tile span { filter: drop-shadow(0 4px 6px rgba(0,0,0,0.16)); }
-    .findme-item[data-platform="rednote"] .findme-emo-tile { background: var(--tint-tomato); }
-    .findme-item[data-platform="bili"]    .findme-emo-tile { background: var(--tint-sky); }
-    .findme-item[data-platform="xyz"]     .findme-emo-tile { background: var(--tint-purple); }
-    .findme-item[data-platform="yt"]      .findme-emo-tile { background: var(--tint-tomato); }
-    .findme-item[data-platform="x"]       .findme-emo-tile { background: var(--paper-3); }
-    .findme-item[data-platform="mail"]    .findme-emo-tile { background: var(--tint-sun); }
+    .findme-item[data-platform="rednote"]  .findme-emo-tile { background: var(--tint-tomato); }
+    .findme-item[data-platform="bili"]     .findme-emo-tile { background: var(--tint-sky); }
+    .findme-item[data-platform="douyin"]   .findme-emo-tile { background: var(--paper-3); }
+    .findme-item[data-platform="xyz"]      .findme-emo-tile { background: var(--tint-purple); }
+    .findme-item[data-platform="netease"]  .findme-emo-tile { background: var(--tint-tomato); }
+    .findme-item[data-platform="wechat"]   .findme-emo-tile { background: var(--tint-grass); }
+    .findme-item[data-platform="jike"]     .findme-emo-tile { background: var(--tint-sun); }
+    .findme-item[data-platform="yt"]       .findme-emo-tile { background: var(--tint-tomato); }
+    .findme-item[data-platform="x"]        .findme-emo-tile { background: var(--paper-3); }
+    .findme-item[data-platform="substack"] .findme-emo-tile { background: var(--tint-sun); }
+    .findme-item[data-platform="reddit"]   .findme-emo-tile { background: var(--tint-tomato); }
+    .findme-item[data-platform="discord"]  .findme-emo-tile { background: var(--tint-purple); }
+    .findme-item[data-platform="mail"]     .findme-emo-tile { background: var(--tint-sun); }
 
     .findme-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
     .findme-platform {
@@ -2399,51 +2406,110 @@
   <p class="findme-sub">Wherever You Hang Out · I'm Probably There</p>
 
   <ul class="findme-list">
+    <!-- 🇨🇳 中国平台 -->
     <li>
-      <a class="findme-item" href="#" target="_blank" rel="noopener" data-platform="rednote">
+      <a class="findme-item" href="https://www.xiaohongshu.com" target="_blank" rel="noopener" data-platform="rednote">
         <span class="findme-emo-tile"><span>📕</span></span>
         <span class="findme-text">
           <span class="findme-platform">小红书 · Xiaohongshu</span>
-          <span class="findme-handle">@Claire 玉婷</span>
+          <span class="findme-handle">@Claire</span>
         </span>
       </a>
     </li>
     <li>
-      <a class="findme-item" href="#" target="_blank" rel="noopener" data-platform="bili">
+      <a class="findme-item" href="https://www.bilibili.com" target="_blank" rel="noopener" data-platform="bili">
         <span class="findme-emo-tile"><span>📺</span></span>
         <span class="findme-text">
           <span class="findme-platform">B站 · Bilibili</span>
-          <span class="findme-handle">@Claire 玉婷</span>
+          <span class="findme-handle">@Claire</span>
         </span>
       </a>
     </li>
     <li>
-      <a class="findme-item" href="#" target="_blank" rel="noopener" data-platform="xyz">
+      <a class="findme-item" href="https://www.douyin.com" target="_blank" rel="noopener" data-platform="douyin">
+        <span class="findme-emo-tile"><span>🎵</span></span>
+        <span class="findme-text">
+          <span class="findme-platform">抖音 · Douyin</span>
+          <span class="findme-handle">@Claire</span>
+        </span>
+      </a>
+    </li>
+    <li>
+      <a class="findme-item" href="https://www.xiaoyuzhoufm.com" target="_blank" rel="noopener" data-platform="xyz">
         <span class="findme-emo-tile"><span>🎙️</span></span>
         <span class="findme-text">
-          <span class="findme-platform">小宇宙 · Xiaoyuzhou</span>
-          <span class="findme-handle">Claire 的播客</span>
+          <span class="findme-platform">小宇宙 · Podcast</span>
+          <span class="findme-handle">Claire 的会客厅</span>
         </span>
       </a>
     </li>
     <li>
-      <a class="findme-item" href="#" target="_blank" rel="noopener" data-platform="yt">
+      <a class="findme-item" href="https://music.163.com" target="_blank" rel="noopener" data-platform="netease">
+        <span class="findme-emo-tile"><span>🎧</span></span>
+        <span class="findme-text">
+          <span class="findme-platform">网易云 · 播客</span>
+          <span class="findme-handle">Claire 的会客厅</span>
+        </span>
+      </a>
+    </li>
+    <li>
+      <a class="findme-item" href="https://mp.weixin.qq.com" target="_blank" rel="noopener" data-platform="wechat">
+        <span class="findme-emo-tile"><span>💬</span></span>
+        <span class="findme-text">
+          <span class="findme-platform">公众号 · WeChat</span>
+          <span class="findme-handle">Claire 的会客厅</span>
+        </span>
+      </a>
+    </li>
+    <li>
+      <a class="findme-item" href="https://web.okjike.com" target="_blank" rel="noopener" data-platform="jike">
+        <span class="findme-emo-tile"><span>⏱️</span></span>
+        <span class="findme-text">
+          <span class="findme-platform">即刻 · Jike</span>
+          <span class="findme-handle">@clairesparlor</span>
+        </span>
+      </a>
+    </li>
+
+    <!-- 🌍 海外平台 -->
+    <li>
+      <a class="findme-item" href="https://www.youtube.com/@clairesparlor" target="_blank" rel="noopener" data-platform="yt">
         <span class="findme-emo-tile"><span>📹</span></span>
         <span class="findme-text">
           <span class="findme-platform">YouTube</span>
-          <span class="findme-handle">@ClaireYuting</span>
+          <span class="findme-handle">@clairesparlor</span>
         </span>
       </a>
     </li>
     <li>
-      <a class="findme-item" href="#" target="_blank" rel="noopener" data-platform="x">
+      <a class="findme-item" href="https://x.com/clairesparlor" target="_blank" rel="noopener" data-platform="x">
         <span class="findme-emo-tile"><span>✖️</span></span>
         <span class="findme-text">
           <span class="findme-platform">X · Twitter</span>
-          <span class="findme-handle">@ClaireYuting</span>
+          <span class="findme-handle">@clairesparlor</span>
         </span>
       </a>
     </li>
+    <li>
+      <a class="findme-item" href="https://clairesparlor.substack.com" target="_blank" rel="noopener" data-platform="substack">
+        <span class="findme-emo-tile"><span>📩</span></span>
+        <span class="findme-text">
+          <span class="findme-platform">Substack · Newsletter</span>
+          <span class="findme-handle">clairesparlor.substack.com</span>
+        </span>
+      </a>
+    </li>
+    <li>
+      <a class="findme-item" href="https://reddit.com/user/clairesparlor" target="_blank" rel="noopener" data-platform="reddit">
+        <span class="findme-emo-tile"><span>👽</span></span>
+        <span class="findme-text">
+          <span class="findme-platform">Reddit</span>
+          <span class="findme-handle">u/clairesparlor</span>
+        </span>
+      </a>
+    </li>
+
+    <!-- ✉️ 联系 -->
     <li>
       <a class="findme-item" href="mailto:yutingliu1996@gmail.com" data-platform="mail">
         <span class="findme-emo-tile"><span>✉️</span></span>
@@ -2457,7 +2523,7 @@
 
   <p class="findme-note">
     <strong>反馈、合作、闲聊、骂我</strong>都可以——哪个平台舒服哪个来 🙋‍♀️ <br>
-    （Handle 是占位的，等真链接到位我替换。）
+    （海外平台 handle 已锁 <strong>@clairesparlor</strong>，中国平台等真分享链接到位再替换具体跳转。）
   </p>
 </section>
 
