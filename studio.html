@@ -540,7 +540,8 @@
       .topnav-inner { padding: 11px 16px; gap: 8px; }
       .nav-brand { font-size: 10.5px; letter-spacing: 0.04em; }
       .nav-brand .muted { display: none; }
-      .nav-links { gap: 12px; font-size: 10px; }
+      .nav-links { gap: 14px; font-size: 10.5px; }
+      .nav-links .opt { display: none; }
       .wrap, .wrap-narrow { padding: 0 18px; }
       .hero { padding: 48px 0 32px; }
       .hero-title { font-size: 44px; }
@@ -573,16 +574,21 @@
 </head>
 <body>
 
-<nav class="topnav">
+<nav class="topnav" id="top">
   <div class="topnav-inner">
     <a class="nav-brand" href="/">
-      <span class="planet">🪐</span><span>C</span><span class="cdot c1">·</span><span>L</span><span class="cdot c2">·</span><span>A</span><span class="cdot c3">·</span><span>I</span><span class="cdot c4">·</span><span>R</span><span class="cdot c5">·</span><span>E</span><span class="muted">STUDIO</span>
+      <span class="planet">🪐</span><span>C</span><span class="cdot c1">·</span><span>L</span><span class="cdot c2">·</span><span>A</span><span class="cdot c3">·</span><span>I</span><span class="cdot c4">·</span><span>R</span><span class="cdot c5">·</span><span>E</span><span class="muted">PARLOR</span>
     </a>
     <div class="nav-links">
-      <a href="/">主刊</a>
+      <a href="/#iconmap">目录</a>
+      <a href="/#guests" class="opt">嘉宾</a>
       <a href="/looks">风格</a>
       <a href="/studio" class="active">IP</a>
-      <a href="/#findme">找我</a>
+      <a href="/#bookshelf" class="opt">书房</a>
+      <a href="/#tunes" class="opt">音乐</a>
+      <a href="/#hangouts" class="opt">小聚</a>
+      <a href="/#workshop" class="opt">工作坊</a>
+      <a href="/#findme" class="opt">找我</a>
     </div>
   </div>
 </nav>
@@ -1347,6 +1353,9 @@
     });
   });
 </script>
+
+<script src="bgm.js" defer></script>
+<script src="pet.js" defer></script>
 
 </body>
 </html>
