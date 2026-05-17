@@ -6,12 +6,7 @@
 
 # Then explicitly UN-ignore the project files
 !.gitignore
-!ai-framework.html
-!index.html
-!looks.html
-!studio.html
-!ip.html
-!l[1-6].html
+!*.html
 !archive/
 !vercel.json
 !wechat-qr.png

@@ -6,59 +6,62 @@
   <meta name="theme-color" content="#FAFAFA">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <meta name="apple-mobile-web-app-title" content="Vol.01">
-  <title>Vol.01 · 给内容创作者的 AI 全景框架 · Claire 的会客厅</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2224%22 fill=%22%23FFE4E0%22/><text y=%22.9em%22 x=%2216%22 font-size=%2274%22>🪐</text></svg>">
+  <meta name="apple-mobile-web-app-title" content="Vol.01 · Sky">
+  <title>Vol.01 · Sky 光·遇 风 · Claire 的会客厅</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><defs><linearGradient id=%22g%22 x1=%220%22 y1=%220%22 x2=%221%22 y2=%221%22><stop offset=%220%25%22 stop-color=%22%23FFF1E0%22/><stop offset=%2260%25%22 stop-color=%22%23F5D86A%22/><stop offset=%22100%25%22 stop-color=%22%23FF9A6E%22/></linearGradient></defs><rect width=%22100%22 height=%22100%22 rx=%2224%22 fill=%22url(%23g)%22/><text y=%22.9em%22 x=%2218%22 font-size=%2270%22>☁️</text></svg>">
 
   <style>
     :root {
-      /* Surfaces */
-      --paper: #FAF6EF;       /* warmer cream — Central Perk wall */
-      --paper-2: #FFFFFF;
-      --paper-3: #F0EAE0;
+      /* —— Sky · 光·遇 主题：暖金 + 桃橘 + 奶油 + 玻璃感 —— */
 
-      /* Ink */
-      --ink: #1A1A1A;
-      --ink-2: #585858;
-      --ink-3: #9A9A9A;
+      /* Surfaces — 奶油黄底，整体偏暖 */
+      --paper: #FFF8EC;
+      --paper-2: #FFFDF6;
+      --paper-3: #FBE9C7;
 
-      /* Soft tints for icon tiles & cards */
-      --tint-tomato: #FFE4E0;
-      --tint-sun: #FFF1C2;
-      --tint-grass: #D6F5EA;
-      --tint-sky: #DCE3FF;
-      --tint-purple: #ECDFFF;
-      --tint-mint: #DFF7EE;
+      /* Ink — 焦糖暖深色（不用纯黑，呼应暖光氛围） */
+      --ink: #3A2410;
+      --ink-2: #6E4A1A;
+      --ink-3: #B59A6E;
 
-      /* Saturated accents */
-      --tomato: #FF5A4D;
-      --tomato-deep: #D03A2E;
-      --sun: #FFCB30;
-      --sun-deep: #E0A800;
-      --grass: #06D6A0;
-      --grass-deep: #04A37A;
-      --sky: #4361EE;
-      --sky-deep: #2840C0;
-      --purple: #9B5DE5;
-      --purple-deep: #6B3DB0;
+      /* Soft tints — 全调子偏暖光 */
+      --tint-tomato: #FFE0CC;
+      --tint-sun: #FFEEC0;
+      --tint-grass: #E8EBC8;
+      --tint-sky: #D8E5F4;
+      --tint-purple: #E8DCF0;
+      --tint-mint: #E4E9D4;
 
-      /* Apple-style: layered but light, less "stamp" more "floating sheet" */
-      --shadow-xs: 0 1px 3px rgba(0,0,0,0.05);
-      --shadow-sm: 0 3px 8px rgba(0,0,0,0.05), inset 0 -2px 0 rgba(0,0,0,0.03);
-      --shadow-md: 0 8px 20px rgba(0,0,0,0.07), 0 2px 4px rgba(0,0,0,0.04), inset 0 -3px 0 rgba(0,0,0,0.04);
-      --shadow-lg: 0 16px 36px rgba(0,0,0,0.09), 0 4px 10px rgba(0,0,0,0.05), inset 0 -5px 0 rgba(0,0,0,0.05);
-      --shadow-xl: 0 24px 56px rgba(0,0,0,0.11), 0 8px 16px rgba(0,0,0,0.06), inset 0 -7px 0 rgba(0,0,0,0.06);
-      --shadow-tomato: 0 12px 28px rgba(255,90,77,0.28), 0 4px 10px rgba(255,90,77,0.14), inset 0 -4px 0 rgba(0,0,0,0.07);
-      --shadow-sun: 0 12px 28px rgba(255,203,48,0.28), inset 0 -4px 0 rgba(0,0,0,0.06);
-      --shadow-grass: 0 12px 28px rgba(6,214,160,0.24), inset 0 -4px 0 rgba(0,0,0,0.06);
-      --shadow-sky: 0 12px 28px rgba(67,97,238,0.24), inset 0 -4px 0 rgba(0,0,0,0.06);
-      /* Friends signature colors (Central Perk yellow, Monica purple, peephole frame) */
-      --cp-yellow: #FFC72C;
-      --cp-yellow-deep: #E8A800;
-      --cp-purple: #7B4B94;
-      --cp-teal: #4A90B8;
-      --cp-olive: #7CA982;
-      --cp-orange: #E5762A;
+      /* Accents — 主色: 暖金 (--sun) + 桃橘 (--tomato) */
+      --tomato: #FF9A6E;
+      --tomato-deep: #E07440;
+      --sun: #F5D86A;
+      --sun-deep: #D9B53A;
+      --grass: #C9D08C;
+      --grass-deep: #8FA362;
+      --sky: #7AA7D9;
+      --sky-deep: #4A7AB8;
+      --purple: #B59ACE;
+      --purple-deep: #8C72A8;
+
+      /* Apple-style 阴影 + Sky 漂浮光晕 */
+      --shadow-xs: 0 1px 3px rgba(95,55,15,0.06);
+      --shadow-sm: 0 3px 10px rgba(95,55,15,0.07), inset 0 -2px 0 rgba(255,235,180,0.5);
+      --shadow-md: 0 10px 24px rgba(95,55,15,0.10), 0 2px 4px rgba(95,55,15,0.05), inset 0 -3px 0 rgba(255,235,180,0.55);
+      --shadow-lg: 0 18px 40px rgba(95,55,15,0.13), 0 4px 10px rgba(95,55,15,0.06), 0 0 60px rgba(245,216,106,0.18);
+      --shadow-xl: 0 26px 60px rgba(95,55,15,0.16), 0 8px 16px rgba(95,55,15,0.08), 0 0 80px rgba(245,216,106,0.22);
+      --shadow-tomato: 0 14px 32px rgba(255,154,110,0.32), 0 4px 10px rgba(255,154,110,0.16);
+      --shadow-sun: 0 14px 32px rgba(245,216,106,0.42), 0 0 50px rgba(245,216,106,0.28);
+      --shadow-grass: 0 12px 28px rgba(201,208,140,0.34);
+      --shadow-sky: 0 12px 28px rgba(122,167,217,0.30);
+
+      /* Sky 招牌彩 — 替代 Friends 的 Central Perk 紫黄装饰 */
+      --cp-yellow: #F5D86A;
+      --cp-yellow-deep: #D9B53A;
+      --cp-purple: #B59ACE;
+      --cp-teal: #7AA7D9;
+      --cp-olive: #C9D08C;
+      --cp-orange: #FF9A6E;
 
       /* Type stack */
       --sans: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Helvetica Neue", "Microsoft YaHei", system-ui, sans-serif;
@@ -73,7 +76,13 @@
     }
 
     body {
-      background: var(--paper);
+      /* Sky · 光·遇 · 暖金渐变铺底（向下 cream → 浅金 → 桃橘） */
+      background:
+        radial-gradient(circle at 80% 0%, rgba(255,154,110,0.18) 0%, transparent 45%),
+        radial-gradient(circle at 0% 30%, rgba(184,212,240,0.22) 0%, transparent 40%),
+        radial-gradient(circle at 50% 100%, rgba(245,216,106,0.20) 0%, transparent 50%),
+        linear-gradient(180deg, #FFF8EC 0%, #FFEEC0 35%, #FFE0CC 70%, #FFD9C0 100%);
+      background-attachment: fixed;
       color: var(--ink);
       font-family: var(--sans);
       font-size: 16px;
@@ -85,17 +94,17 @@
       overflow-x: hidden;
     }
 
-    ::selection { background: var(--tomato); color: var(--paper-2); }
+    ::selection { background: var(--sun); color: var(--ink); }
 
-    /* —— Sticky nav (cleaner, no harsh borders) —— */
+    /* —— Sticky nav (Sky 玻璃感) —— */
     .topnav {
       position: sticky;
       top: 0;
       z-index: 50;
-      background: rgba(250, 250, 250, 0.85);
-      backdrop-filter: saturate(180%) blur(20px);
-      -webkit-backdrop-filter: saturate(180%) blur(20px);
-      border-bottom: 1px solid rgba(0,0,0,0.05);
+      background: rgba(255, 248, 236, 0.72);
+      backdrop-filter: saturate(180%) blur(24px);
+      -webkit-backdrop-filter: saturate(180%) blur(24px);
+      border-bottom: 1px solid rgba(245, 216, 106, 0.25);
     }
     .topnav-inner {
       max-width: 920px;
@@ -156,20 +165,20 @@
       text-decoration: none;
       transition: color 0.15s ease;
     }
-    .nav-links a:hover { color: var(--tomato); }
+    .nav-links a:hover { color: var(--tomato-deep); }
     .nav-links a.style-toggle {
       padding: 5px 11px;
       border-radius: 999px;
-      background: linear-gradient(135deg, #FFEEC0 0%, #F5D86A 50%, #FF9A6E 100%);
-      color: #3A2410;
-      box-shadow: 0 6px 14px rgba(245,216,106,0.32);
+      background: linear-gradient(135deg, var(--sun) 0%, var(--tomato) 100%);
+      color: var(--ink);
+      box-shadow: var(--shadow-sun);
       transition: transform 0.2s ease, box-shadow 0.2s ease;
       letter-spacing: 0.12em;
     }
     .nav-links a.style-toggle:hover {
-      color: #3A2410;
+      color: var(--ink);
       transform: translateY(-2px);
-      box-shadow: 0 10px 20px rgba(245,216,106,0.42);
+      box-shadow: var(--shadow-md);
     }
 
     .wrap {
@@ -263,14 +272,14 @@
     h1.title em {
       font-style: normal;
       font-weight: 900;
-      color: var(--paper-2);
-      background: var(--tomato);
+      color: var(--ink);
+      background: linear-gradient(135deg, #FFEEC0 0%, #F5D86A 45%, #FF9A6E 100%);
       padding: 0.04em 0.22em 0.08em;
-      border-radius: 24px;
+      border-radius: 28px;
       display: inline-block;
       transform: rotate(-1.5deg);
-      box-shadow: var(--shadow-tomato);
-      -webkit-text-stroke: 0.6px var(--paper-2);
+      box-shadow: var(--shadow-sun);
+      -webkit-text-stroke: 0;
     }
     h1.title .planet {
       display: inline-block;
@@ -2869,7 +2878,7 @@
 <nav class="topnav" id="top">
   <div class="topnav-inner">
     <a class="nav-brand" href="#top">
-      <span class="planet">🪐</span><span>C</span><span class="cdot c1">·</span><span>L</span><span class="cdot c2">·</span><span>A</span><span class="cdot c3">·</span><span>I</span><span class="cdot c4">·</span><span>R</span><span class="cdot c5">·</span><span>E</span><span class="muted">PARLOR</span>
+      <span class="planet">☁️</span><span>C</span><span class="cdot c1">·</span><span>L</span><span class="cdot c2">·</span><span>A</span><span class="cdot c3">·</span><span>I</span><span class="cdot c4">·</span><span>R</span><span class="cdot c5">·</span><span>E</span><span class="muted">SKY · 光遇</span>
     </a>
     <div class="nav-links">
       <a href="#iconmap">目录</a>
@@ -2881,7 +2890,7 @@
       <a href="#hangouts" class="opt">小聚</a>
       <a href="#workshop" class="opt">工作坊</a>
       <a href="#findme" class="opt">找我</a>
-      <a href="/sky" class="style-toggle" title="切换到 Sky 光遇风格">☁️ Sky 版</a>
+      <a href="/" class="style-toggle" title="切换到老友记风格">🎨 Friends 版</a>
     </div>
   </div>
 </nav>
