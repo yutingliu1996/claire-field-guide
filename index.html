@@ -935,6 +935,81 @@
       border-radius: 6px;
     }
 
+    /* —— Chapter · summary card (首页简化版，详情走二级页) —— */
+    .chapter.summary { padding: 64px 0 44px; }
+    .chapter.summary .chapter-opener { margin-bottom: 28px; }
+    .chapter.summary .chapter-emoji-tile { width: 104px; height: 104px; font-size: 62px; border-radius: 30px; margin-bottom: 22px; }
+    .chapter.summary .chapter-num { font-size: 132px; margin-bottom: 14px; }
+    .chapter.summary .chapter-name { font-size: 52px; margin-bottom: 14px; }
+    .chapter.summary .chapter-content { margin-top: 24px; }
+
+    .summary-tagline {
+      font-family: var(--sans);
+      font-size: 19px;
+      line-height: 1.65;
+      color: var(--ink);
+      font-weight: 600;
+      margin-bottom: 22px;
+      max-width: 640px;
+    }
+    .summary-tagline strong {
+      color: var(--ink);
+      font-weight: 900;
+      background: var(--tint-sun);
+      padding: 1px 6px;
+      border-radius: 6px;
+    }
+
+    .summary-keys {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+
+    .chapter-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 26px;
+      border-radius: 999px;
+      background: var(--ink);
+      color: var(--paper-2);
+      font-family: var(--sans);
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: -0.005em;
+      text-decoration: none;
+      box-shadow: var(--shadow-md);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .chapter-cta:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+    .chapter-cta .cta-arrow {
+      font-family: var(--mono);
+      font-size: 18px;
+      font-weight: 900;
+      transition: transform 0.2s ease;
+    }
+    .chapter-cta:hover .cta-arrow { transform: translateX(4px); }
+    .chapter-cta .cta-sub {
+      font-family: var(--mono);
+      font-size: 10.5px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.65);
+      font-weight: 800;
+    }
+
+    .chapter[data-tone="tomato"] .chapter-cta { background: var(--tomato); box-shadow: var(--shadow-tomato); }
+    .chapter[data-tone="sun"]    .chapter-cta { background: var(--sun); color: var(--ink); box-shadow: var(--shadow-sun); }
+    .chapter[data-tone="sun"]    .chapter-cta .cta-sub { color: rgba(0,0,0,0.5); }
+    .chapter[data-tone="grass"]  .chapter-cta { background: var(--grass); color: var(--ink); box-shadow: var(--shadow-grass); }
+    .chapter[data-tone="grass"]  .chapter-cta .cta-sub { color: rgba(0,0,0,0.5); }
+    .chapter[data-tone="sky"]    .chapter-cta { background: var(--sky); box-shadow: var(--shadow-sky); }
+    .chapter[data-tone="purple"] .chapter-cta { background: var(--purple); }
+    .chapter[data-tone="mint"]   .chapter-cta { background: var(--grass); color: var(--ink); box-shadow: var(--shadow-grass); }
+    .chapter[data-tone="mint"]   .chapter-cta .cta-sub { color: rgba(0,0,0,0.5); }
+
     .aside-card {
       margin-top: 36px;
       padding: 24px 26px;
@@ -1341,6 +1416,146 @@
       border-radius: 6px;
     }
 
+    /* —— Tunes · 客厅音乐 —— */
+    .tunes { padding: 80px 0 56px; }
+    .tunes-title {
+      font-family: var(--sans);
+      font-size: 64px; font-weight: 900;
+      line-height: 1.02; color: var(--ink);
+      letter-spacing: -0.04em;
+      margin-bottom: 14px;
+    }
+    .tunes-sub {
+      font-family: var(--mono);
+      font-size: 11px; letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ink-3); font-weight: 800;
+      margin-bottom: 22px;
+    }
+    .tunes-lede {
+      font-family: var(--sans);
+      font-size: 16.5px; line-height: 1.72;
+      color: var(--ink-2); font-weight: 500;
+      margin-bottom: 32px;
+      max-width: 640px;
+    }
+    .tunes-lede strong {
+      color: var(--ink); font-weight: 800;
+      background: var(--tint-purple); padding: 1px 6px; border-radius: 6px;
+    }
+
+    .tunes-embed {
+      margin-bottom: 24px;
+      border-radius: 22px;
+      background: var(--paper-2);
+      box-shadow: var(--shadow-md);
+      padding: 14px 14px 10px;
+    }
+    .tunes-embed-label {
+      font-family: var(--mono);
+      font-size: 10.5px; letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-3); font-weight: 800;
+      margin-bottom: 10px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .tunes-embed-label .badge {
+      background: var(--tomato); color: var(--paper-2);
+      padding: 2px 8px; border-radius: 999px;
+      font-size: 9px; letter-spacing: 0.14em;
+    }
+    .tunes-embed iframe { display: block; width: 100%; border: 0; border-radius: 14px; }
+
+    .tunes-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+    .tune-card {
+      background: var(--paper-2);
+      border-radius: 22px;
+      padding: 22px 22px 20px;
+      box-shadow: var(--shadow-sm);
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      position: relative;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .tune-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+    .tune-card[data-platform="netease"]  { background: linear-gradient(135deg, #FFE4E0 0%, #FFFFFF 60%); }
+    .tune-card[data-platform="qq"]       { background: linear-gradient(135deg, #D6F5EA 0%, #FFFFFF 60%); }
+    .tune-card[data-platform="apple"]    { background: linear-gradient(135deg, #ECDFFF 0%, #FFFFFF 60%); }
+    .tune-card[data-platform="spotify"]  { background: linear-gradient(135deg, #DFF7EE 0%, #FFFFFF 60%); }
+    .tune-emo {
+      font-size: 34px;
+      margin-bottom: 12px;
+      display: inline-block;
+      filter: drop-shadow(0 2px 3px rgba(0,0,0,0.12));
+    }
+    .tune-platform {
+      font-family: var(--mono);
+      font-size: 10px; letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-3); font-weight: 800;
+      margin-bottom: 6px;
+    }
+    .tune-name {
+      font-family: var(--sans);
+      font-size: 17px; font-weight: 800;
+      color: var(--ink); letter-spacing: -0.01em;
+      margin-bottom: 8px;
+      line-height: 1.35;
+    }
+    .tune-note {
+      font-family: var(--sans);
+      font-size: 13.5px; color: var(--ink-2);
+      line-height: 1.55;
+      font-weight: 500;
+    }
+    .tune-cta {
+      margin-top: 14px;
+      font-family: var(--mono);
+      font-size: 10.5px; letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-weight: 800;
+      color: var(--ink);
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+    .tune-card[data-status="soon"] { opacity: 0.78; }
+    .tune-card[data-status="soon"]::after {
+      content: 'COMING';
+      position: absolute;
+      top: 14px; right: 14px;
+      font-family: var(--mono);
+      font-size: 9px; letter-spacing: 0.16em;
+      padding: 3px 9px;
+      background: var(--paper-3);
+      color: var(--ink-2);
+      border-radius: 999px;
+      font-weight: 800;
+    }
+
+    .tunes-note {
+      font-family: var(--sans);
+      font-size: 14.5px;
+      color: var(--ink-2);
+      line-height: 1.7;
+      padding: 18px 20px;
+      background: var(--tint-sun);
+      border-radius: 18px;
+    }
+    .tunes-note strong { color: var(--ink); font-weight: 800; }
+    .tunes-note code {
+      font-family: var(--mono);
+      font-size: 12.5px;
+      background: var(--paper-2);
+      padding: 1px 6px;
+      border-radius: 5px;
+      box-shadow: var(--shadow-xs);
+    }
+
     /* —— Hangouts · 客厅小聚 (听友/书友/答疑) —— */
     .hangouts { padding: 80px 0 64px; }
     .hangouts-title {
@@ -1666,6 +1881,187 @@
       font-weight: 800;
       padding: 1px 6px;
       border-radius: 6px;
+    }
+
+    /* —— Workshop · 学员预习 + 照片墙 + 学员好评 (sub-blocks) —— */
+    .workshop-divider {
+      margin: 56px 0 22px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .workshop-divider::before, .workshop-divider::after {
+      content: '';
+      flex: 1; height: 1px;
+      background: rgba(0,0,0,0.08);
+    }
+    .workshop-divider-text {
+      font-family: var(--mono);
+      font-size: 11px; letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ink-2); font-weight: 800;
+      white-space: nowrap;
+    }
+    .workshop-h3 {
+      font-family: var(--sans);
+      font-size: 26px;
+      font-weight: 900;
+      color: var(--ink);
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+      line-height: 1.2;
+    }
+    .workshop-h3-sub {
+      font-family: var(--mono);
+      font-size: 10.5px; letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-3); font-weight: 800;
+      margin-bottom: 16px;
+    }
+    .workshop-h3-note {
+      font-family: var(--sans);
+      font-size: 15px;
+      color: var(--ink-2);
+      line-height: 1.65;
+      margin-bottom: 22px;
+      max-width: 640px;
+    }
+    .workshop-h3-note strong { color: var(--ink); font-weight: 800; }
+
+    .prereq-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .prereq-card {
+      display: block;
+      padding: 18px 16px 16px;
+      background: var(--paper-2);
+      border-radius: 16px;
+      text-decoration: none;
+      color: var(--ink);
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .prereq-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+    .prereq-card[data-tone="purple"] { background: linear-gradient(180deg, var(--tint-purple) 0%, var(--paper-2) 70%); }
+    .prereq-card[data-tone="mint"]   { background: linear-gradient(180deg, var(--tint-mint) 0%, var(--paper-2) 70%); }
+    .prereq-card[data-tone="tomato"] { background: linear-gradient(180deg, var(--tint-tomato) 0%, var(--paper-2) 70%); }
+    .prereq-card[data-tone="sun"]    { background: linear-gradient(180deg, var(--tint-sun) 0%, var(--paper-2) 70%); }
+    .prereq-card[data-tone="grass"]  { background: linear-gradient(180deg, var(--tint-grass) 0%, var(--paper-2) 70%); }
+    .prereq-card[data-tone="sky"]    { background: linear-gradient(180deg, var(--tint-sky) 0%, var(--paper-2) 70%); }
+    .prereq-emo {
+      font-size: 28px;
+      margin-bottom: 8px;
+      display: inline-block;
+      filter: drop-shadow(0 2px 3px rgba(0,0,0,0.12));
+    }
+    .prereq-num {
+      font-family: var(--mono);
+      font-size: 10.5px; letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 900;
+      color: var(--ink-3);
+      margin-bottom: 4px;
+    }
+    .prereq-name {
+      font-family: var(--sans);
+      font-size: 14.5px;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      line-height: 1.35;
+      margin-bottom: 6px;
+    }
+    .prereq-arrow {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--ink-2);
+      font-weight: 800;
+    }
+
+    .photo-wall {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    .photo-cell {
+      aspect-ratio: 1 / 1;
+      background: var(--paper-2);
+      border-radius: 14px;
+      box-shadow: var(--shadow-sm);
+      display: grid;
+      place-items: center;
+      text-align: center;
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      font-weight: 800;
+      position: relative;
+      overflow: hidden;
+      padding: 8px;
+    }
+    .photo-cell.placeholder {
+      background:
+        repeating-linear-gradient(
+          135deg,
+          rgba(0,0,0,0.04) 0px, rgba(0,0,0,0.04) 1px,
+          transparent 1px, transparent 12px
+        ),
+        var(--paper-2);
+    }
+    .photo-cell .emo {
+      display: block;
+      font-size: 26px;
+      margin-bottom: 4px;
+      opacity: 0.65;
+    }
+
+    .reviews-wall {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+    .review-card {
+      background: var(--paper-2);
+      border-radius: 18px;
+      padding: 20px 22px;
+      box-shadow: var(--shadow-sm);
+      position: relative;
+    }
+    .review-card.placeholder {
+      background: var(--paper-2);
+      border: 1.5px dashed rgba(0,0,0,0.12);
+      box-shadow: none;
+    }
+    .review-card.placeholder .review-quote { color: var(--ink-3); font-style: italic; }
+    .review-quote {
+      font-family: var(--sans);
+      font-size: 15.5px;
+      font-weight: 500;
+      line-height: 1.65;
+      color: var(--ink);
+      margin-bottom: 14px;
+    }
+    .review-quote em {
+      font-style: italic;
+      color: var(--ink-2);
+    }
+    .review-quote::before { content: '"'; color: var(--ink-3); font-family: var(--mono); font-weight: 900; margin-right: 4px; }
+    .review-quote::after  { content: '"'; color: var(--ink-3); font-family: var(--mono); font-weight: 900; margin-left: 4px; }
+    .review-author {
+      display: flex; align-items: center; gap: 8px;
+      font-family: var(--mono);
+      font-size: 10.5px; letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink-2); font-weight: 800;
+    }
+    .review-author .dot {
+      width: 5px; height: 5px;
+      background: var(--ink-3);
+      border-radius: 50%;
     }
 
     /* —— Guest Room (嘉宾席) —— */
@@ -2318,6 +2714,16 @@
       .block { margin-bottom: 26px; }
       .block-body { font-size: 16px; }
       .examples li { font-size: 15.5px; padding: 10px 0 10px 26px; }
+
+      .chapter.summary { padding: 52px 0 36px; }
+      .chapter.summary .chapter-emoji-tile { width: 84px; height: 84px; font-size: 48px; border-radius: 24px; margin-bottom: 18px; }
+      .chapter.summary .chapter-num { font-size: 92px; margin-bottom: 10px; }
+      .chapter.summary .chapter-name { font-size: 34px; margin-bottom: 12px; }
+      .summary-tagline { font-size: 16.5px; margin-bottom: 18px; }
+      .summary-keys { margin-bottom: 22px; }
+      .chapter-cta { font-size: 15px; padding: 14px 22px; gap: 10px; }
+      .chapter-cta .cta-sub { display: none; }
+
       .aside-card { grid-template-columns: 48px 1fr auto; gap: 12px; padding: 18px 20px; border-radius: 20px; }
       .aside-emo { width: 48px; height: 48px; font-size: 26px; }
       .aside-text { font-size: 14px; }
@@ -2417,6 +2823,30 @@
       .chapter-dots { display: none; }
       .emoji-parade { gap: 10px; padding: 32px 20px 8px; }
       .parade-emo { width: 48px; height: 48px; font-size: 28px; border-radius: 16px; }
+
+      .tunes { padding: 56px 0 48px; }
+      .tunes-title { font-size: 40px; line-height: 1.02; letter-spacing: -0.035em; -webkit-text-stroke: 0.3px var(--ink); }
+      .tunes-sub { font-size: 11px; margin-bottom: 18px; }
+      .tunes-lede { font-size: 15px; margin-bottom: 24px; }
+      .tunes-grid { grid-template-columns: 1fr; }
+      .tune-card { padding: 18px 20px; border-radius: 18px; }
+      .tune-name { font-size: 16px; }
+      .tunes-note { font-size: 13.5px; padding: 14px 16px; }
+
+      .workshop-divider { margin: 40px 0 18px; }
+      .workshop-divider-text { font-size: 10px; letter-spacing: 0.18em; }
+      .workshop-h3 { font-size: 22px; }
+      .workshop-h3-sub { font-size: 10px; margin-bottom: 14px; }
+      .workshop-h3-note { font-size: 14.5px; margin-bottom: 20px; }
+      .prereq-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .prereq-card { padding: 14px 12px; border-radius: 14px; }
+      .prereq-name { font-size: 13.5px; }
+      .photo-wall { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+      .photo-cell { border-radius: 12px; font-size: 9px; }
+      .photo-cell .emo { font-size: 22px; }
+      .reviews-wall { grid-template-columns: 1fr; gap: 10px; }
+      .review-card { padding: 16px 18px; }
+      .review-quote { font-size: 14.5px; }
     }
   </style>
 </head>
@@ -2433,6 +2863,7 @@
       <a href="/looks">风格</a>
       <a href="/studio">IP</a>
       <a href="#bookshelf" class="opt">书房</a>
+      <a href="#tunes" class="opt">音乐</a>
       <a href="#hangouts" class="opt">小聚</a>
       <a href="#workshop" class="opt">工作坊</a>
       <a href="#findme" class="opt">找我</a>
@@ -2682,7 +3113,7 @@
 </section>
 
 <!-- L1 -->
-<article class="wrap chapter reveal" id="l1" data-tone="purple">
+<article class="wrap chapter summary reveal" id="l1" data-tone="purple">
   <header class="chapter-opener">
     <div class="chapter-emoji-tile"><span>🧊</span></div>
     <div class="chapter-num">L1</div>
@@ -2692,28 +3123,21 @@
   </header>
 
   <div class="chapter-content">
-    <div class="block">
-      <div class="block-label"><span class="emo">🏷️</span> 落在这层的词</div>
-      <div class="tags">
-        <span class="tag">数学统计学知识</span>
-        <span class="tag">统计学基本概念</span>
-      </div>
+    <p class="summary-tagline">给 AI 打底的那一层。<strong>不用专门学</strong>，碰到再补就行——你看后台均值、标准差、AB 测试已经在用了。</p>
+    <div class="summary-keys">
+      <span class="tag">数学统计学知识</span>
+      <span class="tag">统计学基本概念</span>
     </div>
-    <div class="block">
-      <div class="block-label"><span class="emo">🎯</span> 干嘛用的</div>
-      <p class="block-body">给 AI 打底。你<strong>不用专门学</strong>，碰到再补就行。</p>
-    </div>
-    <div class="block">
-      <div class="block-label"><span class="emo">💼</span> 对照你的工作</div>
-      <ul class="examples">
-        <li>看后台数据时的均值、标准差、AB 测试就是这层。</li>
-      </ul>
-    </div>
+    <a class="chapter-cta" href="l1.html">
+      <span>推门进 L1 房间</span>
+      <span class="cta-sub">Full chapter</span>
+      <span class="cta-arrow">→</span>
+    </a>
   </div>
 </article>
 
 <!-- L2 -->
-<article class="wrap chapter reveal" id="l2" data-tone="mint">
+<article class="wrap chapter summary reveal" id="l2" data-tone="mint">
   <header class="chapter-opener">
     <div class="chapter-emoji-tile"><span>🎯</span></div>
     <div class="chapter-num">L2</div>
@@ -2723,52 +3147,23 @@
   </header>
 
   <div class="chapter-content">
-    <div class="block">
-      <div class="block-label"><span class="emo">🎯</span> 三大问题</div>
-      <div class="tags">
-        <span class="tag key">分类</span>
-        <span class="tag key">回归</span>
-        <span class="tag key">聚类</span>
-      </div>
+    <p class="summary-tagline">人<strong>先告诉机器看什么特征</strong>，机器再学。三大问题：分类、回归、聚类——你给笔记分类、预测涨粉、做粉丝分群，全在这层。</p>
+    <div class="summary-keys">
+      <span class="tag key">分类</span>
+      <span class="tag key">回归</span>
+      <span class="tag key">聚类</span>
+      <span class="tag">KNN · SVM · 决策树 · K-means</span>
     </div>
-    <div class="block">
-      <div class="block-label"><span class="emo">⚙️</span> 核心算法</div>
-      <div class="tags">
-        <span class="tag">KNN K-近邻</span>
-        <span class="tag">线性回归</span>
-        <span class="tag">逻辑回归</span>
-        <span class="tag">朴素贝叶斯</span>
-        <span class="tag">决策树</span>
-        <span class="tag">随机森林</span>
-        <span class="tag">SVM 支持向量机</span>
-        <span class="tag">K-means</span>
-      </div>
-    </div>
-    <div class="block">
-      <div class="block-label"><span class="emo">🔁</span> 配套流程</div>
-      <div class="tags">
-        <span class="tag">模型构建过程</span>
-        <span class="tag">模型评估</span>
-      </div>
-    </div>
-    <div class="block">
-      <div class="block-label"><span class="emo">💡</span> 干嘛用的</div>
-      <p class="block-body">人<strong>先告诉机器看什么特征</strong>，机器再学。</p>
-    </div>
-    <div class="block">
-      <div class="block-label"><span class="emo">💼</span> 对照你的工作</div>
-      <ul class="examples">
-        <li><strong>分类</strong>：把笔记分到「穿搭 / 美食 / 职场」</li>
-        <li><strong>回归</strong>：预测一条笔记 24 小时涨多少粉</li>
-        <li><strong>聚类</strong>：粉丝画像分群，没有现成标签</li>
-        <li><strong>KNN</strong>：找跟这条爆款"最像"的 5 条历史笔记</li>
-      </ul>
-    </div>
+    <a class="chapter-cta" href="l2.html">
+      <span>推门进 L2 房间</span>
+      <span class="cta-sub">Full chapter</span>
+      <span class="cta-arrow">→</span>
+    </a>
   </div>
 </article>
 
 <!-- L3 -->
-<article class="wrap chapter reveal" id="l3" data-tone="tomato">
+<article class="wrap chapter summary reveal" id="l3" data-tone="tomato">
   <header class="chapter-opener">
     <div class="chapter-emoji-tile"><span>🧠</span></div>
     <div class="chapter-num">L3</div>
@@ -2778,54 +3173,23 @@
   </header>
 
   <div class="chapter-content">
-    <div class="block">
-      <div class="block-label"><span class="emo">🏗️</span> 底层架构</div>
-      <div class="tags">
-        <span class="tag">感知机</span>
-        <span class="tag">神经元</span>
-        <span class="tag">激活函数</span>
-        <span class="tag">神经网络</span>
-      </div>
+    <p class="summary-tagline">人不用挑特征了——<strong>机器自己学会"该看什么"</strong>。图像走 CNN / Diffusion，文本走 RNN / LSTM。代价是更费数据、更费算力。</p>
+    <div class="summary-keys">
+      <span class="tag key">CNN</span>
+      <span class="tag key">RNN · LSTM</span>
+      <span class="tag">GAN · Diffusion</span>
+      <span class="tag">强化学习</span>
     </div>
-    <div class="block">
-      <div class="block-label"><span class="emo">🖼️</span> 图像方向</div>
-      <div class="tags">
-        <span class="tag key">CNN 卷积神经网络</span>
-        <span class="tag">GAN 生成对抗网络</span>
-        <span class="tag">Diffusion 扩散模型</span>
-        <span class="tag">AI 绘画</span>
-      </div>
-    </div>
-    <div class="block">
-      <div class="block-label"><span class="emo">📝</span> 文本 / 序列方向</div>
-      <div class="tags">
-        <span class="tag key">RNN 循环神经网络</span>
-        <span class="tag key">LSTM 长短时记忆</span>
-      </div>
-    </div>
-    <div class="block">
-      <div class="block-label"><span class="emo">🎮</span> 特殊范式</div>
-      <div class="tags">
-        <span class="tag">强化学习</span>
-      </div>
-    </div>
-    <div class="block">
-      <div class="block-label"><span class="emo">💡</span> 和 L2 的区别</div>
-      <p class="block-body">人不用挑特征了，<strong>机器自己学会"该看什么"</strong>。代价是更费数据、更费算力。</p>
-    </div>
-    <div class="block">
-      <div class="block-label"><span class="emo">💼</span> 对照你的工作</div>
-      <ul class="examples">
-        <li>小红书识别封面里"有没有人脸、食物、风景"——<strong>CNN</strong></li>
-        <li>你用 Midjourney、可灵生成 AI 短视频——背后是 <strong>Diffusion</strong></li>
-        <li>B站自动生成字幕、弹幕情绪识别——<strong>LSTM</strong></li>
-      </ul>
-    </div>
+    <a class="chapter-cta" href="l3.html">
+      <span>推门进 L3 房间</span>
+      <span class="cta-sub">Full chapter</span>
+      <span class="cta-arrow">→</span>
+    </a>
   </div>
 </article>
 
 <!-- L4 -->
-<article class="wrap chapter reveal" id="l4" data-tone="sun">
+<article class="wrap chapter summary reveal" id="l4" data-tone="sun">
   <header class="chapter-opener">
     <div class="chapter-emoji-tile"><span>🤖</span></div>
     <div class="chapter-num">L4</div>
@@ -2835,64 +3199,23 @@
   </header>
 
   <div class="chapter-content">
-    <div class="block">
-      <div class="block-label"><span class="emo">⚙️</span> 核心引擎</div>
-      <div class="tags">
-        <span class="tag key">Transformer 架构</span>
-        <span class="tag key">注意力机制</span>
-        <span class="tag">嵌入词向量 Embedding</span>
-      </div>
+    <p class="summary-tagline">让机器<strong>理解上下文</strong>，生成像人写的内容。Transformer 是引擎，LLM 是产物——你每天用的 Claude、ChatGPT 都在这层。</p>
+    <div class="summary-keys">
+      <span class="tag key">Transformer</span>
+      <span class="tag key">LLM</span>
+      <span class="tag">预训练 · 微调 · RLHF</span>
+      <span class="tag">Embedding</span>
     </div>
-    <div class="block">
-      <div class="block-label"><span class="emo">📦</span> 核心产物</div>
-      <div class="tags">
-        <span class="tag">基础模型 Foundation Model</span>
-        <span class="tag key">大语言模型 LLM</span>
-        <span class="tag">ChatGPT</span>
-        <span class="tag">Claude</span>
-      </div>
-    </div>
-    <div class="block">
-      <div class="block-label"><span class="emo">🛠️</span> 怎么造出来</div>
-      <div class="tags">
-        <span class="tag">模型参数</span>
-        <span class="tag">数据集</span>
-        <span class="tag">数据标注</span>
-        <span class="tag key">预训练</span>
-        <span class="tag key">微调</span>
-        <span class="tag key">RLHF 人类反馈强化</span>
-        <span class="tag">训练要求</span>
-      </div>
-    </div>
-    <div class="block">
-      <div class="block-label"><span class="emo">📊</span> 怎么验收</div>
-      <div class="tags">
-        <span class="tag">模型评测</span>
-      </div>
-    </div>
-    <div class="block">
-      <div class="block-label"><span class="emo">🐒</span> 附带概念</div>
-      <div class="tags">
-        <span class="tag">无限猴子定理</span>
-      </div>
-    </div>
-    <div class="block">
-      <div class="block-label"><span class="emo">💡</span> 干嘛用的</div>
-      <p class="block-body">让机器<strong>理解上下文</strong>，生成像人写的内容。</p>
-    </div>
-    <div class="block">
-      <div class="block-label"><span class="emo">💼</span> 对照你的工作</div>
-      <ul class="examples">
-        <li>你用 Claude 起标题、ChatGPT 改播客大纲——都在调用 <strong>LLM</strong></li>
-        <li>把你 100 期播客文稿喂进去训出"你的专属 AI"——叫<strong>微调</strong></li>
-        <li>ChatGPT 一夜爆红背后的秘密——<strong>预训练 + RLHF</strong></li>
-      </ul>
-    </div>
+    <a class="chapter-cta" href="l4.html">
+      <span>推门进 L4 房间</span>
+      <span class="cta-sub">Full chapter</span>
+      <span class="cta-arrow">→</span>
+    </a>
   </div>
 </article>
 
 <!-- L5 -->
-<article class="wrap chapter reveal" id="l5" data-tone="grass">
+<article class="wrap chapter summary reveal" id="l5" data-tone="grass">
   <header class="chapter-opener">
     <div class="chapter-emoji-tile"><span>🧰</span></div>
     <div class="chapter-num">L5</div>
@@ -2902,32 +3225,22 @@
   </header>
 
   <div class="chapter-content">
-    <div class="block">
-      <div class="block-label"><span class="emo">🏷️</span> 落在这层的词</div>
-      <div class="tags">
-        <span class="tag key">RAG 检索增强</span>
-        <span class="tag key">Agent 智能体</span>
-        <span class="tag">知识图谱</span>
-        <span class="tag">智能对话技术</span>
-      </div>
+    <p class="summary-tagline">光有 LLM 不能直接卖钱——得<strong>装进具体场景</strong>做成产品。RAG 给它私人资料库，Agent 让它自己跑完一整条流程。</p>
+    <div class="summary-keys">
+      <span class="tag key">RAG 检索增强</span>
+      <span class="tag key">Agent 智能体</span>
+      <span class="tag">知识图谱</span>
     </div>
-    <div class="block">
-      <div class="block-label"><span class="emo">💡</span> 干嘛用的</div>
-      <p class="block-body">光有 LLM 不能直接卖钱，得<strong>装进具体场景</strong>做成产品。</p>
-    </div>
-    <div class="block">
-      <div class="block-label"><span class="emo">💼</span> 对照你的工作</div>
-      <ul class="examples">
-        <li><strong>RAG</strong>：把你所有播客文稿做成 AI 的"私人资料库"，问它"我以前讲过这个吗"</li>
-        <li><strong>Agent</strong>：一句话交代——"看完 B站视频 → 提炼亮点 → 改成小红书文案 → 生成封面 → 排期发布"——它自己做完</li>
-        <li><strong>知识图谱</strong>：B站「番剧—UP 主—标签」那种关系网</li>
-      </ul>
-    </div>
+    <a class="chapter-cta" href="l5.html">
+      <span>推门进 L5 房间</span>
+      <span class="cta-sub">Full chapter</span>
+      <span class="cta-arrow">→</span>
+    </a>
   </div>
 </article>
 
 <!-- L6 -->
-<article class="wrap chapter reveal" id="l6" data-tone="sky">
+<article class="wrap chapter summary reveal" id="l6" data-tone="sky">
   <header class="chapter-opener">
     <div class="chapter-emoji-tile"><span>🗺️</span></div>
     <div class="chapter-num">L6</div>
@@ -2937,25 +3250,17 @@
   </header>
 
   <div class="chapter-content">
-    <div class="block">
-      <div class="block-label"><span class="emo">🏷️</span> 落在这层的词</div>
-      <div class="tags">
-        <span class="tag">AI 产品 vs 传统产品</span>
-        <span class="tag">AI 行业现状</span>
-        <span class="tag">AI 全岗位分析</span>
-        <span class="tag">AI 产品落地全流程</span>
-      </div>
+    <p class="summary-tagline">从 PM / 创业者的视角，看 AI <strong>怎么变成生意</strong>。这层是你<strong>最不陌生</strong>的——等底下五层打通了，再回来看会有"原来这群人在干这个"的快感 ✨</p>
+    <div class="summary-keys">
+      <span class="tag">AI 产品 vs 传统产品</span>
+      <span class="tag">AI 行业现状</span>
+      <span class="tag">岗位 · 落地流程</span>
     </div>
-    <div class="block">
-      <div class="block-label"><span class="emo">💡</span> 干嘛用的</div>
-      <p class="block-body">从 PM / 创业者的视角，看 AI 是怎么落到产品、做成生意的。</p>
-    </div>
-    <div class="block">
-      <div class="block-label"><span class="emo">💼</span> 对照你的工作</div>
-      <ul class="examples">
-        <li>这层是你<strong>最不陌生</strong>的。等底下五层打通了，再回来看会有"哦，原来这群人在干这个"的快感 ✨</li>
-      </ul>
-    </div>
+    <a class="chapter-cta" href="l6.html">
+      <span>推门进 L6 房间</span>
+      <span class="cta-sub">Full chapter</span>
+      <span class="cta-arrow">→</span>
+    </a>
   </div>
 </article>
 
@@ -3330,6 +3635,76 @@
 </section>
 
 
+<!-- TUNES · 客厅音乐 -->
+<section class="wrap tunes reveal" id="tunes">
+  <div class="section-mark"><span class="emo">🎵</span> Tunes · 客厅音乐</div>
+  <h2 class="tunes-title">在我客厅里<br>循环播放</h2>
+  <p class="tunes-sub">Claire's Parlor Mix · S01</p>
+  <p class="tunes-lede">
+    我是一个<strong>被音乐喂大的人</strong>。播客录制的暖场、写代码到深夜、车上单曲循环、给朋友放的"你听这首"——都在这里。<em>这间客厅永远有 BGM</em>。
+  </p>
+
+  <!-- Embedded NetEase Music player · 网易云外链 · Claire 的会客厅 BGM 歌单 -->
+  <div class="tunes-embed" data-platform="netease">
+    <div class="tunes-embed-label">
+      <span>🎧 NOW PLAYING · 网易云外链</span>
+      <span class="badge">LIVE</span>
+    </div>
+    <iframe
+      src="//music.163.com/outchain/player?type=0&id=7247223624&auto=0&height=430"
+      width="100%" height="450"
+      frameborder="no" border="0"
+      marginwidth="0" marginheight="0"
+      loading="lazy"
+      title="Claire's Parlor BGM · 网易云歌单"></iframe>
+  </div>
+
+  <!-- 一键打开 / 重启 右下角 BGM 浮窗（用户之前如果点了 ✕，从这里召回） -->
+  <p class="tunes-note" style="margin-bottom: 24px;">
+    💡 <strong>右下角那个小播放器</strong>就是这张歌单——一进来就准备好了，浏览器规定第一次要你点一下才发声（这是所有网站的通病）。<button type="button" onclick="if(window.cpBgmReopen) cpBgmReopen()" style="background: var(--ink); color: var(--paper-2); border: none; padding: 6px 14px; border-radius: 999px; font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; font-weight: 800; cursor: pointer; margin-left: 4px;">🎧 重新打开 BGM 浮窗</button>
+  </p>
+
+  <!-- 4 平台跳转卡片 -->
+  <div class="tunes-grid">
+    <a class="tune-card" href="https://music.163.com/playlist?id=7247223624" data-platform="netease" target="_blank" rel="noopener">
+      <span class="tune-emo">🎧</span>
+      <div class="tune-platform">网易云音乐 · NetEase</div>
+      <div class="tune-name">Claire's Parlor · 主歌单</div>
+      <p class="tune-note">播客开头结尾的背景音乐 + 我自己循环最多的几首。<em>主战场。</em></p>
+      <div class="tune-cta">Open in NetEase →</div>
+    </a>
+
+    <a class="tune-card" href="#" data-platform="qq" target="_blank" rel="noopener" data-status="soon">
+      <span class="tune-emo">🎼</span>
+      <div class="tune-platform">QQ 音乐 · QQ Music</div>
+      <div class="tune-name">Claire's Parlor · 通勤版</div>
+      <p class="tune-note">车上、走路、地铁。版权偶尔比网易云全一点。</p>
+      <div class="tune-cta">Coming →</div>
+    </a>
+
+    <a class="tune-card" href="#" data-platform="apple" target="_blank" rel="noopener" data-status="soon">
+      <span class="tune-emo">🍎</span>
+      <div class="tune-platform">Apple Music</div>
+      <div class="tune-name">Claire's Parlor · 海外版</div>
+      <p class="tune-note">海外朋友用。歌单还在搬。</p>
+      <div class="tune-cta">Coming →</div>
+    </a>
+
+    <a class="tune-card" href="#" data-platform="spotify" target="_blank" rel="noopener" data-status="soon">
+      <span class="tune-emo">🟢</span>
+      <div class="tune-platform">Spotify</div>
+      <div class="tune-name">Claire's Parlor · Global</div>
+      <p class="tune-note">挂梯子的朋友直接听。歌单 sync 中。</p>
+      <div class="tune-cta">Coming →</div>
+    </a>
+  </div>
+
+  <p class="tunes-note">
+    🛠️ <strong>给 Claire 的接入备忘</strong>：QQ 音乐 / Apple Music / Spotify 等你建好后，分享 → 复制网页链接 → 给 Claude → 我把 4 张卡片的 <code>href</code> 和 "COMING" 标替换掉就好。
+  </p>
+</section>
+
+
 <!-- GUEST ROOM -->
 <section class="wrap guests reveal" id="guests">
   <div class="section-mark"><span class="emo">🎙️</span> Guest Room · 嘉宾席</div>
@@ -3503,6 +3878,94 @@
         <li>📨 自荐</li>
       </ul>
       <a class="workshop-cta" href="mailto:yutingliu1996@gmail.com?subject=%E6%83%B3%E5%9C%A8%E6%88%91%E7%9A%84%E5%9F%8E%E5%B8%82%E5%8A%9E%E5%B7%A5%E4%BD%9C%E5%9D%8A">毛遂自荐 →</a>
+    </article>
+  </div>
+
+  <!-- 学员预习 · AI 基础通识 (L1-L6) -->
+  <div class="workshop-divider"><span class="workshop-divider-text">学员预习 · Prerequisites</span></div>
+  <h3 class="workshop-h3">来之前先翻翻这 6 章</h3>
+  <p class="workshop-h3-sub">AI 基础通识 · 6 Layers Of AI</p>
+  <p class="workshop-h3-note">
+    工作坊不讲名词解释——但要保证大家在<strong>同一个水位</strong>。这 6 张卡是 Vol.01 的精华版：从数学地基到大模型应用层，一层一张，<strong>15 分钟翻完</strong>。来之前请把 L4 + L5 + L6 至少看一遍。
+  </p>
+  <div class="prereq-grid">
+    <a class="prereq-card" href="l1.html" data-tone="purple">
+      <span class="prereq-emo">🧊</span>
+      <div class="prereq-num">L1 · 地基</div>
+      <div class="prereq-name">数学 & 统计学</div>
+      <span class="prereq-arrow">推门进 →</span>
+    </a>
+    <a class="prereq-card" href="l2.html" data-tone="mint">
+      <span class="prereq-emo">🎯</span>
+      <div class="prereq-num">L2 · ~2010</div>
+      <div class="prereq-name">经典机器学习</div>
+      <span class="prereq-arrow">推门进 →</span>
+    </a>
+    <a class="prereq-card" href="l3.html" data-tone="tomato">
+      <span class="prereq-emo">🧠</span>
+      <div class="prereq-num">L3 · 2012-17</div>
+      <div class="prereq-name">深度学习</div>
+      <span class="prereq-arrow">推门进 →</span>
+    </a>
+    <a class="prereq-card" href="l4.html" data-tone="sun">
+      <span class="prereq-emo">🤖</span>
+      <div class="prereq-num">L4 · 必读</div>
+      <div class="prereq-name">大模型时代</div>
+      <span class="prereq-arrow">推门进 →</span>
+    </a>
+    <a class="prereq-card" href="l5.html" data-tone="grass">
+      <span class="prereq-emo">🧰</span>
+      <div class="prereq-num">L5 · 必读</div>
+      <div class="prereq-name">大模型应用层</div>
+      <span class="prereq-arrow">推门进 →</span>
+    </a>
+    <a class="prereq-card" href="l6.html" data-tone="sky">
+      <span class="prereq-emo">🗺️</span>
+      <div class="prereq-num">L6 · 必读</div>
+      <div class="prereq-name">行业 · 产品 · 岗位</div>
+      <span class="prereq-arrow">推门进 →</span>
+    </a>
+  </div>
+
+  <!-- 线下照片墙 -->
+  <div class="workshop-divider"><span class="workshop-divider-text">现场 · Workshop Moments</span></div>
+  <h3 class="workshop-h3">线下是真的会见面</h3>
+  <p class="workshop-h3-sub">Photos · 等真发生了再贴</p>
+  <p class="workshop-h3-note">
+    首场还没开——<strong>这墙先空着</strong>。第一期结束就把现场照片、白板涂鸦、合影、小纸条全摊上来。<em>不修图、不摆拍，</em>就是那个味道。
+  </p>
+  <div class="photo-wall">
+    <div class="photo-cell placeholder"><div><span class="emo">📸</span>第一场<br>等你来</div></div>
+    <div class="photo-cell placeholder"><div><span class="emo">🪧</span>现场<br>白板</div></div>
+    <div class="photo-cell placeholder"><div><span class="emo">☕</span>歇脚<br>咖啡时间</div></div>
+    <div class="photo-cell placeholder"><div><span class="emo">🎤</span>圆桌<br>讨论</div></div>
+    <div class="photo-cell placeholder"><div><span class="emo">📝</span>大家的<br>笔记</div></div>
+    <div class="photo-cell placeholder"><div><span class="emo">📷</span>大合影<br></div></div>
+  </div>
+
+  <!-- 学员好评 -->
+  <div class="workshop-divider"><span class="workshop-divider-text">学员留言 · After Workshop</span></div>
+  <h3 class="workshop-h3">来过的人怎么说</h3>
+  <p class="workshop-h3-sub">Testimonials · 第一场之后回填</p>
+  <p class="workshop-h3-note">
+    工作坊一结束就发问卷——大家可以匿名，也可以挂名。<strong>我只贴真实反馈</strong>，包括"哪里没准备好"那种。<em>这一墙现在是空的，等真人填。</em>
+  </p>
+  <div class="reviews-wall">
+    <article class="review-card placeholder">
+      <p class="review-quote">第一位学员的反馈贴这里 · 留个位置，等真发生</p>
+      <div class="review-author">A · 内容创作者 · <span class="dot"></span> 2026 待定</div>
+    </article>
+    <article class="review-card placeholder">
+      <p class="review-quote">第二位 · 也许是 PM 朋友 · 也许是播客同行</p>
+      <div class="review-author">B · 产品经理 · <span class="dot"></span> 2026 待定</div>
+    </article>
+    <article class="review-card placeholder">
+      <p class="review-quote">第三位 · 想说"我是来认识人的"那种</p>
+      <div class="review-author">C · 创业者 · <span class="dot"></span> 2026 待定</div>
+    </article>
+    <article class="review-card placeholder">
+      <p class="review-quote">第四位 · 或者刚刚毕业、想换赛道的朋友</p>
+      <div class="review-author">D · 转行中 · <span class="dot"></span> 2026 待定</div>
     </article>
   </div>
 
@@ -3681,6 +4144,9 @@
     }
   }, { passive: true });
 </script>
+
+<script src="bgm.js" defer></script>
+<script src="pet.js" defer></script>
 
 </body>
 </html>

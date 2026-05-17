@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#FAFAFA">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="L1">
+  <title>L1 · 数学 & 统计学 · Claire 的会客厅</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2224%22 fill=%22%23ECDFFF%22/><text y=%22.9em%22 x=%2216%22 font-size=%2274%22>🧊</text></svg>">
+
+  <style>
+    :root {
+      --paper: #FAF6EF;
+      --paper-2: #FFFFFF;
+      --paper-3: #F0EAE0;
+      --ink: #1A1A1A;
+      --ink-2: #585858;
+      --ink-3: #9A9A9A;
+
+      --tint-tomato: #FFE4E0;
+      --tint-sun: #FFF1C2;
+      --tint-grass: #D6F5EA;
+      --tint-sky: #DCE3FF;
+      --tint-purple: #ECDFFF;
+      --tint-mint: #DFF7EE;
+
+      --tomato: #FF5A4D;
+      --tomato-deep: #D03A2E;
+      --sun: #FFCB30;
+      --sun-deep: #E0A800;
+      --grass: #06D6A0;
+      --grass-deep: #04A37A;
+      --sky: #4361EE;
+      --sky-deep: #2840C0;
+      --purple: #9B5DE5;
+      --purple-deep: #6B3DB0;
+
+      --shadow-xs: 0 1px 3px rgba(0,0,0,0.05);
+      --shadow-sm: 0 3px 8px rgba(0,0,0,0.05), inset 0 -2px 0 rgba(0,0,0,0.03);
+      --shadow-md: 0 8px 20px rgba(0,0,0,0.07), 0 2px 4px rgba(0,0,0,0.04), inset 0 -3px 0 rgba(0,0,0,0.04);
+      --shadow-lg: 0 16px 36px rgba(0,0,0,0.09), 0 4px 10px rgba(0,0,0,0.05), inset 0 -5px 0 rgba(0,0,0,0.05);
+      --shadow-purple: 0 12px 28px rgba(155,93,229,0.24), inset 0 -4px 0 rgba(0,0,0,0.06);
+
+      --cp-yellow: #FFC72C;
+      --cp-yellow-deep: #E8A800;
+      --cp-purple: #7B4B94;
+      --cp-teal: #4A90B8;
+      --cp-olive: #7CA982;
+      --cp-orange: #E5762A;
+
+      --sans: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Helvetica Neue", "Microsoft YaHei", system-ui, sans-serif;
+      --mono: ui-monospace, "SF Mono", "Menlo", "Consolas", monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.72;
+      font-weight: 400;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+      overflow-x: hidden;
+    }
+    ::selection { background: var(--purple); color: var(--paper-2); }
+
+    .topnav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(250, 250, 250, 0.85);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+    .topnav-inner {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .nav-brand {
+      font-family: var(--sans);
+      font-size: 16px;
+      letter-spacing: 0.04em;
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 900;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .nav-brand .planet { font-size: 18px; line-height: 1; filter: drop-shadow(0 2px 3px rgba(0,0,0,0.12)); margin-right: 4px; }
+    .nav-brand .cdot {
+      font-weight: 900;
+      font-size: 14px;
+      line-height: 1;
+      margin: 0 1px;
+      position: relative;
+      top: -1px;
+    }
+    .nav-brand .cdot.c1 { color: var(--cp-orange); }
+    .nav-brand .cdot.c2 { color: var(--cp-yellow); }
+    .nav-brand .cdot.c3 { color: var(--cp-teal); }
+    .nav-brand .cdot.c4 { color: var(--cp-olive); }
+    .nav-brand .cdot.c5 { color: var(--cp-purple); }
+    .nav-brand .muted {
+      color: var(--ink-3);
+      font-weight: 700;
+      font-size: 11px;
+      font-family: var(--mono);
+      letter-spacing: 0.16em;
+      margin-left: 8px;
+      padding-left: 8px;
+      border-left: 1px solid var(--ink-3);
+    }
+    .nav-links {
+      display: flex;
+      gap: 22px;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 800;
+    }
+    .nav-links a {
+      color: var(--ink-2);
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+    .nav-links a:hover { color: var(--tomato); }
+
+    .wrap { max-width: 720px; margin: 0 auto; padding: 0 24px; }
+
+    .page-hero { padding: 64px 0 36px; }
+    .chapter-emoji-tile {
+      width: 128px; height: 128px;
+      border-radius: 36px;
+      display: grid; place-items: center;
+      font-size: 78px; line-height: 1;
+      margin-bottom: 28px;
+      background: var(--tint-purple);
+      box-shadow: var(--shadow-lg);
+    }
+    .chapter-emoji-tile span { filter: drop-shadow(0 10px 14px rgba(0,0,0,0.24)); }
+
+    .chapter-num {
+      font-family: var(--sans);
+      font-size: 168px;
+      font-weight: 900;
+      line-height: 0.86;
+      letter-spacing: -0.075em;
+      margin-bottom: 18px;
+      display: inline-block;
+      color: var(--purple);
+      -webkit-text-stroke: 1px currentColor;
+    }
+    .chapter-eyebrow {
+      font-family: var(--sans);
+      font-style: italic;
+      font-size: 17px;
+      color: var(--ink-2);
+      margin-bottom: 16px;
+      font-weight: 700;
+      display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+    }
+    .chapter-eyebrow .ep {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      font-weight: 800;
+      font-style: normal;
+      padding: 4px 10px;
+      background: var(--paper-2);
+      border-radius: 999px;
+      box-shadow: var(--shadow-xs);
+    }
+    .chapter-name {
+      font-family: var(--sans);
+      font-size: 64px;
+      font-weight: 900;
+      line-height: 1.04;
+      color: var(--ink);
+      letter-spacing: -0.04em;
+      margin-bottom: 16px;
+    }
+    .chapter-era {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 800;
+      display: inline-block;
+      padding: 5px 11px;
+      border-radius: 999px;
+      background: var(--paper-2);
+      box-shadow: var(--shadow-xs);
+      color: var(--purple-deep);
+    }
+
+    .page-body { padding: 16px 0 80px; }
+
+    .block { margin-bottom: 30px; }
+    .block:last-child { margin-bottom: 0; }
+    .block-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ink);
+      margin-bottom: 14px;
+      font-weight: 900;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .block-label .emo {
+      font-family: var(--sans);
+      font-size: 16px;
+      letter-spacing: 0;
+      filter: drop-shadow(0 1px 2px rgba(0,0,0,0.12));
+    }
+    .block-body {
+      font-family: var(--sans);
+      font-size: 17px;
+      line-height: 1.72;
+      color: var(--ink);
+      font-weight: 500;
+    }
+    .block-body strong {
+      color: var(--ink);
+      font-weight: 800;
+      background: var(--tint-sun);
+      padding: 1px 6px;
+      border-radius: 6px;
+    }
+
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tag {
+      display: inline-block;
+      padding: 6px 14px;
+      background: var(--paper-2);
+      border-radius: 999px;
+      font-family: var(--sans);
+      font-size: 13.5px;
+      color: var(--ink);
+      white-space: nowrap;
+      line-height: 1.4;
+      font-weight: 600;
+      box-shadow: var(--shadow-xs);
+    }
+    .tag.key { background: var(--purple); color: var(--paper-2); font-weight: 800; box-shadow: var(--shadow-sm); }
+
+    .examples { list-style: none; }
+    .examples li {
+      padding: 12px 0 12px 30px;
+      position: relative;
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--ink);
+      font-weight: 500;
+    }
+    .examples li + li { border-top: 1px solid rgba(0,0,0,0.06); }
+    .examples li::before {
+      content: '→';
+      position: absolute;
+      left: 0; top: 12px;
+      color: var(--purple);
+      font-family: var(--mono);
+      font-size: 16px;
+      font-weight: 900;
+    }
+    .examples li strong {
+      color: var(--ink);
+      font-weight: 800;
+      background: var(--tint-sun);
+      padding: 1px 6px;
+      border-radius: 6px;
+    }
+
+    .page-foot {
+      padding: 24px 0 64px;
+      border-top: 1px solid rgba(0,0,0,0.06);
+      margin-top: 40px;
+    }
+    .foot-nav-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+    .foot-nav {
+      display: block;
+      padding: 20px 22px;
+      background: var(--paper-2);
+      border-radius: 22px;
+      text-decoration: none;
+      color: var(--ink);
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .foot-nav:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+    .foot-nav.next { background: var(--tint-mint); }
+    .foot-dir {
+      display: block;
+      font-family: var(--mono);
+      font-size: 10.5px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+    .foot-label {
+      display: block;
+      font-family: var(--sans);
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+    }
+    .foot-cta {
+      text-align: center;
+    }
+    .foot-cta a {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 24px;
+      border-radius: 999px;
+      background: var(--ink);
+      color: var(--paper-2);
+      font-family: var(--sans);
+      font-size: 15px;
+      font-weight: 800;
+      text-decoration: none;
+      box-shadow: var(--shadow-md);
+      transition: transform 0.2s ease;
+    }
+    .foot-cta a:hover { transform: translateY(-2px); }
+
+    @media (max-width: 700px) {
+      .wrap { padding: 0 20px; }
+      .topnav-inner { padding: 11px 18px; gap: 8px; }
+      .nav-brand { font-size: 10.5px; letter-spacing: 0.14em; }
+      .nav-brand .muted { display: none; }
+      .nav-links { gap: 14px; font-size: 10.5px; }
+      .nav-links .opt { display: none; }
+
+      .page-hero { padding: 44px 0 28px; }
+      .chapter-emoji-tile { width: 96px; height: 96px; font-size: 56px; border-radius: 28px; margin-bottom: 22px; }
+      .chapter-num { font-size: 108px; line-height: 0.88; letter-spacing: -0.06em; -webkit-text-stroke: 0.8px currentColor; }
+      .chapter-eyebrow { font-size: 13px; }
+      .chapter-name { font-size: 40px; line-height: 1.05; letter-spacing: -0.035em; -webkit-text-stroke: 0.3px var(--ink); }
+      .chapter-era { font-size: 10px; }
+
+      .block { margin-bottom: 26px; }
+      .block-body { font-size: 16px; }
+      .examples li { font-size: 15.5px; padding: 10px 0 10px 26px; }
+
+      .foot-nav-row { grid-template-columns: 1fr; }
+      .foot-nav { padding: 16px 18px; border-radius: 18px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="topnav" id="top">
+    <div class="topnav-inner">
+      <a class="nav-brand" href="index.html#top">
+        <span class="planet">🪐</span><span>C</span><span class="cdot c1">·</span><span>L</span><span class="cdot c2">·</span><span>A</span><span class="cdot c3">·</span><span>I</span><span class="cdot c4">·</span><span>R</span><span class="cdot c5">·</span><span>E</span><span class="muted">PARLOR</span>
+      </a>
+      <div class="nav-links">
+        <a href="index.html#iconmap">目录</a>
+        <a href="index.html#guests" class="opt">嘉宾</a>
+        <a href="/looks">风格</a>
+        <a href="/studio">IP</a>
+        <a href="index.html#bookshelf" class="opt">书房</a>
+        <a href="index.html#tunes" class="opt">音乐</a>
+        <a href="index.html#hangouts" class="opt">小聚</a>
+        <a href="index.html#workshop" class="opt">工作坊</a>
+        <a href="index.html#findme" class="opt">找我</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <section class="wrap page-hero">
+      <div class="chapter-emoji-tile"><span>🧊</span></div>
+      <div class="chapter-num">L1</div>
+      <div class="chapter-eyebrow"><span class="ep">S01 · E01</span>The One About 地基</div>
+      <h1 class="chapter-name">数学 & 统计学</h1>
+      <div class="chapter-era">L1 · 地基 · Foundation</div>
+    </section>
+
+    <section class="wrap page-body">
+      <div class="block">
+        <div class="block-label"><span class="emo">🏷️</span> 落在这层的词</div>
+        <div class="tags">
+          <span class="tag">数学统计学知识</span>
+          <span class="tag">统计学基本概念</span>
+        </div>
+      </div>
+      <div class="block">
+        <div class="block-label"><span class="emo">🎯</span> 干嘛用的</div>
+        <p class="block-body">给 AI 打底。你<strong>不用专门学</strong>，碰到再补就行。</p>
+      </div>
+      <div class="block">
+        <div class="block-label"><span class="emo">💼</span> 对照你的工作</div>
+        <ul class="examples">
+          <li>看后台数据时的<strong>均值、标准差、AB 测试</strong>就是这层。</li>
+          <li>"这条笔记的互动率显著高于均值"——你已经在用统计学了。</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap page-foot">
+    <div class="foot-nav-row">
+      <a class="foot-nav prev" href="index.html#iconmap">
+        <span class="foot-dir">← Prev</span>
+        <span class="foot-label">回 Vol.01 目录</span>
+      </a>
+      <a class="foot-nav next" href="l2.html">
+        <span class="foot-dir">Next →</span>
+        <span class="foot-label">L2 · 经典机器学习</span>
+      </a>
+    </div>
+    <div class="foot-cta">
+      <a href="index.html">← 回 Vol.01 主页</a>
+    </div>
+  </footer>
+
+  <script src="bgm.js" defer></script>
+  <script src="pet.js" defer></script>
+
+</body>
+</html>

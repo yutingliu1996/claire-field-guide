@@ -11,12 +11,14 @@
 !looks.html
 !studio.html
 !ip.html
+!l[1-6].html
 !archive/
 !vercel.json
 !wechat-qr.png
 !*.png
 !*.jpg
 !*.svg
+!*.js
 
 # Also keep her existing standalone HTMLs from earlier work
 !我的人生操作系统.html
