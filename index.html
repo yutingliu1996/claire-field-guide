@@ -157,6 +157,21 @@
       transition: color 0.15s ease;
     }
     .nav-links a:hover { color: var(--tomato); }
+    .nav-links a.nav-cta {
+      padding: 5px 11px;
+      border-radius: 999px;
+      background: var(--tomato);
+      color: var(--paper-2);
+      font-weight: 900;
+      box-shadow: 0 6px 14px rgba(255,90,77,0.28);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      letter-spacing: 0.04em;
+    }
+    .nav-links a.nav-cta:hover {
+      color: var(--paper-2);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(255,90,77,0.42);
+    }
     .nav-links a.style-toggle {
       padding: 5px 11px;
       border-radius: 999px;
@@ -438,6 +453,170 @@
     }
     .byline-row .sep { color: rgba(0,0,0,0.15); font-weight: 400; }
     .byline-row strong { color: var(--ink); font-weight: 900; }
+
+    /* —— Subscribe Hub · 双语漏斗入口 (2026-05-19) —— */
+    .subscribe-hub { padding: 56px 0 48px; }
+    .subscribe-title {
+      font-family: var(--sans);
+      font-size: 56px;
+      font-weight: 900;
+      line-height: 1.02;
+      letter-spacing: -0.035em;
+      margin-bottom: 10px;
+    }
+    .subscribe-sub {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      font-weight: 800;
+      margin-bottom: 18px;
+    }
+    .subscribe-lede {
+      font-family: var(--sans);
+      font-size: 17px;
+      color: var(--ink-2);
+      line-height: 1.65;
+      font-weight: 500;
+      margin-bottom: 28px;
+      max-width: 640px;
+    }
+    .subscribe-lede strong {
+      background: var(--tint-sun);
+      font-weight: 800;
+      padding: 1px 6px;
+      border-radius: 6px;
+      color: var(--ink);
+    }
+    .subscribe-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+    .sub-card {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      padding: 22px 24px;
+      background: var(--paper-2);
+      border-radius: 22px;
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.28s ease, box-shadow 0.28s ease;
+      box-shadow: var(--shadow-md);
+      border: 2px solid transparent;
+    }
+    .sub-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+    .sub-card-en      { border-color: var(--tint-purple); }
+    .sub-card-cn      { border-color: var(--tint-grass); }
+    .sub-card-wechat  { border-color: var(--tint-tomato); cursor: copy; }
+    .sub-card-mail    { border-color: var(--tint-sun); }
+    .sub-icon { font-size: 28px; line-height: 1; margin-bottom: 4px; }
+    .sub-platform {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      font-weight: 800;
+    }
+    .sub-name {
+      font-family: var(--sans);
+      font-size: 18px;
+      font-weight: 900;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+    }
+    .sub-action {
+      font-family: var(--sans);
+      font-size: 13px;
+      color: var(--ink-2);
+      font-weight: 600;
+      margin-top: 4px;
+    }
+    .sub-card:hover .sub-action {
+      color: var(--tomato);
+    }
+    .subscribe-note {
+      font-family: var(--sans);
+      font-size: 14.5px;
+      color: var(--ink);
+      line-height: 1.65;
+      font-weight: 500;
+      padding: 16px 18px;
+      background: var(--paper-2);
+      border-radius: 14px;
+      box-shadow: var(--shadow-xs);
+    }
+    .subscribe-note strong {
+      background: var(--tint-sun);
+      font-weight: 800;
+      padding: 1px 6px;
+      border-radius: 6px;
+    }
+
+    /* —— Founding OG · 创始 100 人挂名 (2026-05-19) —— */
+    .founding-og {
+      margin: 28px 0 20px;
+      padding: 22px 24px;
+      background: linear-gradient(180deg, var(--tint-sun) 0%, var(--paper-2) 100%);
+      border-radius: 18px;
+      box-shadow: var(--shadow-sm);
+    }
+    .founding-mark {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--ink-2);
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+    .founding-mark .emo { margin-right: 6px; }
+    .founding-tag {
+      font-family: var(--sans);
+      font-size: 15px;
+      color: var(--ink);
+      line-height: 1.6;
+      font-weight: 500;
+    }
+    .founding-tag strong {
+      background: var(--tint-tomato);
+      font-weight: 900;
+      padding: 1px 6px;
+      border-radius: 6px;
+    }
+    .founding-count {
+      font-family: var(--mono);
+      font-weight: 900;
+      color: var(--tomato);
+      letter-spacing: 0.02em;
+    }
+    .founding-tag a {
+      color: var(--tomato-deep);
+      font-weight: 800;
+      text-decoration: none;
+      border-bottom: 2px solid var(--tomato);
+    }
+
+    @media (max-width: 768px) {
+      .subscribe-hub { padding: 40px 0 36px; }
+      .subscribe-title { font-size: 36px; letter-spacing: -0.03em; }
+      .subscribe-sub { font-size: 10px; margin-bottom: 14px; }
+      .subscribe-lede { font-size: 15px; margin-bottom: 22px; }
+      .subscribe-grid { grid-template-columns: 1fr; gap: 12px; }
+      .sub-card { padding: 18px 20px; border-radius: 18px; }
+      .sub-icon { font-size: 24px; }
+      .sub-name { font-size: 16px; }
+      .subscribe-note { font-size: 13.5px; padding: 14px 16px; }
+      .founding-og { margin: 22px 0 16px; padding: 18px 20px; }
+      .founding-tag { font-size: 14px; }
+    }
 
     /* —— Manifesto (no full-bleed, cleaner) —— */
     .manifesto {
@@ -2872,6 +3051,7 @@
       <span class="planet">🪐</span><span>C</span><span class="cdot c1">·</span><span>L</span><span class="cdot c2">·</span><span>A</span><span class="cdot c3">·</span><span>I</span><span class="cdot c4">·</span><span>R</span><span class="cdot c5">·</span><span>E</span><span class="muted">PARLOR</span>
     </a>
     <div class="nav-links">
+      <a href="#subscribe" class="opt nav-cta">📩 订阅</a>
       <a href="#iconmap">目录</a>
       <a href="#guests" class="opt">嘉宾</a>
       <a href="/looks">风格</a>
@@ -2924,6 +3104,47 @@
     <strong>SHARE THIS</strong>
   </div>
 </header>
+
+<!-- SUBSCRIBE HUB · 双语漏斗入口 (v20 · 2026-05-19) -->
+<section class="wrap subscribe-hub reveal" id="subscribe">
+  <div class="section-mark"><span class="emo">📩</span> Subscribe · 留个联系方式</div>
+  <h2 class="subscribe-title">想留住<br>我们的连接</h2>
+  <p class="subscribe-sub">Two ways to join · 双语漏斗</p>
+  <p class="subscribe-lede">
+    平台粉丝是租来的，<strong>邮箱 / 微信 是你自己的</strong>。Vol.01 上线我会同步通知，新一期播客 + 不定期长文——选你舒服的方式。
+  </p>
+
+  <div class="subscribe-grid">
+    <a class="sub-card sub-card-en" href="https://clairesparlor.substack.com" target="_blank" rel="noopener">
+      <span class="sub-icon">📩</span>
+      <span class="sub-platform">EMAIL · International</span>
+      <span class="sub-name">Substack · Claire's Parlor</span>
+      <span class="sub-action">Subscribe Free →</span>
+    </a>
+    <a class="sub-card sub-card-cn" href="weixin://" target="_blank" rel="noopener">
+      <span class="sub-icon">📱</span>
+      <span class="sub-platform">微信公众号 · 中文</span>
+      <span class="sub-name">Claire 的会客厅</span>
+      <span class="sub-action">微信搜「Claire 的会客厅」→ 关注</span>
+    </a>
+    <button class="sub-card sub-card-wechat" type="button" onclick="navigator.clipboard?.writeText('Claire__LYT').then(()=>{this.querySelector('.sub-action').textContent='✓ 已复制·去微信加好友';setTimeout(()=>{this.querySelector('.sub-action').textContent='点这里复制 · 备注「会客厅」';},2400);})">
+      <span class="sub-icon">💬</span>
+      <span class="sub-platform">微信 · 1:1 连接</span>
+      <span class="sub-name">Claire__LYT</span>
+      <span class="sub-action">点这里复制 · 备注「会客厅」</span>
+    </button>
+    <a class="sub-card sub-card-mail" href="mailto:yutingliu1996@gmail.com?subject=Hi%20Claire%20%E2%80%94%20%E6%9D%A5%E4%BC%9A%E5%AE%A2%E5%8E%85">
+      <span class="sub-icon">✉️</span>
+      <span class="sub-platform">EMAIL · 直接联系</span>
+      <span class="sub-name">yutingliu1996@gmail.com</span>
+      <span class="sub-action">写信给我 →</span>
+    </a>
+  </div>
+
+  <p class="subscribe-note">
+    <strong>会客厅 OG · 创始 100 人</strong>：前 100 位订阅会客厅的同好，将在网站底部 <em>永久挂名</em>——你的身份你定义，想被怎么记住 ✨
+  </p>
+</section>
 
 <!-- MANIFESTO -->
 <section class="wrap manifesto reveal" id="manifesto">
@@ -4033,6 +4254,14 @@
       <dd>🤝 我 + Claude</dd>
     </div>
   </dl>
+
+  <div class="founding-og">
+    <div class="founding-mark"><span class="emo">🌟</span> 会客厅 OG · 创始 100 人</div>
+    <p class="founding-tag">
+      前 100 位订阅 <strong>Claire's Parlor</strong> 的同好，将在此<strong>永久挂名</strong>——身份由你定义，想被怎么记住、就怎么记住。<br>
+      <strong>当前进度</strong>：<span class="founding-count">0 / 100</span> 已认领 · <a href="#subscribe">第一个会是你？↑</a>
+    </p>
+  </div>
 
   <div class="colophon-note">
     <p><strong>关于这一页本身：</strong>纯静态 HTML，一个文件、零依赖、零框架。<strong>所有看起来"像设计师做的"地方，都是我跟 AI 对话写出来的。</strong></p>
